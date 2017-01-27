@@ -1,8 +1,23 @@
 # GCModeller CLI to R binding
 
-help.GCModeller <- function(tool = "GCModeller", man = 0) {
+help.GCModeller <- function(tool = "GCModeller", man = FALSE) {
 	
-	CLI = paste(tool, "?")
+	if (man) {
+		CLI = paste(tool, "man")
+	} else {
+		CLI = paste(tool, "?")
+	}
+	
 	system(CLI)
+}
+
+seqtools.snp <- function(seq.fa, ...) {
+
+	if (missing(seq.fa)) {
+		CLI = paste("seqtools", "?", "/SNP")
+	} else {
+		CLI = paste("seqtools /SNP /in", seq.fa)
+	}
 	
+	system(CLI)
 }
