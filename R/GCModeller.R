@@ -11,7 +11,7 @@ help.GCModeller <- function(tool = "GCModeller", man = FALSE) {
 	system(CLI)
 }
 
-seqtools.snp <- function(seq.fa, ...) {
+seqtools.snp <- function(seq.fa = NULL, ...) {
 
 	if (missing(seq.fa)) {
 		CLI = paste("seqtools", "?", "/SNP")
