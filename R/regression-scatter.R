@@ -42,13 +42,13 @@ regression.plot <- function(raw, sx, sy) {
 
 	x <- as.numeric(as.vector(raw[,sx]))
 	y <- as.numeric(as.vector(raw[,sy]))
-	title <- paste(sx,"vs",sy)
+	title <- paste(sx, "vs", sy)
 
 	plot(x, y, col="red", pch=4, xlab= xl, ylab=yl, main=title)
 	
 	fit <- lm(x~y)
-	abline(fit, col="black",lwd=2) # regression line (y~x) 
-	r2=paste("=",round(summary(fit)$adj.r.squared,4))
-	text(3/4*max(x, na.rm=T), 1/3*max(y, na.rm=T),bquote(R^2~.(r2)))
+	abline(fit, col="black", lwd=2) # regression line (y~x) 
+	r2=paste("=", round(summary(fit)$adj.r.squared, 4))
+	text(3/4 * max(x, na.rm=T), 1/3 * max(y, na.rm=T), bquote(R^2~.(r2)))
 
 }
