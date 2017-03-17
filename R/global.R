@@ -28,12 +28,19 @@ GCModeller.cfg <- function(bin) {
 
 # library load or install the target package
 # @package: The R package name, please notice that, this function 
-#           only works for the CRAN packages, bioconductor package 
-#           will not works
+#           not only works for the CRAN packages, andalso 
+#           bioconductor package works too.
 Imports <- function(package) {
 
 	if (!require(package)) {
+		
 		install.packages(package, dependencies = TRUE);
-		library(gplots);
+		
+		if (!require(package)) {
+		
+			# try install bioconductor package
+			source("https://bioconductor.org/biocLite.R");
+			biocLite(package);
+		}
 	}
 }
