@@ -25,3 +25,15 @@ if(FileIO.FileLength(cfg) <= 0) {
 GCModeller.cfg <- function(bin) {
 	
 }
+
+# library load or install the target package
+# @package: The R package name, please notice that, this function 
+#           only works for the CRAN packages, bioconductor package 
+#           will not works
+Imports <- function(package) {
+
+	if (!require(package)) {
+		install.packages(package, dependencies = TRUE);
+		library(gplots);
+	}
+}
