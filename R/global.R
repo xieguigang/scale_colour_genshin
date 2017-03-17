@@ -9,19 +9,19 @@ HOME <<- path.expand('~');
 # and then combine this HOME directory for initialize this package's configuration data.
 cfg <<- sprintf("%s/GCModeller.cli2R.csv", HOME);
 
-# ÅäÖÃÊý¾ÝÏîÄ¿ÁÐ±í
+# é…ç½®æ•°æ®é¡¹ç›®åˆ—è¡¨
 GCModeller.bin <<- NA;
 
 if(FileIO.FileLength(cfg) <= 0) {
 	warning("The GCModeller configuration have not been initialize yet! \nUnless you have already add the GCModeller/bin path into your system's environment variable... \nPlease run 'GCModeller.cfg' function for configs this scripting environment...");
 } else {
 
-	# ÅäÖÃÎÄ¼þ´æÔÚ£¬¶ÁÈ¡csvÎÄ¼þ£¬È»ºó¸³Öµ¸øÈ«¾ÖµÄ»·¾³±äÁ¿
+	# é…ç½®æ–‡ä»¶å­˜åœ¨ï¼Œè¯»å–csvæ–‡ä»¶ï¼Œç„¶åŽèµ‹å€¼ç»™å…¨å±€çš„çŽ¯å¢ƒå˜é‡
 	configs <- read.csv(cfg);
 	
 }
 
-# ½«ÅäÖÃÊý¾ÝÍ¨¹ýÉú³ÉÒ»¸ödataframe¶ÔÏóÈ»ºóÐ´ÈëcsvÎÄ¼þÖ®ÖÐ×÷ÎªÅäÖÃÊý¾Ý
+# å°†é…ç½®æ•°æ®é€šè¿‡ç”Ÿæˆä¸€ä¸ªdataframeå¯¹è±¡ç„¶åŽå†™å…¥csvæ–‡ä»¶ä¹‹ä¸­ä½œä¸ºé…ç½®æ•°æ®
 GCModeller.cfg <- function(bin) {
 	
 }

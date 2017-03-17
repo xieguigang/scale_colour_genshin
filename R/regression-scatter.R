@@ -12,7 +12,7 @@ iTraq.consistency <- function(sample, pairs, size = c(6000, 4500), resolution = 
 	DIR <- paste(DIR, file_path_sans_ext(basename(path = sample)), sep="/")
 	# setwd(DIR)
 
-	# »æÍ¼²Ù×÷µÄÎÄ¼þÊä³ö
+	# ç»˜å›¾æ“ä½œçš„æ–‡ä»¶è¾“å‡º
 	scatter.tiff <- paste(DIR, "-consistency-scatterplot2.tiff")
 	options(stringsAsFactors = FALSE) 
 

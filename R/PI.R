@@ -1,8 +1,8 @@
 library(tools) 
 options(stringsAsFactors = FALSE) 
 
-### ���׵ȵ��Ե�����Է�������ɢ��ͼ
-### @csv: iTraq����ļ�
+### 蛋白等电点对蛋白相对分子质量散点图
+### @csv: iTraq结果文件
 PI.plot <- function(csv) {
 
 	raw<-read.csv(file=csv,header=TRUE)
