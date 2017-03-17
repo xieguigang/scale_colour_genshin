@@ -7,3 +7,7 @@ Author: xieguigang
 Maintainer: xie.guigang@gcmodeller.org
 Description: GCModeller: genomics CAD(Computer Assistant Design) Modeller system in .NET language
 License: MIT License
+Encoding: UTF-8
+LazyData: true
+NeedsCompilation: no
+Packaged: 2017-03-17 02:59:11 UTC; gg.xie
