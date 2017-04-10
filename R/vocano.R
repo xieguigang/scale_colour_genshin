@@ -2,6 +2,7 @@ library(ggplot2)
 library(tools)
 library(Cairo)
 
+## Plot DEP vocano plot by using default FC level value 1.5.
 plot.vocano.DEP <- function(file) {
 	plot.vocano(file, level=1.5)
 }
@@ -38,16 +39,27 @@ plot.vocano <- function(file, level=0) {
 # PValue
 # tag
 # level 默认为1用作DEG分析
+## @param xrange The X axis tick range, default is from -5 to 5
+## @param yrange The Y axis tick range, default is from 0 to 5
+## @param level  The DEP/DEG threshold, default is greater than log(2)=1 for up regulated and smaller than log(1/2)=-1 for down regulated.
+## @param pvalue The column name in the csv @file for using as the p.value of the DEP calculation
+## @param tag.disp The X axis display label text
+## @param tag    The column name in the csv @file for using as the fold change result value from the DEP calculation
+## @param file   The csv data source file for this vocano plot function. 
 plot.vocano <- function(file, tag="logFC", level=c(1,-1), pvalue = "PValue", tag.disp = "log2 fold change", xrange = c(-5, 5), yrange=c(0, 5)) {
 
+	## generates the output file name automatic
 	DIR <- dirname(file)
 	DIR <- paste(DIR, file_path_sans_ext(basename(file)), sep="/")
     out <- paste(DIR, "plot.vocano.png", sep=".")
 			
+	## load source data and get the fold change value and pvalue that using for the vocano plot
 	data=read.csv(file=file, header=T)
 	data=data.frame(PValue=c(data[pvalue]), logFC=c(data[tag]))
+	## set plot color schema for the DEP and non-DEP data
 	data$threshold<-as.factor((data[tag] >= level[1] | data[tag] <= level[2]) & (data[pvalue] <= 0.05))
 	
+	## Invoke graphics plot.
 	Cairo(out, type="png", units="in", width=5*2, height=4*2, pointsize=12, dpi=200)
 	
 		g = ggplot(data=data, aes(x=data[tag], y=-log10(data[pvalue]), colour=threshold)) +

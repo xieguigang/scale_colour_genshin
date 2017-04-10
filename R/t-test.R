@@ -37,14 +37,14 @@ logFC.test <- function(file, level = 1.5) {
 	
 	data["FC.avg"]  = avgFC
 	data["p.value"] = pvalue
-	# DEP 计算结果
 	
+	# DEP 计算结果	
 	downLevel = 1 / level
 	data["is.DEP"] = ((avgFC >= level | avgFC <= downLevel) & (pvalue <= 0.05))
 	
 	DIR <- dirname(file)
 	DIR <- paste(DIR, file_path_sans_ext(basename(file)), sep="/")
-	out <- paste(DIR, "-log2-t.test.csv")
+	out <- paste(DIR, "-avgFC-log2-t.test.csv")
 	
 	write.csv(data, out, row.names= FALSE)
 }
