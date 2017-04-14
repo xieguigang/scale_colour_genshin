@@ -1,5 +1,7 @@
 library(tools) 
 
+### iTraq结果的差异表达蛋白的检验计算
+### @level: 蛋白组分析之中的差异表达的阈值默认为log2(1.5)，对于转录组而言，这里是log2(2) = 1
 logFC.test <- function(file, level = 1.5) {
 
 	data          = read.csv(file)
@@ -35,14 +37,14 @@ logFC.test <- function(file, level = 1.5) {
 	
 	data["FC.avg"]  = avgFC
 	data["p.value"] = pvalue
-	# DEP 计算结果
 	
+	# DEP 计算结果	
 	downLevel = 1 / level
 	data["is.DEP"] = ((avgFC >= level | avgFC <= downLevel) & (pvalue <= 0.05))
 	
 	DIR <- dirname(file)
 	DIR <- paste(DIR, file_path_sans_ext(basename(file)), sep="/")
-	out <- paste(DIR, "-log2-t.test.csv")
+	out <- paste(DIR, "-avgFC-log2-t.test.csv")
 	
 	write.csv(data, out, row.names= FALSE)
 }
