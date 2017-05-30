@@ -1,6 +1,8 @@
 library(tools) 
 
 ### iTraq结果的差异表达蛋白的检验计算
+### 在这个函数之中，输入的表格文件的第一列为蛋白质的id编号，剩下的所有的列都是一个实验设计的比值结果
+### 通过与等长的零向量做比较来通过假设检验判断是否是差异表达的？
 ### @level: 蛋白组分析之中的差异表达的阈值默认为log2(1.5)，对于转录组而言，这里是log2(2) = 1
 logFC.test <- function(file, level = 1.5, p.value = 0.05) {
 
@@ -30,8 +32,8 @@ logFC.test <- function(file, level = 1.5, p.value = 0.05) {
 			# log2(FC) 结果和等长零向量做检验得到pvalue
 			pvalue[i] = t.test(v, ZERO, var.equal = TRUE)$p.value			
 		} else {
-			avgFC[i] = NA
-			pvalue[i] = NA
+			avgFC[i]  <- NA;
+			pvalue[i] <- NA;
 		}
 	} 
 	
@@ -39,7 +41,7 @@ logFC.test <- function(file, level = 1.5, p.value = 0.05) {
 	data["p.value"] = pvalue
 	
 	# DEP 计算结果	
-	downLevel = 1 / level
+	downLevel      = 1 / level;
 	data["is.DEP"] = ((avgFC >= level | avgFC <= downLevel) & (pvalue <= p.value))
 	
 	DIR <- dirname(file);
