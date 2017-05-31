@@ -35,6 +35,23 @@ plot.vocano <- function(file, level=0) {
 	dev.off()
 }
 
+plot.vocano.iTraq <- function(file, 
+	tag      = "FC.avg", 
+	level    = 1.25, 
+	pvalue   = "p.value", 
+	tag.disp = "FoldChange average", 
+	xrange   = c(0, 5), 
+	yrange   = c(0,10)) {
+	
+	plot.vocano(file, 
+		tag      = tag, 
+		level    = c(level, 1/level), 
+		pvalue   = pvalue, 
+		tag.disp = tag.disp, 
+		xrange   = xrange, 
+		yrange   = yrange);
+}
+
 # 自定义画图
 # PValue
 # tag

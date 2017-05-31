@@ -2,6 +2,7 @@ library(tools)
 
 ### iTraq结果的差异表达蛋白的检验计算
 ### @level: 蛋白组分析之中的差异表达的阈值默认为log2(1.5)，对于转录组而言，这里是log2(2) = 1
+###         如果信号量比较低，可以考虑level参数值取值1.25
 logFC.test <- function(file, level = 1.5) {
 
 	data          = read.csv(file)
