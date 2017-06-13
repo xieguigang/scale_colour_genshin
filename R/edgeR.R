@@ -24,10 +24,23 @@ run.edgeR <- function(table) {
 
 run.edgeR.csv <- function(table.csv) {
 	table <- read.csv(table.csv); # 读取reads count文件
+	table <- assign.Symbol(table);
+	
 	return(run.edgeR(table));
+}
+
+# 将dataframe的第一列的编号作为row的名称
+assign.Symbol <- function(table) {
+	Symbol <- names(table)[1];
+	Symbol <- as.vector(table[, Symbol]);
+	rownames(table) <- Symbol;
+	
+	return(table);
 }
 
 run.edgeR.tsv <- function(table.tsv) {
 	table <- read.delim(table.tsv); # 读取reads count文件
+	table <- assign.Symbol(table);
+	
 	return(run.edgeR(table));
 }
