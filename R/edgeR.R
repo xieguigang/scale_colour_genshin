@@ -11,8 +11,14 @@ library(edgeR);
 # @param table data.frame对象
 run.edgeR <- function(table) {
 	
-	group <- factor(c(1,1,2,2)) # 分组变量 前两个为一组， 后一个为一组， 每个有两个重复
-	y     <- DGEList(counts=table,group=group) # 构建基因表达列表
+	repeats <- (ncol(table) - 1) / 2;
+	x       <- rep(1, repeats);
+	y       <- rep(2, repeats);
+	
+	# 分组变量 前两个为一组， 后一个为一组， 每个有repeats个重复
+	group   <- factor(append(x, y));
+	
+	y     <- DGEList(counts=table, group=group) # 构建基因表达列表
 	y     <- calcNormFactors(y) # 计算样本内标准化因子
 	y     <- estimateCommonDisp(y) #计算普通的离散度
 	y     <- estimateTagwiseDisp(y) #计算基因间范围内的离散度
