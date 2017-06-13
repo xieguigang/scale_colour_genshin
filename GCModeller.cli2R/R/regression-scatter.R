@@ -1,3 +1,8 @@
+consistency.plot <- function(sample, pairs, size = c(6000,4500), resolution = 550) {
+	pairs <- read.csv(pairs);
+	iTraq.consistency(sample, pairs, size, resolution);
+}
+
 ### regression scatter plot function tools for the iTraq data samples consistency check
 ### @sample: iTraq sample data output
 ### @pairs: a dataframe object, that each row should contians two string value, like
@@ -8,7 +13,7 @@
 ###
 iTraq.consistency <- function(sample, pairs, size = c(6000, 4500), resolution = 550) {
 
-	DIR <- dirname(file)
+	DIR <- dirname(sample);
 	DIR <- paste(DIR, file_path_sans_ext(basename(path = sample)), sep="/")
 	# setwd(DIR)
 
