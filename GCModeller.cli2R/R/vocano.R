@@ -35,21 +35,25 @@ plot.vocano <- function(file, level=0) {
 	dev.off()
 }
 
+# 这个函数的数据是经过log2转换了的
 plot.vocano.iTraq <- function(file, 
 	tag      = "FC.avg", 
 	level    = 1.25, 
 	pvalue   = "p.value", 
 	tag.disp = "FoldChange average", 
-	xrange   = c(0, 5), 
+	xrange   = c(-5, 5), 
 	yrange   = c(0,10)) {
+	
+	log2 <- log(level,2);
 	
 	plot.vocano(file, 
 		tag      = tag, 
-		level    = c(level, 1/level), 
+		level    = c(log2, -log2), 
 		pvalue   = pvalue, 
 		tag.disp = tag.disp, 
 		xrange   = xrange, 
-		yrange   = yrange);
+		yrange   = yrange, 
+		log.t    = 2);
 }
 
 # 自定义画图
@@ -63,28 +67,42 @@ plot.vocano.iTraq <- function(file,
 ## @param tag.disp The X axis display label text
 ## @param tag    The column name in the csv @file for using as the fold change result value from the DEP calculation
 ## @param file   The csv data source file for this vocano plot function. 
-plot.vocano <- function(file, tag="logFC", level=c(1,-1), pvalue = "PValue", tag.disp = "log2 fold change", xrange = c(-5, 5), yrange=c(0, 5)) {
+plot.vocano <- function(
+	file, 
+	tag="logFC", level=c(1,-1), pvalue = "PValue", tag.disp = "log2 fold change", 
+	xrange = c(-5, 5), yrange=c(0, 5), 
+	log.t = 0) {
 
 	## generates the output file name automatic
-	DIR <- dirname(file)
-	DIR <- paste(DIR, file_path_sans_ext(basename(file)), sep="/")
-    out <- paste(DIR, "plot.vocano.png", sep=".")
+	DIR <- dirname(file);
+	DIR <- paste(DIR, file_path_sans_ext(basename(file)), sep="/");
+    out <- paste(DIR, "plot.vocano.png", sep=".");
 			
 	## load source data and get the fold change value and pvalue that using for the vocano plot
-	data=read.csv(file=file, header=T)
-	data=data.frame(PValue=c(data[pvalue]), logFC=c(data[tag]))
+	data  <- read.csv(file=file, header=T);
+	
+	logFC <- as.vector(data[tag]);
+	if (log.t > 0) {
+		logFC <- log(logFC, log.t);
+	}
+	
+	data  <- data.frame(PValue=c(data[pvalue]), logFC= logFC);
 	## set plot color schema for the DEP and non-DEP data
-	data$threshold<-as.factor((data[tag] >= level[1] | data[tag] <= level[2]) & (data[pvalue] <= 0.05))
+	data$threshold <- as.factor(
+		(data[tag] >= level[1] | data[tag] <= level[2]) && 
+		(data[pvalue] <= 0.05));
 	
 	## Invoke graphics plot.
-	Cairo(out, type="png", units="in", width=5*2, height=4*2, pointsize=12, dpi=200)
+	Cairo(out, type="png", units="in", width=5*2, height=4*2, pointsize=12, dpi=200);
 	
-		g = ggplot(data=data, aes(x=data[tag], y=-log10(data[pvalue]), colour=threshold)) +
-				   geom_point(alpha=0.4, size=1.75) +
-				   # opts(legend.position = "none") +
-				   xlim(xrange) + ylim(yrange) +
-				   xlab(tag.disp) + ylab("-log10(p-value)")
-		print(g)
+		g <- ggplot(data = data, aes(x=data[tag], y=-log10(data[pvalue]), colour=threshold)) +
+			 geom_point(alpha=0.4, size=1.75) +
+			 # opts(legend.position = "none") +
+		     xlim(xrange) + ylim(yrange) +
+		     xlab(tag.disp) + 
+			 ylab("-log10(p-value)");
+			 
+		print(g);
 		
-	dev.off()
+	dev.off();
 }
