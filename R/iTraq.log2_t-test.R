@@ -1,11 +1,13 @@
 library(tools) 
 
 logFC.test.csv <- function(data.csv, level = 1.5, p.value = 0.05) {
-	logFC.test(read.csv(data.csv), level, p.value);
+	data <- logFC.test(read.csv(data.csv), level, p.value);
+	save.result(data, file = data.csv);
 }
 
 logFC.test.tsv <- function(data.txt, level = 1.5, p.value = 0.05) {
-	logFC.test(read.delim(data.txt), level, p.value);
+	data <- logFC.test(read.delim(data.txt), level, p.value);
+	save.result(data, file = data.txt);
 }
 
 # 判断目标向量vector之中的所有的元素是否都等于元素x？
@@ -14,6 +16,14 @@ ALL.Equals <- function(vector, x) {
 	v   <- which(vector==x);
 	l   <- length(vector);
 	return(l == length(v) && l == length(nna));
+}
+
+save.result(data, file) {
+	DIR <- dirname(file);
+	DIR <- paste(DIR, file_path_sans_ext(basename(file)), sep="/");
+	out <- paste(DIR, "-avgFC-log2-t.test.csv", sep="");
+	
+	write.csv(data, out, row.names= FALSE)
 }
 
 ### iTraq结果的差异表达蛋白的检验计算
@@ -52,6 +62,13 @@ logFC.test <- function(data, level = 1.5, p.value = 0.05) {
 			v = as.vector(append(v, rep(1, l)))  
 			avgFC[i] = mean(v, na.rm = TRUE)
 			avgFC[i]
+			
+			for (p in 1:length(v)) {
+				if (v[p] == 0) {
+				    v[p] = NA;
+				}
+			}
+			
 			v = log(v, 2)
 			# log2(FC) 结果和等长零向量做检验得到pvalue
 			pvalue[i] = t.test(v, ZERO, var.equal = TRUE)$p.value	
@@ -69,9 +86,5 @@ logFC.test <- function(data, level = 1.5, p.value = 0.05) {
 	downLevel      = 1 / level;
 	data["is.DEP"] = ((avgFC >= level | avgFC <= downLevel) & (pvalue <= p.value))
 	
-	DIR <- dirname(file);
-	DIR <- paste(DIR, file_path_sans_ext(basename(file)), sep="/");
-	out <- paste(DIR, "-avgFC-log2-t.test.csv", sep="");
-	
-	write.csv(data, out, row.names= FALSE)
+	return(data);
 }
