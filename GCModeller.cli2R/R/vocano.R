@@ -81,20 +81,27 @@ plot.vocano <- function(
 	## load source data and get the fold change value and pvalue that using for the vocano plot
 	data  <- read.csv(file=file, header=T);
 	
-	logFC <- as.vector(data[tag]);
+	logFC <- data[tag];
 	if (log.t > 0) {
 		logFC <- log(logFC, log.t);
+		print(head(logFC));
+		print(level);
+		logFC <- logFC[[tag]];
 	}
 	
 	data  <- data.frame(PValue=c(data[pvalue]), logFC= logFC);
 	## set plot color schema for the DEP and non-DEP data
 	data$threshold <- as.factor(
-		(data[tag] >= level[1] | data[tag] <= level[2]) && 
+		(logFC >= level[1] | logFC <= level[2]) & 
 		(data[pvalue] <= 0.05));
+	
+	print("Have a peeks on the result data:");
+	print(head(data));
 	
 	## Invoke graphics plot.
 	Cairo(out, type="png", units="in", width=5*2, height=4*2, pointsize=12, dpi=200);
 	
+		tag <- "logFC";
 		g <- ggplot(data = data, aes(x=data[tag], y=-log10(data[pvalue]), colour=threshold)) +
 			 geom_point(alpha=0.4, size=1.75) +
 			 # opts(legend.position = "none") +
