@@ -1,3 +1,5 @@
+require(tools);
+
 consistency.plot <- function(sample, pairs, size = c(6000,4500), resolution = 550) {
 	pairs <- read.csv(pairs);
 	iTraq.consistency(sample, pairs, size, resolution);
@@ -18,14 +20,14 @@ iTraq.consistency <- function(sample, pairs, size = c(6000, 4500), resolution = 
 	# setwd(DIR)
 
 	# 绘图操作的文件输出
-	scatter.tiff <- paste(DIR, "-consistency-scatterplot2.tiff")
+	scatter.tiff <- paste(DIR, "-consistency-scatterplot2.png")
 	options(stringsAsFactors = FALSE) 
 
 	# data consistency check by using regression scatter plot
 	# scatter plot
 	raw <- read.csv(sample, header=TRUE)
 
-	tiff(scatter.tiff, width=size[1], height=size[2], res=resolution)
+	png(scatter.tiff, width=size[1], height=size[2], res=resolution)
 
 	par(mfrow = c(3,3))
 	raw = data.frame(raw, stringsAsFactors = FALSE)
