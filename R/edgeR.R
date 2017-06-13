@@ -44,7 +44,9 @@ run.edgeR <- function(table, top = -1) {
 	y     <- estimateCommonDisp(y);                       # 计算普通的离散度
 	y     <- estimateTagwiseDisp(y);                      # 计算基因间范围内的离散度
 	et    <- exactTest(y);                                # 进行精确检验
-	DEG   <- topTags(et, n = top);                        # 输出排名靠前的差异表达基因信息
+	
+	# 输出排名靠前的差异表达基因信息
+	DEG   <- topTags(et, n = top);                        
 
 	return(DEG);	
 }
