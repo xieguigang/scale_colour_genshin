@@ -6,6 +6,22 @@ library(edgeR);
 # gene1	expression1	expression2	expression3	expression4
 # gene2	expression1	expression2	expression3	expression4
 # gene3	expression1	expression2	expression3	expression4
+# ...
+#
+# 这个表格文件可以使用GCModeller的edgeR designer工具生成
+# https://github.com/SMRUCC/GCModeller/blob/9e37968688eabe4f6a2e7609a463330a00b54fd7/src/GCModeller/CLI_tools/eggHTS/CLI/2.%20DEP.vb#L19
+#
+# eggHTS /edgeR.Designer /in "~/project/proteinGroups.csv" /designer "~/project/designer.csv" /label "iBAQ" /deli "_"
+#
+# designer文件示例
+#
+# Experiment,Control,GroupLabel
+# siRelB1,sictrl1,1
+# siRelB2,sictrl2,1
+# siRelB3,sictrl3,1
+# 17-92-1,ctrl1,2
+# 17-92-2,ctrl2,2
+# 17-92-3,ctrl3,2
 
 # 运行edgeR进行DEG/DEP的计算分析
 # @param table data.frame对象
