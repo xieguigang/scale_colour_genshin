@@ -18,7 +18,7 @@ ALL.Equals <- function(vector, x) {
 	return(l == length(v) && l == length(nna));
 }
 
-save.result(data, file) {
+save.result <- function(data, file) {
 	DIR <- dirname(file);
 	DIR <- paste(DIR, file_path_sans_ext(basename(file)), sep="/");
 	out <- paste(DIR, "-avgFC-log2-t.test.csv", sep="");
