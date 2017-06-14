@@ -1,8 +1,8 @@
 require(tools);
 
-consistency.plot <- function(sample, pairs, size = c(6000,4500), resolution = 550) {
+consistency.plot <- function(sample, pairs, repeats = 3, size = c(6000,4500), resolution = 550) {
 	pairs <- read.csv(pairs);
-	iTraq.consistency(sample, pairs, size, resolution);
+	iTraq.consistency(sample, pairs, repeats = 3, size, resolution);
 }
 
 ### regression scatter plot function tools for the iTraq data samples consistency check
@@ -13,7 +13,7 @@ consistency.plot <- function(sample, pairs, size = c(6000,4500), resolution = 55
 ### 2, C1, C3
 ### 3, C2, C3
 ###
-iTraq.consistency <- function(sample, pairs, size = c(6000, 4500), resolution = 550) {
+iTraq.consistency <- function(sample, pairs, repeats = 3, size = c(6000, 4500), resolution = 550) {
 
 	DIR <- dirname(sample);
 	DIR <- paste(DIR, file_path_sans_ext(basename(path = sample)), sep="/")
@@ -29,12 +29,21 @@ iTraq.consistency <- function(sample, pairs, size = c(6000, 4500), resolution = 
 
 	png(scatter.tiff, width=size[1], height=size[2], res=resolution)
 
-	par(mfrow = c(3,3))
-	raw = data.frame(raw, stringsAsFactors = FALSE)
+	n.compares <- nrow(pairs);
+	n.compares <- n.compares / repeats;
+	layout <- c(n.compares, repeats);
 	
-	apply(pairs, 1, function(x) {
+	print(layout);
+	
+	par(mfrow = layout);
+	raw = data.frame(raw, stringsAsFactors = FALSE);	
+	
+	for (i in 1:nrow(pairs)) {
+		x <- pairs[i, ];		
+		x <- as.vector(unlist(x));
+		print(x);
 		regression.plot(raw, x[1], x[2]);
-	})
+	}
 	
 	dev.off()
 }
