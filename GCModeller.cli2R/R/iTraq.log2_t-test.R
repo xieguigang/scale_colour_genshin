@@ -1,12 +1,23 @@
 library(tools) 
 
-logFC.test.csv <- function(data.csv, level = 1.5, p.value = 0.05) {
-	data <- logFC.test(read.csv(data.csv), level, p.value);
+# 输入的数据格式要求有
+#
+# 1. 第一列为基因的编号列
+# 2. 剩余的所有的列都是FoldChange计算结果
+#
+# Symbol  A/B  B/C  A/C
+# 1       1.5  2.3  3.9	
+# 2       3.6  0.1  1.2
+# 3       0.0  0.1  0.5
+# ...
+
+logFC.test.csv <- function(data.csv, level = 1.5, p.value = 0.05, includes.ZERO = FALSE) {
+	data <- logFC.test(read.csv(data.csv), level, p.value, includes.ZERO);
 	save.result(data, file = data.csv);
 }
 
-logFC.test.tsv <- function(data.txt, level = 1.5, p.value = 0.05) {
-	data <- logFC.test(read.delim(data.txt), level, p.value);
+logFC.test.tsv <- function(data.txt, level = 1.5, p.value = 0.05, includes.ZERO = FALSE) {
+	data <- logFC.test(read.delim(data.txt), level, p.value, includes.ZERO);
 	save.result(data, file = data.txt);
 }
 
@@ -18,12 +29,13 @@ ALL.Equals <- function(vector, x) {
 	return(l == length(v) && l == length(nna));
 }
 
+# 自动生成保存所需要的文件名并执行数据框的保存操作
 save.result <- function(data, file) {
 	DIR <- dirname(file);
 	DIR <- paste(DIR, file_path_sans_ext(basename(file)), sep="/");
 	out <- paste(DIR, "-avgFC-log2-t.test.csv", sep="");
 	
-	write.csv(data, out, row.names= FALSE)
+	write.csv(data, out, row.names= FALSE);
 }
 
 ### iTraq结果的差异表达蛋白的检验计算
@@ -31,60 +43,73 @@ save.result <- function(data, file) {
 ### 通过与等长的零向量做比较来通过假设检验判断是否是差异表达的？
 ### @level: 蛋白组分析之中的差异表达的阈值默认为log2(1.5)，对于转录组而言，这里是log2(2) = 1
 ###         如果信号量的变化值都比较低，可以考虑level参数值取值1.25
-logFC.test <- function(data, level = 1.5, p.value = 0.05) {
+### @includes.ZERO 当某一个蛋白的所有的FC值都是零的时候，是否也应该包括为DEP结果？默认不包括
+logFC.test <- function(data, level = 1.5, p.value = 0.05, includes.ZERO = FALSE) {
 	
-	repeatsNumber = ncol(data) - 1          # 实验重复数
-	ZERO          = rep(0, repeatsNumber)   # 得到等长的进行比较的0向量
-	index         = seq(2, repeatsNumber+1)
-	pvalue        = rep(0, nrow(data))
-	avgFC         = rep(0, nrow(data))
+	repeatsNumber <- ncol(data) - 1;        # 实验重复数
+	ZERO          <- rep(0, repeatsNumber); # 得到等长的进行比较的0向量
+	index         <- seq(2, repeatsNumber + 1);
+	pvalue        <- rep(0, nrow(data));
+	avgFC         <- rep(0, nrow(data));
 
 	# 对dataframe之中的每一行都进行计算
 	for(i in 1:(nrow(data))) {
 		
-		row    = data[i, ]
-		# 得到FC向量
-		v      = as.vector(as.matrix(row[index]))
-		valids = sum(!is.na(v))
+		row    <- data[i, ];
+		# 得到的v向量为FC向量，即v向量之中的值都是一个实验设计之中的
+		# 两个实验值的比值
+		v      <- as.vector(as.matrix(row[index]));
+		valids <- sum(!is.na(v));
 
 		if (ALL.Equals(v, 0)) {
 		
 			# 所有的值都是0的话，是无法进行假设检验的
-			# 可能是上游的计算错误，在这里全部置为无效
-			avgFC[i]  <- NA;
-			pvalue[i] <- NA;
-			
+			# 但是这种情况可能是实验A之中没有表达量，但是在实验B之中被检测到了表达
+			if (includes.ZERO) {
+				avgFC[i]  <- 0;
+				pvalue[i] <- 0;  # 所有的实验重复都是这种情况，则重复性很好，pvalue非常非常小？？
+			} else {
+				avgFC[i]  <- NA;
+				pvalue[i] <- NA;
+			}
+						
 		} else if (valids > 0) {
 		
-			v = v[!is.na(v)]
-			l = repeatsNumber - length(v)
+			v <- v[!is.na(v)];
+			l <- repeatsNumber - length(v);
 			# 使用1补齐NA
-			v = as.vector(append(v, rep(1, l)))  
-			avgFC[i] = mean(v, na.rm = TRUE)
-			avgFC[i]
-			
+			v <- as.vector(append(v, rep(1, l)));
+						
+			# 部分数据为零，说明有一部分数据是没有检测到的
+			# 但是有一部分数据是被检测到了的
+			# 实验的问题？？
+			# 则这些部分零值全部设置为1？
 			for (p in 1:length(v)) {
 				if (v[p] == 0) {
-				    v[p] = NA;
+				    v[p] <- 1;
 				}
 			}
 			
-			v = log(v, 2)
+			avgFC[i] <- mean(v, na.rm = TRUE);		
+			v <- log(v, 2);
 			# log2(FC) 结果和等长零向量做检验得到pvalue
 			pvalue[i] = t.test(v, ZERO, var.equal = TRUE)$p.value	
 			
 		} else {
+		
+			# 所有的数据都是NA的情况，则无法进行假设检验了
 			avgFC[i]  <- NA;
 			pvalue[i] <- NA;
 		}
 	} 
 	
-	data["FC.avg"]  = avgFC
-	data["p.value"] = pvalue
-	
+	data["FC.avg"]  <- avgFC
+	data["p.value"] <- pvalue
+	data["FDR"]     <- p.adjust(pvalue, method = "fdr", length(pvalue)); 
+		
 	# DEP 计算结果	
-	downLevel      = 1 / level;
-	data["is.DEP"] = ((avgFC >= level | avgFC <= downLevel) & (pvalue <= p.value))
+	downLevel      <- 1 / level;
+	data["is.DEP"] <- ((avgFC >= level | avgFC <= downLevel) & (pvalue <= p.value) & data["FDR"] <= 0.05);
 	
 	return(data);
 }
