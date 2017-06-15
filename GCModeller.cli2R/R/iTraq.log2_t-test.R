@@ -38,6 +38,45 @@ save.result <- function(data, file) {
 	write.csv(data, out, row.names= FALSE);
 }
 
+## a <- c();
+## b <- c();
+## p.value <- t.test(a, b, var.equal = TRUE)$p.value; 
+## logFC <- log2(mean(a)/mean(b));
+logFC.t.test <- function(data, level = 1.5, p.value = 0.05) {
+	
+	# data输入的格式为：
+	# 第一列为基因的编号，剩下的列数应该是偶数
+	# 则前半部分的数据为分母数据
+	# 后半部分的数据为分子数据
+	
+	repeatsNumber <- (ncol(data) - 1) / 2;
+	pvalue        <- rep(0, nrow(data));
+	logFC         <- rep(0, nrow(data));
+	
+	# a和b 都是index值
+	a <- 2:(2+repeatsNumber);
+	b <- (2+repeatsNumber):(2+2*repeatsNumber);
+	
+	for (i in 1:nrow(data)) {
+		row <- as.vector(as.matrix(data[i, ]));
+		
+		v1  <- row[a];
+		v2  <- row[b];
+		
+		logFC[i]  <- log(mean(v1)/mean(v2), 2);
+		pvalue[i] <- t.test(v1, v2, var.equal = TRUE)$p.value; 
+	}
+
+	data["logFC"]   <- logFC;
+	data["p.value"] <- pvalue;
+	data["FDR"]     <- p.adjust(pvalue, method = "fdr", length(pvalue)); 
+	
+	level <- log(level, 2);
+	data["is.DEP"] <- ((abs(logFC) >= level) & (pvalue <= p.value) & data["FDR"] <= 0.05);
+	
+	return(data);
+}
+
 ### iTraq结果的差异表达蛋白的检验计算
 ### 在这个函数之中，输入的表格文件的第一列为蛋白质的id编号，剩下的所有的列都是一个实验设计的比值结果
 ### 通过与等长的零向量做比较来通过假设检验判断是否是差异表达的？
