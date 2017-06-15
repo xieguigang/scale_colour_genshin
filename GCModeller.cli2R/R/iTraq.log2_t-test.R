@@ -38,6 +38,16 @@ save.result <- function(data, file) {
 	write.csv(data, out, row.names= FALSE);
 }
 
+logFC.test.LFQ.csv <- function(data.csv, level = 1.5, p.value = 0.05) {
+	data <- logFC.t.test(read.csv(data.csv), level, p.value);
+	save.result(data, file = data.csv);
+}
+
+logFC.test.LFQ.tsv <- function(data.txt, level = 1.5, p.value = 0.05) {
+	data <- logFC.t.test(read.delim(data.txt), level, p.value);
+	save.result(data, file = data.txt);
+}
+
 ## a <- c();
 ## b <- c();
 ## p.value <- t.test(a, b, var.equal = TRUE)$p.value; 
@@ -49,20 +59,31 @@ logFC.t.test <- function(data, level = 1.5, p.value = 0.05) {
 	# 则前半部分的数据为分母数据
 	# 后半部分的数据为分子数据
 	
+	print(head(data));
+	
 	repeatsNumber <- (ncol(data) - 1) / 2;
 	pvalue        <- rep(0, nrow(data));
 	logFC         <- rep(0, nrow(data));
 	
+	print(sprintf("input data have %s repeats.", repeatsNumber));
+	
 	# a和b 都是index值
-	a <- 2:(2+repeatsNumber);
-	b <- (2+repeatsNumber):(2+2*repeatsNumber);
+	a <- 2:(2 + repeatsNumber - 1);
+	b <- (2+repeatsNumber):(2+2*repeatsNumber -1);
+	
+	print("index of a:");
+	print(a);
+	print("index of b:");
+	print(b);
 	
 	for (i in 1:nrow(data)) {
-		row <- as.vector(as.matrix(data[i, ]));
+		row <- as.numeric(
+			   as.vector(
+			   as.matrix(data[i, ])));
 		
 		v1  <- row[a];
-		v2  <- row[b];
-		
+		v2  <- row[b];						
+	
 		logFC[i]  <- log(mean(v1)/mean(v2), 2);
 		pvalue[i] <- t.test(v1, v2, var.equal = TRUE)$p.value; 
 	}
