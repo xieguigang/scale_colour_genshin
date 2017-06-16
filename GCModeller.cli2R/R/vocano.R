@@ -42,7 +42,7 @@ plot.vocano.iTraq <- function(file,
 	pvalue   = "p.value", 
 	tag.disp = "FoldChange average", 
 	xrange   = c(-5, 5), 
-	yrange   = c(0,10)) {
+	yrange   = c(0,20)) {
 	
 	log2 <- log(level,2);
 	
@@ -54,6 +54,26 @@ plot.vocano.iTraq <- function(file,
 		xrange   = xrange, 
 		yrange   = yrange, 
 		log.t    = 2);
+}
+
+plot.vocano.LFQ <- function(file, 
+	tag      = "logFC", 
+	level    = 1.25, 
+	pvalue   = "p.value", 
+	tag.disp = "log2(FoldChange)", 
+	xrange   = c(-5, 5), 
+	yrange   = c(0,20)) {
+	
+	log2 <- log(level,2);
+	
+	plot.vocano(file, 
+		tag      = tag, 
+		level    = c(log2, -log2), 
+		pvalue   = pvalue, 
+		tag.disp = tag.disp, 
+		xrange   = xrange, 
+		yrange   = yrange, 
+		log.t    = 0);
 }
 
 # 自定义画图
