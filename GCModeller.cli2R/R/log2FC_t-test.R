@@ -154,6 +154,8 @@ logFC.test <- function(data, level = 1.5, p.value = 0.05, fdr.threshold = 0.05, 
 				# }
 			# }
 			
+			# print(v);
+			
 			avgFC [i] <- mean(v, na.rm = TRUE);		
 			        v <- log(v, 2);
 			# log2(FC) 结果和等长零向量做检验得到pvalue
