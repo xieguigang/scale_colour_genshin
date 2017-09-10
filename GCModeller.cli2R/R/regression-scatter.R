@@ -38,14 +38,18 @@ iTraq.consistency <- function(sample, pairs, repeats = 3, size = c(6000, 4500), 
 	par(mfrow = layout);
 	raw = data.frame(raw, stringsAsFactors = FALSE);	
 	
-	for (i in 1:nrow(pairs)) {
-		x <- pairs[i, ];		
-		x <- as.vector(unlist(x));
-		print(x);
-		regression.plot(raw, x[1], x[2]);
-	}
-	
-	dev.off()
+	tryCatch({
+		for (i in 1:nrow(pairs)) {
+			x <- pairs[i, ];		
+			x <- as.vector(unlist(x));
+			print(x);
+			regression.plot(raw, x[1], x[2]);
+		}
+	}, error = function(e) {
+		print(e);
+	})
+
+	dev.off();
 }
 
 ### apply the regression scatter plot for each sample pairs

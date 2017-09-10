@@ -13,13 +13,13 @@ library(tools)
 # 3       0.0  0.1  0.5
 # ...
 
-logFC.test.csv <- function(data.csv, level = 1.5, p.value = 0.05, includes.ZERO = FALSE) {
-	data <- logFC.test(read.csv(data.csv), level, p.value, includes.ZERO);
+logFC.test.csv <- function(data.csv, level = 1.5, p.value = 0.05, includes.ZERO = FALSE, fdr = TRUE) {
+	data <- logFC.test(read.csv(data.csv), level, p.value, includes.ZERO, fdr = fdr);
 	save.result(data, file = data.csv);
 }
 
-logFC.test.tsv <- function(data.txt, level = 1.5, p.value = 0.05, includes.ZERO = FALSE) {
-	data <- logFC.test(read.delim(data.txt), level, p.value, includes.ZERO);
+logFC.test.tsv <- function(data.txt, level = 1.5, p.value = 0.05, includes.ZERO = FALSE, fdr = TRUE) {
+	data <- logFC.test(read.delim(data.txt), level, p.value, includes.ZERO, fdr = fdr);
 	save.result(data, file = data.txt);
 }
 
@@ -106,14 +106,15 @@ logFC.t.test <- function(data, level = 1.5, p.value = 0.05) {
 ### @level: 蛋白组分析之中的差异表达的阈值默认为log2(1.5)，对于转录组而言，这里是log2(2) = 1
 ###         如果信号量的变化值都比较低，可以考虑level参数值取值1.25
 ### @includes.ZERO 当某一个蛋白的所有的FC值都是零的时候，是否也应该包括为DEP结果？默认不包括
-logFC.test <- function(data, level = 1.5, p.value = 0.05, includes.ZERO = FALSE) {
+logFC.test <- function(data, level = 1.5, p.value = 0.05, includes.ZERO = FALSE, fdr = TRUE) {
 	
 	repeatsNumber <- ncol(data) - 1;        # 实验重复数
 	ZERO          <- rep(0, repeatsNumber); # 得到等长的进行比较的0向量
 	index         <- seq(2, repeatsNumber + 1);
 	pvalue        <- rep(0, nrow(data));
 	avgFC         <- rep(0, nrow(data));
-
+	log2          <- c();
+	
 	# 对dataframe之中的每一行都进行计算
 	for(i in 1:(nrow(data))) {
 		
@@ -156,22 +157,30 @@ logFC.test <- function(data, level = 1.5, p.value = 0.05, includes.ZERO = FALSE)
 			v <- log(v, 2);
 			# log2(FC) 结果和等长零向量做检验得到pvalue
 			pvalue[i] = t.test(v, ZERO, var.equal = TRUE)$p.value	
+			log2[i] <- log(avgFC[i], 2);
 			
 		} else {
 		
 			# 所有的数据都是NA的情况，则无法进行假设检验了
 			avgFC[i]  <- NA;
 			pvalue[i] <- NA;
+			log2[i] <- NA;
 		}
 	} 
 	
-	data["FC.avg"]  <- avgFC
-	data["p.value"] <- pvalue
+	data["FC.avg"]  <- avgFC;
+	data["log2FC"]  <- log2;
+	data["p.value"] <- pvalue;
 	data["FDR"]     <- p.adjust(pvalue, method = "fdr", length(pvalue)); 
-		
+			
 	# DEP 计算结果	
 	downLevel      <- 1 / level;
-	data["is.DEP"] <- ((avgFC >= level | avgFC <= downLevel) & (pvalue <= p.value) & data["FDR"] <= 0.05);
 	
+	if (fdr) {
+		data["is.DEP"] <- ((avgFC >= level | avgFC <= downLevel) & (pvalue <= p.value) & data["FDR"] <= 0.05);
+	} else {
+		data["is.DEP"] <- ((avgFC >= level | avgFC <= downLevel) & (pvalue <= p.value));
+	}
+		
 	return(data);
 }

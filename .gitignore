@@ -33,3 +33,4 @@ vignettes/*.pdf
 *.knit.md
 /.vs/GCModeller.CLI2R/v15/.suo
 /.vs/slnx.sqlite
+.Rproj.user
