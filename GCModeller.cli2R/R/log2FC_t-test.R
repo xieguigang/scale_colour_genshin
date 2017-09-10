@@ -182,6 +182,8 @@ logFC.test <- function(data, level = 1.5, p.value = 0.05, fdr.threshold = 0.05, 
 	print(sprintf("FDR:         %s", fdr.threshold));
 	
 	if (fdr.threshold < 1) {
+		
+		print("Apply FDR adjust for DEPs");
 		data["is.DEP"] <- ((avgFC >= level | avgFC <= downLevel) & 
 		                   (pvalue <= p.value) & 
 						   (data["FDR"] <= fdr.threshold));
