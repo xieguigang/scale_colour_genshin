@@ -148,24 +148,24 @@ logFC.test <- function(data, level = 1.5, p.value = 0.05, fdr.threshold = 0.05, 
 			# 但是有一部分数据是被检测到了的
 			# 实验的问题？？
 			# 则这些部分零值全部设置为1？
-			for (p in 1:length(v)) {
-				if (v[p] == 0) {
-				    v[p] <- 1;
-				}
-			}
+			# for (p in 1:length(v)) {
+				# if (v[p] == 0) {
+				    # v[p] <- 1;
+				# }
+			# }
 			
-			avgFC[i] <- mean(v, na.rm = TRUE);		
-			v <- log(v, 2);
+			avgFC [i] <- mean(v, na.rm = TRUE);		
+			        v <- log(v, 2);
 			# log2(FC) 结果和等长零向量做检验得到pvalue
-			pvalue[i] = t.test(v, ZERO, var.equal = TRUE)$p.value	
-			log2[i] <- log(avgFC[i], 2);
+			pvalue[i] <- t.test(v, ZERO, var.equal = TRUE)$p.value	
+			log2  [i] <- log(avgFC[i], 2);
 			
 		} else {
 		
 			# 所有的数据都是NA的情况，则无法进行假设检验了
-			avgFC[i]  <- NA;
+			avgFC [i] <- NA;
 			pvalue[i] <- NA;
-			log2[i] <- NA;
+			log2  [i] <- NA;
 		}
 	} 
 	
@@ -175,15 +175,16 @@ logFC.test <- function(data, level = 1.5, p.value = 0.05, fdr.threshold = 0.05, 
 	data["FDR"]     <- p.adjust(pvalue, method = "fdr", length(pvalue)); 
 				
 	# DEP 计算结果	
-	downLevel      <- 1 / level;
+	downLevel       <- 1 / level;
 	
 	print(sprintf("DEP levels: (%s, %s)", level, downLevel));
-	print(sprintf("Pvalue:      %s", p.value));
-	print(sprintf("FDR:         %s", fdr.threshold));
+	print(sprintf("    Pvalue:  %s", p.value));
+	print(sprintf("       FDR:  %s", fdr.threshold));
 	
 	if (fdr.threshold < 1) {
 		
 		print("Apply FDR adjust for DEPs");
+		
 		data["is.DEP"] <- ((avgFC >= level | avgFC <= downLevel) & 
 		                   (pvalue <= p.value) & 
 						   (data["FDR"] <= fdr.threshold));
