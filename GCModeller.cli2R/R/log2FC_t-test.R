@@ -13,13 +13,13 @@ library(tools)
 # 3       0.0  0.1  0.5
 # ...
 
-logFC.test.csv <- function(data.csv, level = 1.5, p.value = 0.05, includes.ZERO = FALSE, fdr = TRUE) {
-	data <- logFC.test(read.csv(data.csv), level, p.value, includes.ZERO, fdr = fdr);
+logFC.test.csv <- function(data.csv, level = 1.5, p.value = 0.05, fdr.threshold = 0.05, includes.ZERO = FALSE) {
+	data <- logFC.test(read.csv(data.csv), level, p.value, fdr.threshold, includes.ZERO);
 	save.result(data, file = data.csv);
 }
 
-logFC.test.tsv <- function(data.txt, level = 1.5, p.value = 0.05, includes.ZERO = FALSE, fdr = TRUE) {
-	data <- logFC.test(read.delim(data.txt), level, p.value, includes.ZERO, fdr = fdr);
+logFC.test.tsv <- function(data.txt, level = 1.5, p.value = 0.05, fdr.threshold=0.05, includes.ZERO = FALSE) {
+	data <- logFC.test(read.delim(data.txt), level, p.value, fdr.threshold, includes.ZERO);
 	save.result(data, file = data.txt);
 }
 
@@ -106,7 +106,8 @@ logFC.t.test <- function(data, level = 1.5, p.value = 0.05) {
 ### @level: 蛋白组分析之中的差异表达的阈值默认为log2(1.5)，对于转录组而言，这里是log2(2) = 1
 ###         如果信号量的变化值都比较低，可以考虑level参数值取值1.25
 ### @includes.ZERO 当某一个蛋白的所有的FC值都是零的时候，是否也应该包括为DEP结果？默认不包括
-logFC.test <- function(data, level = 1.5, p.value = 0.05, includes.ZERO = FALSE, fdr = TRUE) {
+### @fdr.threshold 当FDR校验的阈值设置为1的时候，表示不需要进行FDR校验，则不会再结果之中显示FDR值
+logFC.test <- function(data, level = 1.5, p.value = 0.05, fdr.threshold = 0.05, includes.ZERO = FALSE) {
 	
 	repeatsNumber <- ncol(data) - 1;        # 实验重复数
 	ZERO          <- rep(0, repeatsNumber); # 得到等长的进行比较的0向量
@@ -172,15 +173,25 @@ logFC.test <- function(data, level = 1.5, p.value = 0.05, includes.ZERO = FALSE,
 	data["log2FC"]  <- log2;
 	data["p.value"] <- pvalue;
 	data["FDR"]     <- p.adjust(pvalue, method = "fdr", length(pvalue)); 
-			
+				
 	# DEP 计算结果	
 	downLevel      <- 1 / level;
 	
-	if (fdr) {
-		data["is.DEP"] <- ((avgFC >= level | avgFC <= downLevel) & (pvalue <= p.value) & data["FDR"] <= 0.05);
+	print(sprintf("DEP levels: (%s, %s)", level, downLevel));
+	print(sprintf("Pvalue:      %s", p.value));
+	print(sprintf("FDR:         %s", fdr.threshold));
+	
+	if (fdr.threshold < 1) {
+		data["is.DEP"] <- ((avgFC >= level | avgFC <= downLevel) & 
+		                   (pvalue <= p.value) & 
+						   (data["FDR"] <= fdr.threshold));
 	} else {
-		data["is.DEP"] <- ((avgFC >= level | avgFC <= downLevel) & (pvalue <= p.value));
-	}
-		
+		# FDR阈值等于1的时候不进行fdr校验
+		data["is.DEP"] <- ((avgFC >= level | avgFC <= downLevel) & 
+		                   (pvalue <= p.value));
+	}	
+	
+	print(sprintf("Results %s DEPs in %s proteins!", length(which(data[, "is.DEP"])), nrow(data)));
+			
 	return(data);
 }
