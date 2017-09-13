@@ -148,14 +148,13 @@ logFC.test <- function(data, level = 1.5, p.value = 0.05, fdr.threshold = 0.05, 
 			# 但是有一部分数据是被检测到了的
 			# 实验的问题？？
 			# 则这些部分零值全部设置为1？
-			# for (p in 1:length(v)) {
-				# if (v[p] == 0) {
-				    # v[p] <- 1;
-				# }
-			# }
-			
-			# print(v);
-			
+			for (p in 1:length(v)) {
+				if (v[p] == 0) {
+					# 不进行替换的话，在后面的log2计算会计算出NA值，从而导致t.test失败
+				    v[p] <- level;
+				}
+			}
+					
 			avgFC [i] <- mean(v, na.rm = TRUE);		
 			        v <- log(v, 2);
 			# log2(FC) 结果和等长零向量做检验得到pvalue
