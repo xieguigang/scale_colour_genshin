@@ -151,7 +151,7 @@ logFC.test <- function(data, level = 1.5, p.value = 0.05, fdr.threshold = 0.05, 
 			for (p in 1:length(v)) {
 				if (v[p] == 0) {
 					# 不进行替换的话，在后面的log2计算会计算出NA值，从而导致t.test失败
-				    v[p] <- level;
+				    v[p] <- 1;
 				}
 			}
 					
