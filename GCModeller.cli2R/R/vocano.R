@@ -40,7 +40,7 @@ plot.vocano.iTraq <- function(file,
 	tag      = "FC.avg", 
 	level    = 1.25, 
 	pvalue   = "p.value", 
-	tag.disp = "FoldChange average", 
+	tag.disp = "log2(average FoldChange)", 
 	xrange = NULL, 
 	yrange = NULL) {
 	
