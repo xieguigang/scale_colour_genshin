@@ -124,7 +124,7 @@ plot.vocano <- function(
 	
 	if (is.null(yrange)) {
 		yrange = as.vector(data[, "p.value"]);
-		yrange = c(0, -log( max(yrange), 10));
+		yrange = c(0, -log( min(yrange), 10));
 	}
 
 	print(sprintf("xrange is %s", toString(xrange)));
