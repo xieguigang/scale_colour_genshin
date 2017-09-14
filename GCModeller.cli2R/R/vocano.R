@@ -40,9 +40,7 @@ plot.vocano.iTraq <- function(file,
 	tag      = "FC.avg", 
 	level    = 1.25, 
 	pvalue   = "p.value", 
-	tag.disp = "FoldChange average", 
-	xrange   = c(-5, 5), 
-	yrange   = c(0,20)) {
+	tag.disp = "FoldChange average") {
 	
 	log2 <- log(level,2);
 	
@@ -51,8 +49,6 @@ plot.vocano.iTraq <- function(file,
 		level    = c(log2, -log2), 
 		pvalue   = pvalue, 
 		tag.disp = tag.disp, 
-		xrange   = xrange, 
-		yrange   = yrange, 
 		log.t    = 2);
 }
 
@@ -60,9 +56,7 @@ plot.vocano.LFQ <- function(file,
 	tag      = "logFC", 
 	level    = 1.25, 
 	pvalue   = "p.value", 
-	tag.disp = "log2(FoldChange)", 
-	xrange   = c(-5, 5), 
-	yrange   = c(0,20)) {
+	tag.disp = "log2(FoldChange)") {
 	
 	log2 <- log(level,2);
 	
@@ -71,8 +65,6 @@ plot.vocano.LFQ <- function(file,
 		level    = c(log2, -log2), 
 		pvalue   = pvalue, 
 		tag.disp = tag.disp, 
-		xrange   = xrange, 
-		yrange   = yrange, 
 		log.t    = 0);
 }
 
@@ -89,8 +81,7 @@ plot.vocano.LFQ <- function(file,
 ## @param file   The csv data source file for this vocano plot function. 
 plot.vocano <- function(
 	file, 
-	tag="logFC", level=c(1,-1), pvalue = "PValue", tag.disp = "log2 fold change", 
-	xrange = c(-5, 5), yrange=c(0, 5), 
+	tag="logFC", level=c(1,-1), pvalue = "PValue", tag.disp = "log2 fold change", 	
 	log.t = 0) {
 
 	## generates the output file name automatic
@@ -114,6 +105,19 @@ plot.vocano <- function(
 	data$threshold <- as.factor(
 		(logFC >= level[1] | logFC <= level[2]) & 
 		(data[pvalue] <= 0.05));
+	
+	print(head(data));
+	
+	# 自动计算出xrange和yrange
+	xrange = as.vector(data[, "logFC"]);
+	xrange = max(abs(xrange))
+	xrange = c(-xrange, xrange);
+	
+	yrange = as.vector(data[, "p.value"]);
+	yrange = c(0, -log( max(yrange), 10));
+	
+	print(sprintf("xrange is %s", toString(xrange)));
+	print(sprintf("yrange is %s", toString(yrange)));
 	
 	print("Have a peeks on the result data:");
 	print(head(data));
