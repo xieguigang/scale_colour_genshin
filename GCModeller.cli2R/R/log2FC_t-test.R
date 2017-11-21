@@ -50,6 +50,7 @@ logFC.test.LFQ.tsv <- function(data.txt, level = 1.5, p.value = 0.05) {
 	save.result(data, file = data.txt);
 }
 
+## Label Free差异蛋白计算
 ## a <- c();
 ## b <- c();
 ## p.value <- t.test(a, b, var.equal = TRUE)$p.value; 
@@ -122,7 +123,7 @@ logFC.test <- function(data, level = 1.5, p.value = 0.05, fdr.threshold = 0.05, 
 		row    <- data[i, ];
 		# 得到的v向量为FC向量，即v向量之中的值都是一个实验设计之中的
 		# 两个实验值的比值
-		v      <- as.vector(as.matrix(row[index]));
+		v      <- as.numeric(as.vector(as.matrix(row[index])));
 		valids <- sum(!is.na(v));
 
 		if (ALL.Equals(v, 0)) {
@@ -154,9 +155,10 @@ logFC.test <- function(data, level = 1.5, p.value = 0.05, fdr.threshold = 0.05, 
 				    v[p] <- 1;
 				}
 			}
-					
+								
 			avgFC [i] <- mean(v, na.rm = TRUE);		
 			        v <- log(v, 2);
+						        
 			# log2(FC) 结果和等长零向量做检验得到pvalue
 			pvalue[i] <- t.test(v, ZERO, var.equal = TRUE)$p.value	
 			log2  [i] <- log(avgFC[i], 2);
