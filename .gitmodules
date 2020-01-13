@@ -1,3 +1,6 @@
 [submodule "modules/php-dotnet"]
-	path = modules/php-dotnet
+	path = modules/php.NET
 	url = https://github.com/biocad-cloud/php-dotnet.git
+[submodule "typescripts/data.ts"]
+	path = typescripts/data.ts
+	url = https://github.com/biocad-cloud/data.ts.git
