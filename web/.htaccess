@@ -1,3 +1,4 @@
 RewriteEngine On
 
 RewriteRule ^assets/(.+)$ /proxy.php?app=assets&resource=$1
+RewriteRule ^scripts/(.+)$ /proxy.php?app=scripts&resource=$1

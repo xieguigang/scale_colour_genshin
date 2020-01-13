@@ -6,7 +6,7 @@ include __DIR__ . "/../modules/bootstrap.php";
  * File proxy
 */
 class App {
-    
+
     /**
      * Transfer the static assets files
      * 
@@ -14,16 +14,31 @@ class App {
      * @require resource=string
     */
     public function assets() {
-        $resource = trim($_GET["resource"], "./\\ ");
+        $resource = WebRequest::getPath("resource");
         $resource = WWWROOT . "/assets/$resource";
         
-        if (file_exists($resource)) {
+        if (!empty($resource) && file_exists($resource)) {
             Utils::PushDownload($resource);
         } else {
             dotnet::PageNotFound($_GET["resource"]);
         }
     }
 
+    /**
+     * @access *
+     * @require resource=string
+    */
+    public function scripts() {
+        $resource = WebRequest::getPath("resource");
+        $resource = WWWROOT . "/typescripts/build/$resource";
+        
+        if (!empty($resource) && file_exists($resource)) {
+            Utils::PushDownload($resource);
+        } else {
+            dotnet::PageNotFound($_GET["resource"]);
+        }
+    }
+    
     /**
      * 
     */
