@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="canonical" href="/">
+    <link rel="manifest" href="/manifest.json">
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="">
+    <link rel="apple-touch-icon" href="favicon.jpg">
+    <!-- Add to home screen for IE on Windows -->
+    <meta name="msapplication-TileImage" content="favicon.jpg">
+    <meta name="msapplication-TileColor" content="#2F3BA2">
+
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="styles/inline.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <h1 class="header_title"></h1>
+        <a href="/about"><button id="butAbout" class="headerButton" aria-label="about"></button></a>
+    </header>
+
+    <main class="main">
+        <div class="post-list-body post-area">
+            <template id="blogListTemplate">
+                <div class="list-item">
+                    <a href="/" id="blogLink" title="title template">
+                        <div class="post-list-item">
+                            <font color="#aaaaaa" id="blogTime"></font>
+                            <h2>
+                                <font color="#AE57A4" id="tag"></font>
+                                <font color="#333333" id="title"></font>
+                            </h2>
+                            <p>
+                                <font color="#666666" id="description"></font>
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </template>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <button id="column1" class="button1">专栏</button>
+        <button id="column2" class="button2">博客</button>
+        <button id="column3" class="button3">作品</button>
+    </footer>
+
+    <script src="/scripts/app.js" async></script>
+</body>
+
+</html>
