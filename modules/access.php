@@ -10,7 +10,7 @@ class accessController extends controller {
         $type   = $this->getUsage();
 
         # 测试
-        return true;
+        # return true;
 
         # 从这里统计用户的活动信息
         if ($type == "view" || $type == "router") {

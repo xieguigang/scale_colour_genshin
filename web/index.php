@@ -10,4 +10,6 @@ class App {
     public function index() {
         View::Display();
     }
+
+    
 }
