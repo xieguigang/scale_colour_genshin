@@ -1,17 +1,12 @@
 {
-  "name": "diary",
+  "name": "linq.ts",
   "version": "0.0.0",
-  "description": "diary",
-  "main": "app.js",
+  "description": "Data sequence Linq extension for TypeScript.",
+  "main": "linq.js",
   "author": {
-    "name": ""
-  },
-  "scripts": {
-    "build": "tsc --build",
-    "clean": "tsc --build --clean"
+    "name": "xieguigang"
   },
   "devDependencies": {
-    "@types/node": "^8.0.14",
-    "typescript": "^3.2.2"
+    "@types/node": "^6.14.7"
   }
 }

@@ -17,6 +17,7 @@ local.properties
 .classpath
 .settings/
 .loadpath
+node_modules/
 
 slnx.sqlite-journal
 slnx.sqlite
@@ -55,7 +56,7 @@ packages/
 [Dd]ebug/
 [Rr]elease/
 x64/
-build/
+# build/
 [Bb]in/
 [Oo]bj/
 .svn/
@@ -204,7 +205,7 @@ $RECYCLE.BIN/
 *.egg
 *.egg-info
 dist/
-build/
+# build/
 eggs/
 parts/
 var/
