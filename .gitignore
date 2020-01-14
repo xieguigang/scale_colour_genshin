@@ -246,3 +246,4 @@ pip-log.txt
 /plot
 /modules/config.ini.php
 web/phpinfo.php
+/template/lazy-kit-master
