@@ -11,5 +11,11 @@ class App {
         View::Display();
     }
 
-    
+	/**
+	 * @uses api
+	 * @access *
+	*/
+    public function update() {
+		
+	}
 }
