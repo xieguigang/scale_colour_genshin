@@ -18,7 +18,8 @@
         </div>
 
         <!-- button that opens the modal -->
-        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+        <button type="button" class="btn btn-info" id="open-msg" style="display: none;" data-toggle="modal"
+            data-target="#exampleModal">
             Click for More
         </button>
 
@@ -48,5 +49,11 @@
 
     ${../includes/footer.html}
 </body>
+
+<script>
+    $ts(function () {
+        $("#open-msg").click();
+    });
+</script>
 
 </html>
