@@ -17,16 +17,25 @@ class App {
      * @access *
     */
     public function home() {
-        View::Display();
+        View::Display(["home.active" => "active"]);
     }
 
 	/**
      * @uses view
+     * 
     */
     public function gallery() {
-    	View::Display();
+        View::Display(["gallery.active" => "active"]);
     }
-	
+    
+    /**
+     * @uses view
+     * @access *
+    */
+    public function profile() {
+        View::Display(["profile.active" => "active"]);
+    }
+
 	/**
 	 * Update site source file from github repository
 	 *
