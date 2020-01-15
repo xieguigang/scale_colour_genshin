@@ -9,7 +9,7 @@ class App {
      * @access *
     */
     public function index() {
-        View::Display();
+        View::Display(["hide" => "display: none;"]);
     }
     
     /**
