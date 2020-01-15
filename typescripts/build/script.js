@@ -26,7 +26,9 @@ var pages;
             configurable: true
         });
         index.prototype.init = function () {
-            throw new Error("Method not implemented.");
+            $ts("#enter").onclick = function () {
+                $goto("/home");
+            };
         };
         return index;
     }(Bootstrap));
