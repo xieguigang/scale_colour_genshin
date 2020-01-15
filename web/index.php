@@ -11,6 +11,14 @@ class App {
     public function index() {
         View::Display();
     }
+    
+    /**
+     * @uses view
+     * @access *
+    */
+    public function home() {
+        View::Display();
+    }
 
 	/**
      * @uses view

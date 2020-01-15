@@ -1,16 +1,16 @@
 {
-  "short_name": "diary-pwa",
-  "name": "diary-pwa",
+  "short_name": "日记",
+  "name": "记录生活点点滴滴",
   "icons": [
     {
       "src": "/favicon.ico",
       "type": "image/x-icon",
-      "sizes": "32x32"
+      "sizes": "192x192"
     }
   ],
   "start_url": "/",
   "background_color": "#142b3e",
-  "display": "standalone",
+  "display": "fullscreen",
   "scope": "/",
   "theme_color": "#142b3e"
 }
