@@ -11,7 +11,7 @@ return [
     // 框架配置参数
 	"ERR_HANDLER_DISABLE" => "FALSE",
 	"RFC7231"       => __DIR__ . "/views/http_errors/",
-	"CACHE" => true,
+	"CACHE" => false,
     "APP_NAME" => "pwa",
     "APP_TITLE" => "pwa",
     "APP_VERSION" => "0.0.0.1-alpha",
