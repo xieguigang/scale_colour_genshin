@@ -24,7 +24,7 @@ class App {
     public function login() {
         if (pwa::login_userId() < 0) {
             # 未登录状态
-            View::Display();
+            View::Display(["hide" => "display: none;"]);
         } else {
             Redirect("/home");
         }
