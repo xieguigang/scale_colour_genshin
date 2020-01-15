@@ -5,43 +5,43 @@
     ${includes/head.html}
 
     <meta name="app" content="index" />
+	
+	<style>
+	body, html {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.bg-image {
+  /* The image used */
+  background-image: url("photographer.jpg");
+
+  /* Add the blur effect */
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+	
+	</style>
+	
 </head>
 
 <body>
 
-    <main class="main">
+    <main class="main bg-image">
         <div class="post-list-body post-area">
 		
-		 <canvas id="bgcanvas" width="100%" height="100%">
-		
-		<script>
-		// Velocity X
-var vx = 0;
-var WH= document.height;
-var WW= document.width;
-var bgc = document.getElementById("bgcanvas");
-bgc.height=WH;
-bgc.width=WW;
-
-var ctx = bgc.getContext("2d");
-
-var img = new Image();
-img.src = '/assets/images/splash.jpg';
- 
-(function renderGame() {
-    window.requestAnimationFrame(renderGame);
-     
-    ctx.clearRect(0, 0, WW, WH);
-     
-    ctx.fillStyle = '#333';
-    ctx.fillRect(0, 0, 500, 400);
-     
-    ctx.drawImage(img, vx, 50);
-     
-    vx -= 2;
-}());
-		
-		</script>
+<div class="bg-image"></div>
 		
 		<!--
             <template id="blogListTemplate">
