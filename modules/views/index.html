@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 
 <head>
     ${includes/head.html}
@@ -12,25 +12,32 @@
             height: 100%;
         }
 
-        * {
-            box-sizing: border-box;
-        }
-
         .bg-image {
             /* The image used */
-            background-image: url("/assets/images/splash.jpg");
-
-            /* Add the blur effect */
-            filter: blur(8px);
-            -webkit-filter: blur(8px);
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/assets/images/splash.jpg");
 
             /* Full height */
-            height: 100%;
+            height: 90%;
 
             /* Center and scale the image nicely */
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
+
+            position: relative;
+            z-index: 0;
+        }
+
+        /* Place text in the middle of the image */
+        .hero-text {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+
+            z-index: 100;
         }
     </style>
 
@@ -38,31 +45,15 @@
 
 <body>
 
-    <main class="main bg-image">
-        <div class="post-list-body post-area">
+    <div class="bg-image">
 
-            <div class="bg-image"></div>
-
-            <!--
-            <template id="blogListTemplate">
-                <div class="list-item">
-                    <a href="/" id="blogLink" title="title template">
-                        <div class="post-list-item">
-                            <font color="#aaaaaa" id="blogTime"></font>
-                            <h2>
-                                <font color="#AE57A4" id="tag"></font>
-                                <font color="#333333" id="title"></font>
-                            </h2>
-                            <p>
-                                <font color="#666666" id="description"></font>
-                            </p>
-                        </div>
-                    </a>
-                </div>
-            </template>
-			-->
+        <div class="hero-text">
+            <h1 style="color:white;">I am John Doe</h1>
+            <p>And I'm a Photographer</p>
+            <button type="button" class="btn btn-light">点击进入</button>
         </div>
-    </main>
+
+    </div>
 
     ${includes/footer.html}
 </body>
