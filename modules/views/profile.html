@@ -17,24 +17,23 @@
         <div class="col-12 col-md-8 d-flex flex-column align-items-center align-items-lg-start">
           <div class="d-flex flex-row align-items-start mt-3 mt-lg-0">
             <div class="name">
-              <h2 class="mb-0">Lorde</h2>
+              <h2 class="mb-0">{$name}</h2>
             </div>
-            <a href="#a" class="btn btn-primary btn-pill btn-sm ml-3 mt-1">Follow</a>
+            <a href="#a" class="btn btn-primary btn-pill btn-sm ml-3 mt-1">{$status}</a>
           </div>
           <div class="stats d-flex flex-row align-items-center align-items-lg-start text-center text-lg-left">
             <div class="posts ml-2 ml-lg-0">
-              <p class="lead"><b>134</b> posts</p>
+              <p class="lead"><b>{$n.posts}</b> 动静</p>
             </div>
             <div class="posts">
-              <p class="lead"><b>6.6m</b> followers</p>
+              <p class="lead"><b>{$n.photo}</b> 相片</p>
             </div>
             <div class="posts">
               <p class="lead"><b>201</b> following</p>
             </div>
           </div>
-          <p class="lead mb-0 mt-2"><b>Ella Yelich-O'Connor</b></p>
-          <p class="lead text-center text-lg-left">Let's let things come out of the woodwork. I'll give you my best
-            side, tell you all my best lies. Yeah, awesome right?</p>
+          <p class="lead mb-0 mt-2"><b>{$fullname}</b></p>
+          <p class="lead text-center text-lg-left">{$whats.up}</p>
         </div>
       </div>
     </div>
@@ -42,17 +41,17 @@
       <ul class="nav nav-primary nav-tabs mt-3 d-flex flex-column flex-md-row">
         <li class="nav-item">
           <a class="nav-link active" data-toggle="tab" href="#photos">
-            <i class="fas fa-th"></i> Photos
+            <i class="fas fa-th"></i> 相片
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#saved">
-            <i class="far fa-bookmark"></i> Saved
+            <i class="far fa-bookmark"></i> 记录
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#tagged">
-            <i class="far fa-id-badge"></i> Tagged
+            <i class="far fa-id-badge"></i> 动静
           </a>
         </li>
       </ul>
