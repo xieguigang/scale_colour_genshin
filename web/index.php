@@ -20,8 +20,10 @@ class App {
     }
 	
 	/**
+	 * Update site source file from github repository
+	 *
 	 * @uses api
-	 * @access *
+	 * @access admin
 	*/
     public function update() {
 		
