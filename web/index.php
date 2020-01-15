@@ -13,6 +13,24 @@ class App {
     }
     
     /**
+     * 登录
+     * 
+     * 如果已经存在登录会话，则跳转至home页面
+     * 否则显示登录页面
+     * 
+     * @uses view
+     * @access *
+    */
+    public function login() {
+        if (pwa::login_userId() < 0) {
+            # 未登录状态
+            View::Display();
+        } else {
+            Redirect("/home");
+        }
+    }
+
+    /**
      * @uses view
      * @access *
     */

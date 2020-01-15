@@ -27,7 +27,7 @@ var pages;
         });
         index.prototype.init = function () {
             $ts("#enter").onclick = function () {
-                $goto("/home");
+                $goto("/login");
             };
         };
         return index;

@@ -8,7 +8,7 @@ namespace pages {
 
         protected init(): void {
             $ts("#enter").onclick = function () {
-                $goto("/home");
+                $goto("/login");
             }
         }
     }
