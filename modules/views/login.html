@@ -56,7 +56,9 @@
                                     <ul>
                                         <foreach @peoples>
                                             <li>
-                                                <img src='@peoples["avatar"]' class="img-fluid rounded-circle shadow-lg" /><a class="people-link" href="#" target="__blank">@peoples["email"]</a>
+                                                <img src='@peoples["avatar"]' class="img-fluid rounded-circle shadow-lg" style="width: 32px;" />
+                                                &nbsp;&nbsp;
+                                                <a class="people-link" href="#" target="__blank">@peoples["nickname"]</a>
                                             </li>
                                         </foreach>
                                     </ul>
