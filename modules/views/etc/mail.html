@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>登录确认</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link href="http://47.94.16.9:83/assets/img/favicon.ico" rel="icon" type="image/png">
+
+    <link rel="stylesheet" href="http://47.94.16.9:83/assets/vendor/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="http://47.94.16.9:83/assets/css/lazy.css">
+    <link rel="stylesheet" href="http://47.94.16.9:83/assets/css/demo.css">
+    <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="profile index">
+
+    <div class="bubbles d-none d-md-block">
+        <!-- 				bubbles -->
+        <div class="bubble bubble-1 rotate-bubble bg-warning"></div>
+        <div class="bubble bubble-2 bubble-bottom-right bg-danger rotate-bubble"></div>
+        <div class="bubble bubble-3 bubble-top-right bg-warning rotate-bubble"></div>
+        <div class="bubble bubble-4 bubble-top-left bg-info rotate-bubble"></div>
+        <div class="bubble bubble-5 bg-info rotate-bubble"></div>
+        <div class="bubble bubble-6 bubble-bottom-right bg-danger rotate-bubble"></div>
+        <div class="bubble bubble-7 bubble-top-right bg-success rotate-bubble"></div>
+        <div class="bubble bubble-8 bubble-top-left bg-success rotate-bubble"></div>
+        <div class="bubble bubble-9 bg-warning rotate-bubble"></div>
+        <div class="bubble bubble-10 bg-danger rotate-bubble"></div>
+        <div class="bubble bubble-11 bubble-bottom-right bg-info rotate-bubble"></div>
+        <div class="bubble bubble-12 bubble-top-right bg-success rotate-bubble"></div>
+        <div class="bubble bubble-13 bubble-top-left bg-success rotate-bubble"></div>
+        <!--         circles -->
+        <div class="circle circle-1 bg-light rotate-circle"></div>
+        <div class="circle circle-2 bg-success rotate-circle"></div>
+        <div class="circle circle-3 bg-danger rotate-circle"></div>
+        <div class="circle circle-4 bg-info rotate-circle"></div>
+        <div class="circle circle-5 bg-success rotate-circle"></div>
+        <div class="circle circle-6 bg-info rotate-circle"></div>
+        <div class="circle circle-7 bg-warning rotate-circle"></div>
+        <div class="circle circle-8 bg-white rotate-circle"></div>
+        <div class="circle circle-9 bg-warning rotate-circle"></div>
+        <div class="circle circle-10 bg-danger rotate-circle"></div>
+    </div>
+
+    <div class="container">
+        <div class="info">
+            <div class="row">
+                <div class="col-12 col-md-4 text-center">
+                    <img src="http://47.94.16.9:83/{$avatar}" alt="Raised circle image"
+                        class="img-fluid rounded-circle shadow-lg" style="width: 180px;">
+                </div>
+                <div class="col-12 col-md-8 d-flex flex-column align-items-center align-items-lg-start">
+                    <div class="d-flex flex-row align-items-start mt-3 mt-lg-0">
+                        <div class="name">
+                            <h2 class="mb-0">{$nickname}</h2>
+                        </div>
+                    </div>
+                    <div class="stats d-flex flex-row align-items-center align-items-lg-start text-center text-lg-left">
+                        <div class="posts ml-2 ml-lg-0">
+                            <p class="lead"><b>{$n.posts}</b> 动静</p>
+                        </div>
+                        <div class="posts">
+                            <p class="lead"><b>{$n.photo}</b> 相片</p>
+                        </div>
+                        <div class="posts">
+                            <p class="lead"><b>201</b> following</p>
+                        </div>
+                    </div>
+                    <p class="lead mb-0 mt-2"><b>{$fullname}</b></p>
+                    <p class="lead text-center text-lg-left">{$whats.up}</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation d-flex justify-content-center">
+            <a href="{$link.url}" class="btn btn-primary">确认登录</a>
+        </div>
+
+    </div>
+
+
+    <footer class="footer-1 bg-light text-dark">
+        <div class="container">
+
+            <div class="copyright text-center">
+                <hr />
+                <p class="small">&copy; 2020, made with <span class="text-danger"><i class="fas fa-heart"></i></span> by
+                    xieguigang</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="http://47.94.16.9:83/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="http://47.94.16.9:83/assets/vendor/popper/popper.min.js"></script>
+    <script src="http://47.94.16.9:83/assets/vendor/bootstrap/bootstrap.min.js"></script>
+
+    <!-- optional plugins -->
+    <script src="http://47.94.16.9:83/assets/vendor/nouislider/js/nouislider.min.js"></script>
+
+    <!--   lazy javascript -->
+    <script src="http://47.94.16.9:83/assets/js/lazy.js"></script>
+</body>
+
+</html>
