@@ -54,12 +54,12 @@
                                 <h4 class="card-title">点击下面的E-mail进行登录</h4>
                                 <p class="card-text">
                                     <ul>
-                                        <foreach @peoples>
-                                            <li>
-                                                <img src='@peoples["avatar"]' class="img-fluid rounded-circle shadow-lg" style="width: 32px;" />
-                                                &nbsp;&nbsp;
-                                                <a class="people-link" href="#" target="__blank">@peoples["nickname"]</a>
-                                            </li>
+                                        <foreach @peoples>                                          
+                                            <a class="people-link" href="javascript:void(0);" target="__blank"> 
+                                                <img src='@peoples["avatar"]' class="img-fluid rounded-circle shadow-lg" style="width: 64px;" />    
+                                            </a> 
+                                                                                     
+                                                                                           
                                         </foreach>
                                     </ul>
                                 </p>
