@@ -1,5 +1,8 @@
 <?php
 
+# template for do website configuration
+define("AppViews", __DIR__ . "/views");
+
 return [
     'DB_TYPE' => 'mysql',
     'DB_HOST' => '127.0.0.1',
@@ -12,10 +15,20 @@ return [
 	"ERR_HANDLER_DISABLE" => "FALSE",
 	"RFC7231"       => __DIR__ . "/views/http_errors/",
 	"CACHE" => false,
-    "APP_NAME" => "pwa",
-    "APP_TITLE" => "pwa",
+    "APP_NAME" => "pakchoi",
+    "APP_TITLE" => "pakchoi",
     "APP_VERSION" => "0.0.0.1-alpha",
 	"MVC_VIEW_ROOT" => [		
 		"index" => AppViews
     ]
+	
+	"login.tokens" => ["demo1","demo2","demo3","demo4","demo5"],
+	
+	// config for email sender
+	"mailer" = [
+		"server" => "email.com",
+		"user"  => "username",
+		"password" => "*******",
+		"port" => 994 
+	]
 ];
