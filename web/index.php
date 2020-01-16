@@ -23,8 +23,24 @@ class App {
     */
     public function login() {
         if (pwa::login_userId() < 0) {
+			# get user list
+			$peoples = (new Table("users"))->all();
+			$default = "/assets/images/default.png";
+			
+			for($i = 0; $i < count($peoples); $i++) {
+				if (empty($peoples[$i]["avatar"])) {
+					# use default
+					$peoples[$i]["avatar"] = $default;
+				} else {
+					$peoples[$i]["avatar"] = "/files/image/" . $peoples[$i]["avatar"];					
+				}
+			}
+			
             # 未登录状态
-            View::Display(["hide" => "display: none;"]);
+            View::Display([
+				"peoples" => $peoples, 
+				"hide" => "display: none;"
+			]);
         } else {
             Redirect("/home");
         }
