@@ -59,6 +59,13 @@ class App {
             }
 
             $_SESSION["check"] = null;
+
+            (new Table("activity"))->add([
+                "type" => 0,  # 0 -> user login
+                "content" => (new baiduMap())->GetUserGeoLocation(),
+                "create_time" => Utils::Now(),
+                "user" => pakchoi::login_userId()
+            ]);
         } else {
             dotnet::AccessDenied("Invalid user login token!");
         }

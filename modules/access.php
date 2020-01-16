@@ -5,17 +5,25 @@ imports("MVC.restrictions");
 
 class accessController extends controller {
 
+    private static function recordEvent($code) {
+        (new Table("pageview"))->add([
+            "time" => Utils::Now(),
+            "code" => $code,
+            "page_url" => Utils::URL(false),
+            "user_id" => pakchoi::login_userId(),
+            "ip" => Utils::UserIPAddress(),
+            "location" => (new baiduMap())->GetUserGeoLocation()
+        ]);
+    }
+
     public function accessControl() {
         $access = $this->getAccessLevel();
         $type   = $this->getUsage();
 
-        # 测试
-        # return true;
-
         # 从这里统计用户的活动信息
         if ($type == "view" || $type == "router") {
             // 只针对html页面的访问进行统计
-            // self::recordEvent(200);
+            self::recordEvent(200);
         }
 
         if ($this->AccessByEveryOne()) {
