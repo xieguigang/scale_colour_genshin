@@ -34,18 +34,6 @@ var pages;
     }(Bootstrap));
     pages.index = index;
 })(pages || (pages = {}));
-/// <reference path="../build/linq.d.ts" />
-/// <reference path="Apps/index.ts" />
-var webapp;
-(function (webapp) {
-    function start() {
-        Router.AddAppHandler(new pages.index());
-        Router.RunApp();
-    }
-    webapp.start = start;
-})(webapp || (webapp = {}));
-$ts.mode = Modes.debug;
-$ts(webapp.start);
 var pages;
 (function (pages) {
     var login = /** @class */ (function (_super) {
@@ -70,4 +58,18 @@ var pages;
     }(Bootstrap));
     pages.login = login;
 })(pages || (pages = {}));
+/// <reference path="../build/linq.d.ts" />
+/// <reference path="Apps/index.ts" />
+/// <reference path="Apps/login.ts" />
+var webapp;
+(function (webapp) {
+    function start() {
+        Router.AddAppHandler(new pages.index());
+        Router.AddAppHandler(new pages.login());
+        Router.RunApp();
+    }
+    webapp.start = start;
+})(webapp || (webapp = {}));
+$ts.mode = Modes.debug;
+$ts(webapp.start);
 //# sourceMappingURL=script.js.map

@@ -5,12 +5,12 @@ declare namespace pages {
         protected init(): void;
     }
 }
-declare namespace webapp {
-    function start(): void;
-}
 declare namespace pages {
     class login extends Bootstrap {
         readonly appName: string;
         protected init(): void;
     }
+}
+declare namespace webapp {
+    function start(): void;
 }
