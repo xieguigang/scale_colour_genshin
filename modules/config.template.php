@@ -21,12 +21,12 @@ return [
     "APP_VERSION" => "0.0.0.1-alpha",
 	"MVC_VIEW_ROOT" => [		
 		"index" => AppViews
-    ]
+    ],
 	
 	"login.tokens" => ["demo1","demo2","demo3","demo4","demo5"],
 	
 	// config for email sender
-	"mailer" = [
+	"mailer" => [
 		"server" => "email.com",
 		"user"  => "username",
 		"password" => "*******",
