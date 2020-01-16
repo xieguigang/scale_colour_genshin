@@ -1,6 +1,9 @@
 <?php
 
-# include_once __DIR__ . "/PHPMailer/PHPMailerAutoload.php";
+include_once __DIR__ . "/PHPMailer/src/Exception.php";
+include_once __DIR__ . "/PHPMailer/src/PHPMailer.php";
+include_once __DIR__ . "/PHPMailer/src/POP3.php";
+include_once __DIR__ . "/PHPMailer/src/SMTP.php";
 
 class EMail {
 		
@@ -18,7 +21,7 @@ class EMail {
     */
     public static function sendMail($to, $name, $title, $content, $link, $attachmentLink = NULL) {
         $mail = new \PHPMailer(); 
-		$config = Registry::Read("mailer");
+		$config = DotNetRegistry::Read("mailer");
 		
         $mail->isSMTP();              // 使用SMTP服务
         $mail->CharSet = "UTF-8";     // 编码格式为utf8，不设置编码的话，中文会出现乱码       
