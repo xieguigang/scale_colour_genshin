@@ -66,6 +66,12 @@ class App {
                 "create_time" => Utils::Now(),
                 "user" => pakchoi::login_userId()
             ]);
+
+            (new Table("users"))->where([
+                "id" => $_SESSION["id"]
+            ])->save([
+                "activities" => "~activities + 1"
+            ]);
         } else {
             dotnet::AccessDenied("Invalid user login token!");
         }
