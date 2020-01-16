@@ -1,5 +1,8 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 include_once __DIR__ . "/PHPMailer/src/Exception.php";
 include_once __DIR__ . "/PHPMailer/src/PHPMailer.php";
 include_once __DIR__ . "/PHPMailer/src/POP3.php";

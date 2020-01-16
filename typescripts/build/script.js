@@ -49,9 +49,33 @@ var pages;
             configurable: true
         });
         login.prototype.init = function () {
-            $ts.select(".people-link").onClick(function (sender) {
-                var people = sender.getAttribute("people");
-                $ts("#open-msg").click();
+            var vm = this;
+            $ts.select(".people-link").onClick(function (sender) { return vm.doLogin(sender.getAttribute("people")); });
+        };
+        login.prototype.doLogin = function (people) {
+            var vm = this;
+            $ts("#open-msg").click();
+            $ts.post("@api:login", { people: people }, function (result) {
+                if (result.code == 0) {
+                    setInterval(function () {
+                        vm.doCheckLogin();
+                    }, 1000);
+                }
+                else {
+                    console.error(result.info);
+                }
+            });
+        };
+        login.prototype.doCheckLogin = function () {
+            $ts.get("@api:check", function (result) {
+                if (result.code == 0) {
+                    if (result.info == "1") {
+                        $goto("/home");
+                    }
+                }
+                else {
+                    console.error(result.info);
+                }
             });
         };
         return login;

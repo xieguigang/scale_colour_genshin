@@ -9,6 +9,8 @@ declare namespace pages {
     class login extends Bootstrap {
         readonly appName: string;
         protected init(): void;
+        private doLogin;
+        private doCheckLogin;
     }
 }
 declare namespace webapp {

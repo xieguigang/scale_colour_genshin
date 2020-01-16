@@ -7,6 +7,7 @@ class App {
     /**
      * @access *
      * @require people=i32
+     * @method POST
     */
     public function login() {
         $id = $_POST["people"];
