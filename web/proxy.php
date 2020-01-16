@@ -39,6 +39,10 @@ class App {
         }
     }
     
+	public function image() {
+				
+	}
+	
     /**
      * 
     */
