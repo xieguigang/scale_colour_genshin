@@ -8,6 +8,10 @@ class pakchoi {
         return Utils::ReadValue($_SESSION, "id", -1);
     }
 
+    public static function loginUser() {
+        return (new Table("users"))->where(["id" => self::login_userId()])->find();
+    }
+
     public static function sendLoginEmail($user) {
         include_once __DIR__ . "/mailto.php";
 

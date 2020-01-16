@@ -22,7 +22,7 @@ class App {
      * @access *
     */
     public function login() {
-        if (pakchoi::login_userId() < 0) {
+        if (pakchoi::login_userId() <= 0) {
 			# get user list
 			$peoples = (new Table("users"))->all();
 			$default = "/assets/images/default.png";
@@ -65,7 +65,17 @@ class App {
      * @uses view
     */
     public function profile() {
-        View::Display(["profile.active" => "active"]);
+        $user = pakchoi::loginUser();
+
+        View::Display([
+            "profile.active" => "active",
+            "name" => $user["nickname"],
+            "fullname" => $user["fullname"],
+            "whats.up" => $user["whats_up"],
+            "n.posts" => $user["posts"],
+            "n.photo" => $user["photos"],
+            "n.activity" => $user["activities"]
+        ]);
     }
 
 	/**
