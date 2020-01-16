@@ -7,11 +7,36 @@ namespace pages {
         }
 
         protected init(): void {
-            $ts.select(".people-link").onClick(function (sender) {
-                let people = sender.getAttribute("people");
+            let vm = this;
 
-                $ts("#open-msg").click();
+            $ts.select(".people-link").onClick(sender => vm.doLogin(sender.getAttribute("people")));
+        }
+
+        private doLogin(people: string) {
+            let vm = this;
+
+            $ts("#open-msg").click();
+            $ts.post("@api:login", { people: people }, function (result) {
+                if (result.code == 0) {
+                    setInterval(function () {
+                        vm.doCheckLogin();
+                    }, 1000);
+                } else {
+                    console.error(<string>result.info);
+                }
             });
+        }
+
+        private doCheckLogin() {
+            $ts.get("@api:check", function (result: IMsg<string>) {
+                if (result.code == 0) {
+                    if (result.info == "1") {
+                        $goto("/home");
+                    }
+                } else {
+                    console.error(result.info);
+                }
+            })
         }
     }
 }

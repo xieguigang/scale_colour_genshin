@@ -3,6 +3,8 @@
 
 <head>
     <meta name="app" content="login" />
+    <meta name="api:login" content="/api/login.vbs" />
+    <meta name="api:check" content="/api/login_check.vbs" />
 
     ${includes/head.html}
 </head>
@@ -91,6 +93,8 @@
                 </div>
                 <div class="modal-body">
                     请点击电子邮箱中的登录链接确认登录
+
+                    <img src="/assets/images/loader.gif" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
