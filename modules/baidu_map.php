@@ -21,7 +21,7 @@ class baiduMap {
         $ip       = $this->GetUserIP();
         $argv     = [
             "ip" => $ip, 
-            "ak" => baiduMap::$key
+            "ak" => $this->key
         ]; 
         $url      = baiduMap::api . "?" . http_build_query($argv);
         $response = json_decode(CURLExtensions::GET($url));
