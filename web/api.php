@@ -37,4 +37,30 @@ class App {
             controller::success("no login");
         }
     }
+
+    /**
+     * @access *
+     * @require token=string|session=string
+     * @uses view
+    */
+    public function login_confirm() {        
+        $token = $_GET["token"];
+        $session = urldecode($_GET["session"]);
+
+        session_id($session);
+
+        $check = md5($_SESSION["key"] . $_SESSION["check"]["id"]);
+
+        if ($check == $token) {
+            # login success
+            # write session
+            foreach($_SESSION["check"] as $key => $value) {
+                $_SESSION[$key] = $value;
+            }
+
+            $_SESSION["check"] = null;
+        } else {
+            dotnet::AccessDenied("Invalid user login token!");
+        }
+    }
 }

@@ -15,8 +15,10 @@ namespace pages {
         private doLogin(people: string) {
             let vm = this;
 
+            clearInterval();
+
             $ts("#open-msg").click();
-            $ts.post("@api:login", { people: people }, function (result) {
+            $ts.post("@api:login", { people: people }, function (result) {                
                 if (result.code == 0) {
                     setInterval(function () {
                         vm.doCheckLogin();

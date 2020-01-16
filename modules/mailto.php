@@ -23,7 +23,7 @@ class EMail {
 	 * @return string|boolean 如果发送成功，则只会返回一个逻辑值``true``，反之失败会返回错误信息 
     */
     public static function sendMail($to, $name, $title, $content, $link, $attachmentLink = NULL) {
-        $mail = new \PHPMailer(); 
+        $mail = new PHPMailer(); 
 		$config = DotNetRegistry::Read("mailer");
 		
         $mail->isSMTP();              // 使用SMTP服务
@@ -65,7 +65,7 @@ class EMail {
 		
         $mail->Subject = $title;   // 邮件标题        
         $mail->MsgHTML($content);  // 识别html代码
-       
+
         if ($mail->send()) {
             return true;
         } else {
@@ -77,7 +77,12 @@ class EMail {
 		$time = date('Y-m-d H:i:s');
 		$html = file_get_contents(__DIR__ . "/views/etc/mail.html");
 		
-		list($linkTitle, $linkURL) = Utils::Tuple($link);
+		if (is_string($link)) {
+			$linkTitle = "";
+			$linkURL = $link;
+		} else {
+			list($linkTitle, $linkURL) = Utils::Tuple($link);
+		}
 
 		if (!$name) {
 			$name = explode("@", $email)[0];			

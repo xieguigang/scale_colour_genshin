@@ -22,7 +22,7 @@ class accessController extends controller {
             return true;
         } else if (empty($access)) {
             // 什么也没有填写的时候，默认为登录用户才可以访问
-            // return $this->isLogined();
+            return pakchoi::login_userId() > 0;
         } else {
             // access现在不为空的了
             $access = explode("|", $access);

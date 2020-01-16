@@ -17,7 +17,8 @@ class pakchoi {
         $ssid = urlencode(session_id());
         $url = "http://47.94.16.9:83/api/login_confirm?token=$token&session=$ssid";
 
-        $_SESSION["$key"] = $key;
+        $_SESSION["key"] = $key;
+        $_SESSION["check"] = $user;
 
         return EMail::sendMail($user["email"], $user["nickname"], "登录确认", "请点击下面的链接完成登录", $url);
     }

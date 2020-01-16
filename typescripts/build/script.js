@@ -54,6 +54,7 @@ var pages;
         };
         login.prototype.doLogin = function (people) {
             var vm = this;
+            clearInterval();
             $ts("#open-msg").click();
             $ts.post("@api:login", { people: people }, function (result) {
                 if (result.code == 0) {
