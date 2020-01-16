@@ -46,4 +46,28 @@ var webapp;
 })(webapp || (webapp = {}));
 $ts.mode = Modes.debug;
 $ts(webapp.start);
+var pages;
+(function (pages) {
+    var login = /** @class */ (function (_super) {
+        __extends(login, _super);
+        function login() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(login.prototype, "appName", {
+            get: function () {
+                return "login";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        login.prototype.init = function () {
+            $ts.select(".people-link").onClick(function (sender) {
+                var people = sender.getAttribute("people");
+                $ts("#open-msg").click();
+            });
+        };
+        return login;
+    }(Bootstrap));
+    pages.login = login;
+})(pages || (pages = {}));
 //# sourceMappingURL=script.js.map

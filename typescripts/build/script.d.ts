@@ -8,3 +8,9 @@ declare namespace pages {
 declare namespace webapp {
     function start(): void;
 }
+declare namespace pages {
+    class login extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+    }
+}
