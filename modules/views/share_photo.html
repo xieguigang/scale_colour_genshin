@@ -3,6 +3,8 @@
 
 <head>
     <meta name="app" content="share_photo" />
+    <meta name="api:upload" content="/api/upload/image" />
+    <meta name="api:addnote" content="/api/addnote" />
 
     ${includes/head.html}
 </head>
@@ -66,7 +68,10 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-4">
-                                    <textarea id="note"></textarea>
+                                    <p>
+                                        适当地描述一下当时的心情吧：
+                                    </p>
+                                    <textarea id="note" class="form-control" rows="5" style="min-width: 90%"></textarea>
                                 </div>
                             </div>
 

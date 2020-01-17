@@ -108,7 +108,10 @@ var pages;
             $ts.upload("@api:upload", file, function (result) {
                 if (result.code == 0) {
                     // then save description info
-                    $ts.post("@api:addnote", { note: $ts.value("#note") }, function (result) {
+                    $ts.post("@api:addnote", {
+                        note: $ts.value("#note"),
+                        res: result.info
+                    }, function (result) {
                         $goto("/gallery");
                     });
                 }

@@ -7,3 +7,6 @@ RewriteRule ^([a-z_]+)$ /index.php?app=$1
 
 RewriteRule ^api/([a-z_]+).vbs$ /api.php?app=$1
 RewriteRule ^api/login_confirm$ /api.php?app=login_confirm
+
+RewriteRule ^api/upload/(.+)$ /api.php?app=upload_$1
+RewriteRule ^api/addnote$ /api.php?app=resource_note

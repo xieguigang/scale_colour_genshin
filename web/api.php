@@ -77,4 +77,31 @@ class App {
             dotnet::AccessDenied("Invalid user login token!");
         }
     }
+
+    /**
+     * 添加对上传的资源的描述信息
+     * 
+     * @uses api
+     * @require res=i32
+    */
+    public function resource_note() {
+        $note = $_POST["note"];
+        $id = $_POST["res"];
+
+        (new Table("resources"))
+        ->where(["id" => $id])
+        ->save(["description" => $note]);
+
+        controller::success(1);
+    }
+
+    /**
+     * @uses api
+     * 
+    */
+    public function upload_image() {
+        $file = $_FILES[0];
+
+        echo var_dump($file);
+    }
 }
