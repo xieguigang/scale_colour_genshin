@@ -1,6 +1,7 @@
 <?php
 
 imports("MVC.request");
+imports("php.export");
 
 class pakchoi {
 
