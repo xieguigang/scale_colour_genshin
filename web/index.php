@@ -56,6 +56,8 @@ class App {
             ->limit(10)
             ->select();
         $tags = pakchoi::getActivityTags();
+        $id = $_SESSION["id"];
+        $resource = new Table("resources");
 
         for($i = 0; $i < count($latest10); $i++) {
             $type = $latest10[$i]["type"];
@@ -65,6 +67,10 @@ class App {
                 # 登录动态是使用默认的地图图片的
                 $latest10[$i]["resource"] = "/assets/images/map.jpg";
                 $latest10[$i]["content"] = $_SESSION["nickname"] . $latest10[$i]["content"];
+            } else if ($type == 1) {
+                $res = $resource->where(["id" => $latest10[$i]["resource"]])->find();
+                $url = "/images/$id/" . $res["resource"];
+                $latest10[$i]["resource"] = $url;
             }
 
             
