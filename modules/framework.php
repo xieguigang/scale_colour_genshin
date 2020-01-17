@@ -4,6 +4,10 @@ imports("MVC.request");
 
 class pakchoi {
 
+    public static function getUploadDir() {
+        return WWWROOT . "/upload";
+    }
+
     public static function getActivityTags() {
         return [
             "访问" // 0

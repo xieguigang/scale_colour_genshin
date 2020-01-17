@@ -83,6 +83,7 @@ class App {
      * 
      * @uses api
      * @require res=i32
+     * @method POST
     */
     public function resource_note() {
         $note = $_POST["note"];
@@ -97,11 +98,34 @@ class App {
 
     /**
      * @uses api
-     * 
+     * @method POST
     */
     public function upload_image() {
-        $file = $_FILES[0];
+        imports("Microsoft.VisualBasic.FileIO.FileSystem");
 
-        echo var_dump($file);
+        $file = $_FILES["File"];
+        $tmp = $file["tmp_name"];
+        $id = $_SESSION["id"];
+        $year = year();
+        $upload_path = pakchoi::getUploadDir() . "/images/$id/$year/";
+
+        FileSystem::CreateDirectory($upload_path);
+
+        $name = md5(Utils::Now() . $tmp);
+        $upload_path = "$upload_path/$name";
+
+        move_uploaded_file($tmp, $upload_path);
+
+        $resId = (new Table("resources"))->add([
+            "type" => 0,
+            "filename" => $file["name"],
+            "upload_time" => Utils::Now(),
+            "size" => $file["size"],
+            "description" => "",
+            "uploader" => $id,
+            "resource" => "$year/$name"
+        ]);
+
+        controller::success($resId);
     }
 }
