@@ -84,6 +84,10 @@ class App {
         View::Display(["gallery.active" => "active"]);
     }
     
+    /**
+     * @uses view
+     * 
+    */
     public function share_photo() {
         View::Display(["gallery.active" => "active"]);
     }
