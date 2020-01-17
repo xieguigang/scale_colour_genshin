@@ -50,7 +50,29 @@ class App {
      * @uses view
     */
     public function home() {
-        View::Display(["home.active" => "active"]);
+        # 在最开始获取最近的10条
+        $latest10 = (new Table("activity"))
+            ->order_by("create_time", true)
+            ->limit(10)
+            ->select();
+        $tags = pakchoi::getActivityTags();
+
+        for($i = 0; $i < count($latest10); $i++) {
+            $type = $latest10[$i]["type"];
+            $latest10[$i]["tag"] = $tags[$type];
+
+            if ($type == 0) {
+                # 登录动态是使用默认的地图图片的
+                $latest10[$i]["resource"] = "/assets/images/map.jpg";
+            }
+
+            
+        }
+
+        View::Display([
+            "home.active" => "active",
+            "latest" => $latest10
+        ]);
     }
 
 	/**

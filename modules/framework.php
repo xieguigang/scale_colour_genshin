@@ -4,6 +4,12 @@ imports("MVC.request");
 
 class pakchoi {
 
+    public static function getActivityTags() {
+        return [
+            "访问" // 0
+        ];
+    }
+
     public static function login_userId() {
         return Utils::ReadValue($_SESSION, "id", -1);
     }
