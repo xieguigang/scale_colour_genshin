@@ -83,14 +83,54 @@ var pages;
     }(Bootstrap));
     pages.login = login;
 })(pages || (pages = {}));
+var pages;
+(function (pages) {
+    var share_photo = /** @class */ (function (_super) {
+        __extends(share_photo, _super);
+        function share_photo() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(share_photo.prototype, "appName", {
+            get: function () {
+                return "share_photo";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        share_photo.prototype.init = function () {
+            var vm = this;
+            $ts("#do-upload").onclick = function () {
+                vm.doUpload();
+            };
+        };
+        share_photo.prototype.doUpload = function () {
+            var file = $input("#inputGroupFile02").files[0];
+            $ts.upload("@api:upload", file, function (result) {
+                if (result.code == 0) {
+                    // then save description info
+                    $ts.post("@api:addnote", { note: $ts.value("#note") }, function (result) {
+                        $goto("/gallery");
+                    });
+                }
+                else {
+                    console.error(result.info);
+                }
+            });
+        };
+        return share_photo;
+    }(Bootstrap));
+    pages.share_photo = share_photo;
+})(pages || (pages = {}));
 /// <reference path="../build/linq.d.ts" />
 /// <reference path="Apps/index.ts" />
 /// <reference path="Apps/login.ts" />
+/// <reference path="Apps/share_photo.ts" />
 var webapp;
 (function (webapp) {
     function start() {
         Router.AddAppHandler(new pages.index());
         Router.AddAppHandler(new pages.login());
+        Router.AddAppHandler(new pages.share_photo());
         Router.RunApp();
     }
     webapp.start = start;

@@ -13,6 +13,13 @@ declare namespace pages {
         private doCheckLogin;
     }
 }
+declare namespace pages {
+    class share_photo extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+        private doUpload;
+    }
+}
 declare namespace webapp {
     function start(): void;
 }
