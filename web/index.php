@@ -64,6 +64,7 @@ class App {
             if ($type == 0) {
                 # 登录动态是使用默认的地图图片的
                 $latest10[$i]["resource"] = "/assets/images/map.jpg";
+                $latest10[$i]["content"] = $_SESSION["nickname"] . $latest10[$i]["content"];
             }
 
             
