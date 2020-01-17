@@ -62,7 +62,7 @@ class App {
 
             (new Table("activity"))->add([
                 "type" => 0,  # 0 -> user login
-                "content" => (new baiduMap())->GetUserGeoLocation(),
+                "content" => "在" (new baiduMap())->GetUserGeoLocation(),
                 "create_time" => Utils::Now(),
                 "user" => pakchoi::login_userId()
             ]);
