@@ -48,6 +48,7 @@ class App {
         $session = urldecode($_GET["session"]);
 
         session_id($session);
+        session_start();
 
         $check = md5($_SESSION["key"] . $_SESSION["check"]["id"]);
 

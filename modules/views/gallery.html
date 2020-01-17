@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="app" content="gallery" />
+
+    ${includes/head.html}
+</head>
+
+<body class="index landing">
+
+    <div class="bubbles d-none d-md-block">
+        <!-- 				bubbles -->
+        <div class="bubble bubble-1 rotate-bubble bg-warning"></div>
+        <div class="bubble bubble-2 bubble-bottom-right bg-danger rotate-bubble"></div>
+        <div class="bubble bubble-3 bubble-top-right bg-warning rotate-bubble"></div>
+        <div class="bubble bubble-4 bubble-top-left bg-info rotate-bubble"></div>
+        <div class="bubble bubble-5 bg-info rotate-bubble"></div>
+        <div class="bubble bubble-6 bubble-bottom-right bg-danger rotate-bubble"></div>
+        <div class="bubble bubble-7 bubble-top-right bg-success rotate-bubble"></div>
+        <div class="bubble bubble-8 bubble-top-left bg-success rotate-bubble"></div>
+        <div class="bubble bubble-9 bg-warning rotate-bubble"></div>
+        <div class="bubble bubble-10 bg-danger rotate-bubble"></div>
+        <div class="bubble bubble-11 bubble-bottom-right bg-info rotate-bubble"></div>
+        <div class="bubble bubble-12 bubble-top-right bg-success rotate-bubble"></div>
+        <div class="bubble bubble-13 bubble-top-left bg-success rotate-bubble"></div>
+        <!--         circles -->
+        <div class="circle circle-1 bg-light rotate-circle"></div>
+        <div class="circle circle-2 bg-success rotate-circle"></div>
+        <div class="circle circle-3 bg-danger rotate-circle"></div>
+        <div class="circle circle-4 bg-info rotate-circle"></div>
+        <div class="circle circle-5 bg-success rotate-circle"></div>
+        <div class="circle circle-6 bg-info rotate-circle"></div>
+        <div class="circle circle-7 bg-warning rotate-circle"></div>
+        <div class="circle circle-8 bg-white rotate-circle"></div>
+        <div class="circle circle-9 bg-warning rotate-circle"></div>
+        <div class="circle circle-10 bg-danger rotate-circle"></div>
+    </div>
+
+
+    <div class="blog-posts bg-light">
+        <div class="text-center">
+            <h2>相册</h2>
+            <p class="lead">看看对方有什么动静</p>
+        </div>
+        <div class="container">
+
+            <div class="profile-tabs tab-content">
+                <div class="tab-pane fade show active" id="photos">
+
+                    <foreach @photos>
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <div class="square" style='background-image:url("@photos["url"]");'></div>
+                            </div>
+                        </div>
+                    </foreach>
+
+                    <div class="d-flex justify-content-center my-5">
+                        <a href="#a" class="btn btn-outline-primary btn-pill">加载更多</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    ${includes/footer.html}
+</body>
+
+</html>
