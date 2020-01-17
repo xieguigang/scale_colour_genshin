@@ -40,8 +40,15 @@ class App {
         }
     }
     
+    /**
+     * @require resource=string
+    */
 	public function image() {
-				
+        # pakchoi::getUploadDir() . "/images/$id/" . $latest[$i]["resource"];	
+        $resource = $_GET["resource"];
+        $path = pakchoi::getUploadDir() . "/images/$resource";
+        
+        Utils::PushDownload($path, -1, "image/jpeg");
 	}
 	
     /**
