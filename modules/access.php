@@ -12,7 +12,9 @@ class accessController extends controller {
             "page_url" => Utils::URL(false),
             "user_id" => pakchoi::login_userId(),
             "ip" => Utils::UserIPAddress(),
-            "location" => (new baiduMap())->GetUserGeoLocation()
+            "location" => (new baiduMap())->GetUserGeoLocation(),
+            "session_id" => session_id(),
+            "user_agent" => $_SERVER['HTTP_USER_AGENT']
         ]);
     }
 
