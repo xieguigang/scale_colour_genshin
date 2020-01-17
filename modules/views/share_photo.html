@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <meta name="app" content="gallery" />
+    <meta name="app" content="share_photo" />
 
     ${includes/head.html}
 </head>
@@ -40,39 +40,28 @@
 
     <div class="blog-posts bg-light">
         <div class="text-center">
-            <h2>相册</h2>
+            <h2>上传相片至相册</h2>
             <p class="lead">看看对方有什么动静</p>
         </div>
         <div class="container">
 
-            <div class="row">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        分享
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="/share_photo" id="upload-photo">相片</a>
-                        <!--
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                        -->   </div>
-                </div>
-            </div>
-
             <div class="profile-tabs tab-content">
                 <div class="tab-pane fade show active" id="photos">
 
-                    <foreach @photos>
-                        <div class="row">
-                            <div class="col-12 col-md-4">
-                                <div class="square" style='background-image:url("@photos["url"]");'></div>
-                            </div>
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <div class="square" style='background-image:url("/assets/images/splash.jpg");'></div>
                         </div>
-                    </foreach>
+                    </div>
 
                     <div class="d-flex justify-content-center my-5">
-                        <a href="#a" class="btn btn-outline-primary btn-pill">加载更多</a>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile02">
+                                <label class="custom-file-label" for="inputGroupFile02"
+                                    aria-describedby="inputGroupFileAddon02">选择相片</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
