@@ -338,7 +338,7 @@ var webapp;
                     var msgs = result.info;
                     var container = $ts("#comment-list");
                     appendComments(container, msgs);
-                    if (!isNullOrUndefined(getLastMsgId)) {
+                    if (!isNullOrUndefined(getLastMsgId) && msgs.length > 0) {
                         getLastMsgId(msgs[0].id);
                     }
                 }

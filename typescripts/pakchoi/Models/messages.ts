@@ -18,7 +18,7 @@ namespace webapp.models {
 
                 appendComments(container, msgs);
 
-                if (!isNullOrUndefined(getLastMsgId)) {
+                if (!isNullOrUndefined(getLastMsgId) && msgs.length > 0) {
                     getLastMsgId(msgs[0].id);
                 }
             }
