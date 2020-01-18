@@ -11,7 +11,7 @@ class App {
     public function index() {
         View::Display([
             "hide" => "display: none;",
-            "who" => pakchoi::login_userId() >= 0 ? $_SESSION["nickname"] : "欢迎使用pakchoi" 
+            "who" => pakchoi::login_userId() >= 0 ? "Hi, " . $_SESSION["nickname"] : "欢迎使用pakchoi" 
         ]);
     }
     
