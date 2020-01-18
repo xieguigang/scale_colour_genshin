@@ -63,13 +63,13 @@ class App {
             Utils::PushDownload($path, -1, "image/jpeg");
         } else {
             if ($type == "thumbnail") {
-                # width = 120px for thumbnail
+                # width = 180px for thumbnail
                 $tmpfname = tempnam("/tmp", "thumbnail");
-                $width = 120;               
+                $width = 180;               
             } else if ($type == "preview") {
-                # width = 600px for preview
+                # width = 500px for preview
                 $tmpfname = tempnam("/tmp", "previews");
-                $width = 600;
+                $width = 500;
             } else {
                 controller::error("Invalid config: '$type'!");
             }

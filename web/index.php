@@ -76,7 +76,7 @@ class App {
                 $latest10[$i]["content"] = $_SESSION["nickname"] . $latest10[$i]["content"];
             } else if ($type == 1) {
                 $res = $resource->where(["id" => $latest10[$i]["resource"]])->find();
-                $url = "/images/$id/" . $res["resource"];
+                $url = "/images/$id/" . $res["resource"] . "?type=thumbnail";
                 $latest10[$i]["resource"] = $url;
             }
 
