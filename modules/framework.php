@@ -11,7 +11,8 @@ class pakchoi {
 
     public static function getActivityTags() {
         return [
-            "访问" // 0
+            "访问", // 0
+            "分享相片"
         ];
     }
 
