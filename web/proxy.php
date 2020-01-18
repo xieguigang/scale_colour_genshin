@@ -66,7 +66,7 @@ class App {
             if ($type == "thumbnail") {
                 # width = 180px for thumbnail
                 $tmpfname = tempnam("/tmp", "thumbnail");
-                $width = 180;               
+                $width = 200;               
             } else if ($type == "preview") {
                 # width = 500px for preview
                 $tmpfname = tempnam("/tmp", "previews");
