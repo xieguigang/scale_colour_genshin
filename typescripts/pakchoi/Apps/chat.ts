@@ -1,6 +1,7 @@
 namespace pages {
 
     export class chat extends Bootstrap {
+
         get appName(): string {
             return "chat";
         }
@@ -8,11 +9,13 @@ namespace pages {
         protected init(): void {
             let vm = this;
 
+            setInterval(function () {
+                vm.fetchMessage();
+            }, 1000);
+
             $ts("#send").onclick = function () {
                 vm.sendComment();
             }
-
-            this.fetchMessage();
         }
 
         private sendComment() {
@@ -32,6 +35,8 @@ namespace pages {
                 }
             });
         }
+
+        private lastId: string;
 
         private fetchMessage() {
 

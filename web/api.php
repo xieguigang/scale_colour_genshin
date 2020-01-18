@@ -103,7 +103,10 @@ class App {
     */
     public function get_comment() {
         $resource = $_GET["resource"];
-        $messages = (new Table("messages"))->where(["mentions" => $resource])->order_by("message_time", true)->select();
+        $messages = (new Table("messages"))->where([
+            "mentions" => $resource
+        ])->order_by("message_time", true)
+          ->select();
 
         for($i =0 ; $i < count($messages); $i++) {
             $messages[$i]["message"] = base64_decode($messages[$i]["message"]); 
