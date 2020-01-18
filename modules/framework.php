@@ -16,6 +16,16 @@ class pakchoi {
         ];
     }
 
+    public static function addActivity($type, $content, $resId) {
+        (new Table("activity"))->add([
+            "type" => $type,
+            "content" => $content,
+            "create_time" => Utils::Now(),
+            "user" => $_SESSION["id"],
+            "resource" => $resId
+        ]);
+    }
+
     public static function login_userId() {
         return Utils::ReadValue($_SESSION, "id", -1);
     }

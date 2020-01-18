@@ -135,6 +135,11 @@ class App {
             "resource" => "$year/$name"
         ]);
 
-        controller::success($resId);
+        if ($resId > 0) {
+            pakchoi::addActivity(1, "分享了相片 {$file["name"]}", $resId);
+            controller::success($resId);
+        } else {
+            controller::error("error!");
+        }
     }
 }
