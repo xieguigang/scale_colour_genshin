@@ -9,4 +9,8 @@ namespace webapp {
             image.src = URL.createObjectURL(file);
         }
     }
+
+    export function displayMsg(msg: string) {
+
+    }
 }

@@ -4,6 +4,9 @@
 <head>
     <meta name="app" content="edit/profile" />
 
+    <meta name="api:uploadAvatar" content="/api/upload/avatar" />
+    <meta name="api:save" content="/api/save" />
+
     ${includes/head.html}
 </head>
 
@@ -54,7 +57,8 @@
                                     <p>上传新的头像：</p>
                                     <img id="avatar-preview" src="{$avatar}" width="180px" />
                                     <div class="custom-file">
-                                        <input type="file" accept="image/*" class="custom-file-input" id="inputGroupFile02">
+                                        <input type="file" accept="image/*" class="custom-file-input"
+                                            id="inputGroupFile02">
                                         <label class="custom-file-label" for="inputGroupFile02"
                                             aria-describedby="inputGroupFileAddon02">选择相片</label>
                                     </div>
@@ -67,7 +71,7 @@
                                         适当地描述一下现在的心情吧：
                                     </p>
                                     <textarea id="whatsup" class="form-control" rows="5"
-                                        style="min-width: 90%"></textarea>
+                                        style="min-width: 90%">{$whatsup}</textarea>
                                 </div>
                             </div>
                             <div class="row">
@@ -77,8 +81,9 @@
                                             <span class="input-group-text" id="basic-addon1"><i
                                                     class="fas fa-email"></i></span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="修改我的电子邮件地址"
-                                            aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control" placeholder="修改我的电子邮件地址" id="email"
+                                            aria-label="Username" aria-describedby="basic-addon1" value="{$email}"
+                                            disabled>
                                     </div>
                                 </div>
 
@@ -90,7 +95,8 @@
                                                         class="fas fa-user"></i></span>
                                             </div>
                                             <input id="nickname" type="text" class="form-control" placeholder="修改我的昵称"
-                                                aria-label="nickname" aria-describedby="basic-addon2">
+                                                aria-label="nickname" aria-describedby="basic-addon2"
+                                                value="{$nickname}">
                                         </div>
                                     </div>
                                 </div>
@@ -98,7 +104,7 @@
                             <div class="row">
                                 <div class="col-12 col-md-4">
                                     <button id="save" type="button" class="btn btn-primary">保存</button>
-                                    <button id="cancel" type="button" class="btn btn-secondary">放弃</button>
+                                    <a href="/profile" type="button" class="btn btn-secondary">放弃</a>
                                 </div>
                             </div>
                         </div>

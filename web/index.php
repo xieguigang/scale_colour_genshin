@@ -175,7 +175,15 @@ class App {
      * @uses view
     */
     public function edit_profile() {
-        View::Display(["profile.active" => "active"]);
+        $me = pakchoi::loginUser();
+
+        View::Display([
+            "profile.active" => "active",
+            "avatar" => pakchoi::getAvatarUrl($me),
+            "whatsup" => $me["whats_up"],
+            "email" => $me["email"],
+            "nickname" => $me["nickname"]
+        ]);
     }
 
 	/**

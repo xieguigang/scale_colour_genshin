@@ -64,6 +64,9 @@ class pakchoi {
         return Utils::ReadValue($_SESSION, "id", -1);
     }
 
+    /**
+     * Get data of current login user
+    */
     public static function loginUser() {
         return (new Table("users"))->where(["id" => self::login_userId()])->find();
     }

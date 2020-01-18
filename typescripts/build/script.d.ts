@@ -30,6 +30,7 @@ declare namespace pages {
     class edit_profile extends Bootstrap {
         readonly appName: string;
         protected init(): void;
+        private save;
     }
 }
 declare namespace webapp {
@@ -37,4 +38,5 @@ declare namespace webapp {
 }
 declare namespace webapp {
     function hookImagePreviews(inputId: string, previewImgId: string): void;
+    function displayMsg(msg: string): void;
 }

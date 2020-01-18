@@ -161,7 +161,35 @@ var pages;
             configurable: true
         });
         edit_profile.prototype.init = function () {
+            var vm = this;
             webapp.hookImagePreviews("#inputGroupFile02", "#avatar-preview");
+            $ts("#save").onclick = function () {
+                vm.save();
+            };
+        };
+        edit_profile.prototype.save = function () {
+            // 先保存头像
+            // 如果存在文件值的话
+            var avatar = $input("#inputGroupFile02").files;
+            if (!isNullOrUndefined(avatar) && (avatar.length > 0)) {
+                // 有值，则post回服务器先
+                $ts.upload("@api:uploadAvatar", avatar[0], function (result) {
+                });
+            }
+            // 将profile数据post回服务器
+            var profile = {
+                whats_up: $ts.value("#whatsup"),
+                email: $ts.value("#email"),
+                nickname: $ts.value("#nickname")
+            };
+            $ts.post("@api:save", profile, function (result) {
+                if (result.code == 0) {
+                    $goto("/profile");
+                }
+                else {
+                    webapp.displayMsg(result.info);
+                }
+            });
         };
         return edit_profile;
     }(Bootstrap));
@@ -198,5 +226,8 @@ var webapp;
         };
     }
     webapp.hookImagePreviews = hookImagePreviews;
+    function displayMsg(msg) {
+    }
+    webapp.displayMsg = displayMsg;
 })(webapp || (webapp = {}));
 //# sourceMappingURL=script.js.map
