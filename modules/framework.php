@@ -24,6 +24,18 @@ class pakchoi {
         return WWWROOT . "/upload";
     }
 
+    public static function getImageExtensionName($rawfilename) {
+        $ext = explode(".", $rawfilename);
+        $ext = $ext[count($ext) -1];
+
+        if (strlen($ext) > 4) {
+            # This image file have no extension name
+            return "jpg";
+        } else {
+            return strtolower($ext);
+        }
+    }
+
     public static function getUploadResource($resource) {
         $tokens = explode("/", $resource);
         $user_id = $tokens[0];

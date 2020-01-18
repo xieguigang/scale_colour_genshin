@@ -75,7 +75,7 @@ class App {
                 controller::error("Invalid config: '$type'!");
             }
         
-            $ext = self::getImageRawFileType($resource);
+            $ext = pakchoi::getImageExtensionName($resource["filename"]);
 
             if(!Utils::ImageThumbs($path, $tmpfname, $width, $ext)){
                 controller::error(gd_info());
@@ -84,19 +84,6 @@ class App {
             }
         }
 	}
-
-    private static function getImageRawFileType($file) {
-        $rawfilename = $file["filename"];
-        $ext = explode(".", $rawfilename);
-        $ext = $ext[count($ext) -1];
-
-        if (strlen($ext) > 4) {
-            # This image file have no extension name
-            return "jpg";
-        } else {
-            return strtolower($ext);
-        }
-    }
 
     /**
      * 

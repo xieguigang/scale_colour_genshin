@@ -86,6 +86,19 @@ class App {
     }
 
     /**
+     * @uses api
+     * @method POST
+    */
+    public function save() {
+        controller::error("error!");
+        if ((new Table("users"))->where(["id" => $_SESSION["id"]])->save($_POST)) {
+            controller::success("saved");
+        } else {
+            controller::success("Invalid characters!");
+        }
+    }
+
+    /**
      * 添加对上传的资源的描述信息
      * 
      * @uses api
@@ -141,5 +154,38 @@ class App {
         } else {
             controller::error("error!");
         }
+    }
+
+    /**
+     * @uses api
+     * @method POST
+    */
+    public function upload_avatar() {
+        imports("Microsoft.VisualBasic.FileIO.FileSystem");
+
+        $file = $_FILES["File"];
+        $tmp = $file["tmp_name"];        
+        $name = md5($tmp . $file["name"]);
+        $ext = pakchoi::getImageExtensionName($file["name"]);
+        $upload_path = pakchoi::getUploadDir() . "/avatars/$ext/";
+
+        FileSystem::CreateDirectory($upload_path);
+
+        $id = $_SESSION["id"];
+        $name = "$ext/$id" . "_$name";
+        $upload_path = $upload_path . $id . "_" . $name;
+
+        move_uploaded_file($tmp, $upload_path);
+
+        # write to user profile
+        if (!file_exists($upload_path)) {
+            controller::error("error!");
+        } else {
+            (new Table("users"))->where([
+                "id" => $id
+            ])->save(["avatar" => $name]);
+        }        
+
+        controller::success(1);
     }
 }
