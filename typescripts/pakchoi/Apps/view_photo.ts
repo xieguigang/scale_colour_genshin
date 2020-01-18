@@ -40,8 +40,18 @@ namespace pages {
         private loadComments() {
             $ts.get(`@api:load?resource=${this.resourceId}`, function (result: IMsg<webapp.models.message[]>) {
                 if (result.code == 0) {
-                    for (let msg of <webapp.models.message[]>result.info) {
+                    let list = $ts("#comment-list");
 
+                    for (let msg of <webapp.models.message[]>result.info) {                     
+                        let row = $ts("<div>", { class: "col-md-4" });
+
+                        row.append($ts("<img>", {
+                            src: msg.avatar,
+                            class: "img-fluid rounded-circle shadow-lg",
+                            style: "width: 16px;"
+                        })).append($ts("<span>").display(msg.message));
+
+                        list.append($ts("<div>", { class: "row" }).display(row));
                     }
                 }
             });

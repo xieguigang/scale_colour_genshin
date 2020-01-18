@@ -188,8 +188,16 @@ var pages;
         view_photo.prototype.loadComments = function () {
             $ts.get("@api:load?resource=" + this.resourceId, function (result) {
                 if (result.code == 0) {
+                    var list = $ts("#comment-list");
                     for (var _i = 0, _a = result.info; _i < _a.length; _i++) {
                         var msg = _a[_i];
+                        var row = $ts("<div>", { class: "col-md-4" });
+                        row.append($ts("<img>", {
+                            src: msg.avatar,
+                            class: "img-fluid rounded-circle shadow-lg",
+                            style: "width: 16px;"
+                        })).append($ts("<span>").display(msg.message));
+                        list.append($ts("<div>", { class: "row" }).display(row));
                     }
                 }
             });
