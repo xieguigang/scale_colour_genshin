@@ -2,6 +2,7 @@
 
 /// <reference path="Apps/index.ts" />
 /// <reference path="Apps/login.ts" />
+/// <reference path="Apps/home.ts" />
 /// <reference path="Apps/share_photo.ts" />
 
 namespace webapp {
@@ -10,6 +11,7 @@ namespace webapp {
         Router.AddAppHandler(new pages.index());
         Router.AddAppHandler(new pages.login());
         Router.AddAppHandler(new pages.share_photo());
+        Router.AddAppHandler(new pages.home());
 
         Router.RunApp();
     }

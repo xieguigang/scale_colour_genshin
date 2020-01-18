@@ -85,6 +85,27 @@ var pages;
 })(pages || (pages = {}));
 var pages;
 (function (pages) {
+    var home = /** @class */ (function (_super) {
+        __extends(home, _super);
+        function home() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(home.prototype, "appName", {
+            get: function () {
+                return "home";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        home.prototype.init = function () {
+            $ts.select(".type0").ForEach(function (card) { return card.style.display = "none"; });
+        };
+        return home;
+    }(Bootstrap));
+    pages.home = home;
+})(pages || (pages = {}));
+var pages;
+(function (pages) {
     var share_photo = /** @class */ (function (_super) {
         __extends(share_photo, _super);
         function share_photo() {
@@ -127,6 +148,7 @@ var pages;
 /// <reference path="../build/linq.d.ts" />
 /// <reference path="Apps/index.ts" />
 /// <reference path="Apps/login.ts" />
+/// <reference path="Apps/home.ts" />
 /// <reference path="Apps/share_photo.ts" />
 var webapp;
 (function (webapp) {
@@ -134,6 +156,7 @@ var webapp;
         Router.AddAppHandler(new pages.index());
         Router.AddAppHandler(new pages.login());
         Router.AddAppHandler(new pages.share_photo());
+        Router.AddAppHandler(new pages.home());
         Router.RunApp();
     }
     webapp.start = start;
