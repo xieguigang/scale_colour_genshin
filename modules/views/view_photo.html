@@ -3,6 +3,9 @@
 
 <head>
     <meta name="app" content="view/photo" />
+    <meta name="data:resource" content="{$resource_id}">
+
+    <meta name="api:comment" content="/api/comment.vbs" />
 
     ${includes/head.html}
 </head>
@@ -62,6 +65,15 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+
+                    <textarea id="comment" class="form-control" rows="3" style="min-width: 95%"></textarea>
+                    <button id="send" type="button" class="btn btn-primary">添加评论</button>
+
                 </div>
             </div>
 

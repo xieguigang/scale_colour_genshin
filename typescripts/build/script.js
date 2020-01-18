@@ -230,4 +230,46 @@ var webapp;
     }
     webapp.displayMsg = displayMsg;
 })(webapp || (webapp = {}));
+var pages;
+(function (pages) {
+    var view_photo = /** @class */ (function (_super) {
+        __extends(view_photo, _super);
+        function view_photo() {
+            var _this = _super !== null && _super.apply(this, arguments) || this;
+            _this.resourceId = $ts("@data:resource");
+            return _this;
+        }
+        Object.defineProperty(view_photo.prototype, "appName", {
+            get: function () {
+                return "view/photo";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        view_photo.prototype.init = function () {
+            var vm = this;
+            $ts("#send").onclick = function () {
+                vm.sendComment();
+            };
+            // load comments belongs to this resource file
+            this.loadComments();
+        };
+        view_photo.prototype.sendComment = function () {
+            var text = $ts.value("#comment");
+            var data = {
+                resource: this.resourceId,
+                comment: text
+            };
+            if (Strings.Empty(text)) {
+                return webapp.displayMsg("评论不可以为空！");
+            }
+            $ts.post("@api:comment", data, function (result) {
+            });
+        };
+        view_photo.prototype.loadComments = function () {
+        };
+        return view_photo;
+    }(Bootstrap));
+    pages.view_photo = view_photo;
+})(pages || (pages = {}));
 //# sourceMappingURL=script.js.map

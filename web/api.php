@@ -98,6 +98,26 @@ class App {
     }
 
     /**
+     * @uses api
+     * @method POST
+     * 
+     * @require resource=i32|comment=string
+    */
+    public function comment() {
+        $resource = $_POST["resource"];
+        $comment = $_POST["comment"];
+        $userId = $_SESSION["id"];
+        $newId = (new Table("messages"))->add([
+            "send_from" => $userId,
+            "message_time" => Utils::Now(),
+            "message" => $comment,
+            "mentions" => $resource
+        ]);
+
+        controller::success($newId);
+    }
+
+    /**
      * 添加对上传的资源的描述信息
      * 
      * @uses api

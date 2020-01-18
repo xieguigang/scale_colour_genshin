@@ -40,3 +40,12 @@ declare namespace webapp {
     function hookImagePreviews(inputId: string, previewImgId: string): void;
     function displayMsg(msg: string): void;
 }
+declare namespace pages {
+    class view_photo extends Bootstrap {
+        readonly appName: string;
+        private resourceId;
+        protected init(): void;
+        private sendComment;
+        private loadComments;
+    }
+}

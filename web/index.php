@@ -145,7 +145,8 @@ class App {
             "nickname" => $upload_user["nickname"],
             "create_time" => $res["upload_time"],
             "description" => $res["description"],
-            "raw" => $raw
+            "raw" => $raw,
+            "resource_id" => $res["id"]
         ]);
     }
 
