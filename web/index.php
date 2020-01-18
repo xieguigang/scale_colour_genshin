@@ -78,9 +78,8 @@ class App {
                 $res = $resource->where(["id" => $latest10[$i]["resource"]])->find();
                 $url = "/images/$id/" . $res["resource"] . "?type=thumbnail";
                 $latest10[$i]["resource"] = $url;
-            }
-
-            
+                $latest10[$i]["link"] = "/view/photo/" . $res["id"];
+            }            
         }
 
         View::Display([
@@ -121,6 +120,16 @@ class App {
      * 
     */
     public function share_photo() {
+        View::Display(["gallery.active" => "active"]);
+    }
+
+    /**
+     * 查看相片
+     * 
+     * @uses view
+     * 
+    */
+    public function view_photo() {
         View::Display(["gallery.active" => "active"]);
     }
 
