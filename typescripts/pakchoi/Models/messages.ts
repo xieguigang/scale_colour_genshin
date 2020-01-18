@@ -19,7 +19,7 @@ namespace webapp.models {
                 appendComments(container, msgs);
 
                 if (!isNullOrUndefined(getLastMsgId)) {
-                    getLastMsgId(msgs[msgs.length - 1].id);
+                    getLastMsgId(msgs[0].id);
                 }
             }
         });

@@ -143,7 +143,10 @@ var pages;
             });
         };
         chat.prototype.fetchMessage = function () {
-            webapp.models.fetchComments("-1", this.lastId);
+            var vm = this;
+            webapp.models.fetchComments("-1", this.lastId, function (id) {
+                vm.lastId = id;
+            });
         };
         return chat;
     }(Bootstrap));
@@ -336,7 +339,7 @@ var webapp;
                     var container = $ts("#comment-list");
                     appendComments(container, msgs);
                     if (!isNullOrUndefined(getLastMsgId)) {
-                        getLastMsgId(msgs[msgs.length - 1].id);
+                        getLastMsgId(msgs[0].id);
                     }
                 }
             });

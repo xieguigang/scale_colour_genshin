@@ -36,10 +36,17 @@ namespace pages {
             });
         }
 
+        /**
+         * The latest message id
+        */
         private lastId: string;
 
         private fetchMessage() {
-            webapp.models.fetchComments("-1", this.lastId);
+            let vm = this;
+
+            webapp.models.fetchComments("-1", this.lastId, function (id) {
+                vm.lastId = id;
+            });
         }
     }
 }

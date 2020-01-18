@@ -24,6 +24,9 @@ declare namespace pages {
         readonly appName: string;
         protected init(): void;
         private sendComment;
+        /**
+         * The latest message id
+        */
         private lastId;
         private fetchMessage;
     }
