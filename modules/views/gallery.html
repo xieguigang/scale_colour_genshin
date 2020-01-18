@@ -56,7 +56,8 @@
                         <!--
                         <a class="dropdown-item" href="#">Another action</a>
                         <a class="dropdown-item" href="#">Something else here</a>
-                        -->   </div>
+                        -->
+                    </div>
                 </div>
             </div>
 
@@ -66,7 +67,7 @@
                     <foreach @photos>
                         <div class="row">
                             <div class="col-12 col-md-4">
-                                <div class="square" style="background-image:url('@photos["url"]?type=preview');"></div>
+                                <div class="square" style="background-image:url('@photos[" url"]?type=preview');"></div>
                             </div>
                         </div>
                     </foreach>
@@ -74,6 +75,26 @@
                 </div>
             </div>
 
+
+            <div>
+                <ul class="pagination pagination-lg">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#a"><i class="fas fa-long-arrow-alt-left"></i></a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link" href="#a">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#a">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#a">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#a"><i class="fas fa-long-arrow-alt-right"></i></a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     </div>
