@@ -5,7 +5,7 @@ RewriteRule ^scripts/(.+)$ /proxy.php?app=scripts&resource=$1
 RewriteRule ^images/avatar/(.+)$ /proxy.php?app=avatar&resource=$1
 RewriteRule ^images/(.+)$ /proxy.php?app=image&resource=$1
 
-RewriteRule ^([a-z_]+)$ /index.php?app=$1
+RewriteRule ^([a-z_0-9]+)$ /index.php?app=$1
 
 RewriteRule ^view/([a-z_]+)/(\d+)$ /index.php?app=view_$1&id=$2
 
