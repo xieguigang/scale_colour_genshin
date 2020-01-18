@@ -5,6 +5,8 @@ include __DIR__ . "/../modules/bootstrap.php";
 class App {
     
     /**
+     * 欢迎使用pakchoi
+     * 
      * @uses view
      * @access *
     */
@@ -16,7 +18,7 @@ class App {
     }
     
     /**
-     * 登录
+     * 登录pakchoi
      * 
      * 如果已经存在登录会话，则跳转至home页面
      * 否则显示登录页面
@@ -50,6 +52,8 @@ class App {
     }
 
     /**
+     * 主页·新鲜事
+     * 
      * @uses view
     */
     public function home() {
@@ -86,6 +90,8 @@ class App {
     }
 
 	/**
+     * 相册
+     * 
      * @uses view
      * 
     */
@@ -109,6 +115,8 @@ class App {
     }
     
     /**
+     * 分享相片
+     * 
      * @uses view
      * 
     */
@@ -117,6 +125,8 @@ class App {
     }
 
     /**
+     * 我
+     * 
      * @uses view
     */
     public function profile() {
@@ -134,6 +144,8 @@ class App {
     }
 
 	/**
+     * 后台更新
+     * 
 	 * Update site source file from github repository
 	 *
 	 * @uses api
