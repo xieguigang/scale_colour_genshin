@@ -59,6 +59,7 @@ class App {
     public function home() {
         # 在最开始获取最近的10条
         $latest10 = (new Table("activity"))
+            ->where(["type" => not_eq(0)])
             ->order_by("create_time", true)
             ->limit(10)
             ->select();
