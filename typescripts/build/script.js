@@ -329,6 +329,44 @@ var webapp;
 (function (webapp) {
     var models;
     (function (models) {
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            }
+            else {
+                alert("浏览器不支持地理定位。");
+            }
+        }
+        models.getLocation = getLocation;
+        function showPosition(position) {
+            var lat = position.coords.latitude; //纬度 
+            var lag = position.coords.longitude; //经度 
+            $ts.post("@api:addGeoLoc", { latitude: lat, longitude: lag }, function (result) {
+                console.log('纬度:' + lat + ',经度:' + lag);
+            });
+        }
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("定位失败,用户拒绝请求地理定位");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("定位失败,位置信息是不可用");
+                    break;
+                case error.TIMEOUT:
+                    alert("定位失败,请求获取用户位置超时");
+                    break;
+                default:
+                    alert("定位失败,定位系统失效");
+                    break;
+            }
+        }
+    })(models = webapp.models || (webapp.models = {}));
+})(webapp || (webapp = {}));
+var webapp;
+(function (webapp) {
+    var models;
+    (function (models) {
         function fetchComments(resourceId, lastId, getLastMsgId) {
             if (lastId === void 0) { lastId = ""; }
             if (getLastMsgId === void 0) { getLastMsgId = null; }

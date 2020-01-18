@@ -61,6 +61,9 @@ declare namespace webapp {
     function displayMsg(msg: string): void;
 }
 declare namespace webapp.models {
+    function getLocation(): void;
+}
+declare namespace webapp.models {
     interface message {
         send_from: string;
         message_time: string;
