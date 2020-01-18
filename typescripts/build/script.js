@@ -195,8 +195,10 @@ var pages;
                         row.append($ts("<img>", {
                             src: msg.avatar,
                             class: "img-fluid rounded-circle shadow-lg",
-                            style: "width: 16px;"
-                        })).append($ts("<span>").display(msg.message));
+                            style: "width: 24px;"
+                        })).append($ts("<span>", {
+                            style: "font-size:0.9em;"
+                        }).display(msg.message));
                         list.append($ts("<div>", { class: "row" }).display(row));
                     }
                 }
