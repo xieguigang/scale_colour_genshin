@@ -77,7 +77,7 @@ class App {
             $ext = self::getImageRawFileType($resource);
 
             if(!Utils::ImageThumbs($path, $tmpfname, $width, $ext)){
-                controller::error("gd library is not installed!");
+                controller::error(gd_info());
             } else {
                 Utils::PushDownload($tmpfname, -1, "image/jpeg");
             }
