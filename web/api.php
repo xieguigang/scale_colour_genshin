@@ -99,6 +99,28 @@ class App {
 
     /**
      * @uses api
+     * @method POST
+     * @require  latitude=string|longitude=string
+    */
+    public function share_geoLocation() {
+        $latitude = $_POST["latitude"];
+        $longitude = $_POST["longitude"];
+        $content = [
+            "latitude" => $latitude,
+            "longitude" => $longitude 
+        ];
+
+        $result = pakchoi::addActivity(2, json_encode($content), null);
+
+        if (is_string($result)) {
+            controller::error($result);
+        } else {
+            controller::success($result);
+        }
+    }
+
+    /**
+     * @uses api
      * @require resource=i32
     */
     public function get_comment() {

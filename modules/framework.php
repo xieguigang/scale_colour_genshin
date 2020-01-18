@@ -51,12 +51,14 @@ class pakchoi {
     public static function getActivityTags() {
         return [
             "访问", // 0
-            "分享相片"
+            "分享相片", // 1
+            "分享位置" // 2
         ];
     }
 
     public static function addActivity($type, $content, $resId) {
-        (new Table("activity"))->add([
+        $activity = new Table("activity");
+        $result = $activity->add([
             "type" => $type,
             "content" => $content,
             "create_time" => Utils::Now(),
@@ -64,12 +66,18 @@ class pakchoi {
             "resource" => $resId
         ]);
 
-        # update activity count
-        (new Table("users"))->where(["id" => $_SESSION["id"]])->save(["activities" => "~activities + 1"]);
+        if ($result != false) {
+            # update activity count
+            (new Table("users"))->where(["id" => $_SESSION["id"]])->save(["activities" => "~activities + 1"]);
 
-        if ($type == 1) {
-            (new Table("users"))->where(["id" => $_SESSION["id"]])->save(["photos" => "~photos + 1"]);
-        }        
+            if ($type == 1) {
+                (new Table("users"))->where(["id" => $_SESSION["id"]])->save(["photos" => "~photos + 1"]);
+            }  
+
+            return $result;
+        } else {
+            return $activity->getLastMySql();
+        }
     }
 
     public static function login_userId() {
