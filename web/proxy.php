@@ -42,9 +42,10 @@ class App {
     
     /**
      * @require resource=string
+     * @access *
     */
     public function avatar() {
-        $resource = $_GET["resource"];        
+        $resource = WebRequest::getPath("resource");
         $path = pakchoi::getUploadDir() . "/avatars/$resource";
 
         if (!file_exists($path)) {
@@ -64,7 +65,7 @@ class App {
     */
 	public function image() {
         # pakchoi::getUploadDir() . "/images/$id/" . $latest[$i]["resource"];	
-        $resource = $_GET["resource"];
+        $resource = WebRequest::getPath("resource");
         $type = strtolower(WebRequest::get("type", ""));
         $path = pakchoi::getUploadDir() . "/images/$resource";
         $resource = pakchoi::getUploadResource($resource);
