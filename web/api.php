@@ -109,8 +109,7 @@ class App {
             $messages[$i]["message"] = base64_decode($messages[$i]["message"]); 
             $messages[$i]["avatar"] = pakchoi::getAvatarUrl($messages[$i]["send_from"]);
         }
-        echo var_dump($messages);
-        die;
+
         controller::success($messages);
     }
 
