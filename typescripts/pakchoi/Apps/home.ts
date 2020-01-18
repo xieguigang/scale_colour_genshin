@@ -8,6 +8,9 @@ namespace pages {
 
         protected init(): void {
             $ts.select(".type0").ForEach(card => card.style.display = "none");
+            $ts("#share_geo").onclick = function () {
+                webapp.models.getLocation();
+            }
         }
 
 

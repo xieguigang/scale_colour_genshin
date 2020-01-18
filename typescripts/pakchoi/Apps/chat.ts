@@ -16,6 +16,9 @@ namespace pages {
             $ts("#send").onclick = function () {
                 vm.sendComment();
             }
+            $ts("#share_geo").onclick = function () {
+                webapp.models.getLocation();
+            }
         }
 
         private sendComment() {

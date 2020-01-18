@@ -99,6 +99,9 @@ var pages;
         });
         home.prototype.init = function () {
             $ts.select(".type0").ForEach(function (card) { return card.style.display = "none"; });
+            $ts("#share_geo").onclick = function () {
+                webapp.models.getLocation();
+            };
         };
         return home;
     }(Bootstrap));
@@ -125,6 +128,9 @@ var pages;
             }, 1000);
             $ts("#send").onclick = function () {
                 vm.sendComment();
+            };
+            $ts("#share_geo").onclick = function () {
+                webapp.models.getLocation();
             };
         };
         chat.prototype.sendComment = function () {
