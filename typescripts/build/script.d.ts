@@ -49,3 +49,11 @@ declare namespace webapp {
     function hookImagePreviews(inputId: string, previewImgId: string): void;
     function displayMsg(msg: string): void;
 }
+declare namespace webapp.models {
+    interface message {
+        send_from: string;
+        message_time: string;
+        message: string;
+        avatar: string;
+    }
+}

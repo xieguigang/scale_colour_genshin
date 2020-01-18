@@ -38,7 +38,15 @@ namespace pages {
         }
 
         private loadComments() {
+            $ts.get(`@api:load&resource=${this.resourceId}`, function (result: IMsg<webapp.models.message[]>) {
+                if (result.code == 0) {
+                    for (let msg of <webapp.models.message[]>result.info) {
 
+                    }
+                }
+            });
         }
     }
+
+
 }

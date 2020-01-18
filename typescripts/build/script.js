@@ -186,6 +186,13 @@ var pages;
             });
         };
         view_photo.prototype.loadComments = function () {
+            $ts.get("@api:load&resource=" + this.resourceId, function (result) {
+                if (result.code == 0) {
+                    for (var _i = 0, _a = result.info; _i < _a.length; _i++) {
+                        var msg = _a[_i];
+                    }
+                }
+            });
         };
         return view_photo;
     }(Bootstrap));

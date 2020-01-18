@@ -99,6 +99,22 @@ class App {
 
     /**
      * @uses api
+     * @require resource=i32
+    */
+    public function get_comment() {
+        $resource = $_GET["resource"];
+        $messages = (new Table("messages"))->where(["mentions" => $resource])->order_by("message_time", true)->select();
+
+        for($id =0 ; $i < count($messages); $i++) {
+            $messages[$i]["message"] = base64_decode($messages[$i]["message"]); 
+            $messages[$i]["avatar"] = pakchoi::getAvatarUrl($messages[$i]["send_from"]);
+        }
+
+        controller::success($messages);
+    }
+
+    /**
+     * @uses api
      * @method POST
      * 
      * @require resource=i32|comment=string
