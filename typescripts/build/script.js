@@ -146,36 +146,6 @@ var pages;
     }(Bootstrap));
     pages.share_photo = share_photo;
 })(pages || (pages = {}));
-/// <reference path="../build/linq.d.ts" />
-/// <reference path="Apps/index.ts" />
-/// <reference path="Apps/login.ts" />
-/// <reference path="Apps/home.ts" />
-/// <reference path="Apps/share_photo.ts" />
-var webapp;
-(function (webapp) {
-    function start() {
-        Router.AddAppHandler(new pages.index());
-        Router.AddAppHandler(new pages.login());
-        Router.AddAppHandler(new pages.share_photo());
-        Router.AddAppHandler(new pages.home());
-        Router.RunApp();
-    }
-    webapp.start = start;
-})(webapp || (webapp = {}));
-$ts.mode = Modes.debug;
-$ts(webapp.start);
-var webapp;
-(function (webapp) {
-    function hookImagePreviews(inputId, previewImgId) {
-        var image = $image(previewImgId);
-        var file;
-        $input(inputId).onchange = function (evt) {
-            file = $input(inputId).files[0];
-            image.src = URL.createObjectURL(file);
-        };
-    }
-    webapp.hookImagePreviews = hookImagePreviews;
-})(webapp || (webapp = {}));
 var pages;
 (function (pages) {
     var edit_profile = /** @class */ (function (_super) {
@@ -197,4 +167,36 @@ var pages;
     }(Bootstrap));
     pages.edit_profile = edit_profile;
 })(pages || (pages = {}));
+/// <reference path="../build/linq.d.ts" />
+/// <reference path="Apps/index.ts" />
+/// <reference path="Apps/login.ts" />
+/// <reference path="Apps/home.ts" />
+/// <reference path="Apps/share_photo.ts" />
+/// <reference path="Apps/edit_profile.ts" />
+var webapp;
+(function (webapp) {
+    function start() {
+        Router.AddAppHandler(new pages.index());
+        Router.AddAppHandler(new pages.login());
+        Router.AddAppHandler(new pages.share_photo());
+        Router.AddAppHandler(new pages.edit_profile());
+        Router.AddAppHandler(new pages.home());
+        Router.RunApp();
+    }
+    webapp.start = start;
+})(webapp || (webapp = {}));
+$ts.mode = Modes.debug;
+$ts(webapp.start);
+var webapp;
+(function (webapp) {
+    function hookImagePreviews(inputId, previewImgId) {
+        var image = $image(previewImgId);
+        var file;
+        $input(inputId).onchange = function (evt) {
+            file = $input(inputId).files[0];
+            image.src = URL.createObjectURL(file);
+        };
+    }
+    webapp.hookImagePreviews = hookImagePreviews;
+})(webapp || (webapp = {}));
 //# sourceMappingURL=script.js.map
