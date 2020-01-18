@@ -90,7 +90,6 @@ class App {
      * @method POST
     */
     public function save() {
-        controller::error("error!");
         if ((new Table("users"))->where(["id" => $_SESSION["id"]])->save($_POST)) {
             controller::success("saved");
         } else {

@@ -41,6 +41,20 @@ class App {
     }
     
     /**
+     * @require resource=string
+    */
+    public function avatar() {
+        $resource = $_GET["resource"];        
+        $path = pakchoi::getUploadDir() . "/avatars/$resource";
+
+        if (!file_exists($path)) {
+            dotnet::PageNotFound($_GET["resource"]);
+        } else {
+            Utils::PushDownload($path, -1, "image/jpeg");
+        }
+    }
+
+    /**
      * Get upload image
      * 
      * thumbnail = 120
