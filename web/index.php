@@ -127,10 +127,28 @@ class App {
      * 查看相片
      * 
      * @uses view
-     * 
+     * @require id=i32
     */
-    public function view_photo() {
-        View::Display(["gallery.active" => "active"]);
+    public function view_photo() {       
+        $res = (new Table("resources"))->where(["id" => $_GET["id"], "type" => 0])->find();
+
+        if ($res == false) {
+            dotnet::PageNotFound("Target resource not found!");
+        }
+
+        $id = $res["uploader"];
+        $raw = "/images/$id/" . $res["resource"];
+        $previews =  $raw . "?type=preview";
+        $upload_user = (new Table("users"))->where(["id" => $id])->find();
+
+        View::Display([
+            "gallery.active" => "active",
+            "resource" => $previews,
+            "nickname" => $upload_user["nickname"],
+            "create_time" => $res["upload_time"],
+            "description" => $res["description"],
+            "raw" => $raw
+        ]);
     }
 
     /**

@@ -6,6 +6,8 @@ RewriteRule ^images/(.+)$ /proxy.php?app=image&resource=$1
 
 RewriteRule ^([a-z_]+)$ /index.php?app=$1
 
+RewriteRule ^view/([a-z_]+)/(\d+)$ /index.php?app=view_$1&id=$2
+
 RewriteRule ^api/([a-z_]+).vbs$ /api.php?app=$1
 RewriteRule ^api/login_confirm$ /api.php?app=login_confirm
 
