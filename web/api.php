@@ -167,13 +167,13 @@ class App {
         $tmp = $file["tmp_name"];        
         $name = md5($tmp . $file["name"]);
         $ext = pakchoi::getImageExtensionName($file["name"]);
-        $upload_path = pakchoi::getUploadDir() . "/avatars/$ext/";
+        $upload_path = pakchoi::getUploadDir() . "/avatars";
 
-        FileSystem::CreateDirectory($upload_path);
+        FileSystem::CreateDirectory($upload_path . "/$ext");
 
         $id = $_SESSION["id"];
         $name = "$ext/$id" . "_$name";
-        $upload_path = $upload_path . $id . "_" . $name;
+        $upload_path = $upload_path . "/" . $name;
 
         move_uploaded_file($tmp, $upload_path);
 
