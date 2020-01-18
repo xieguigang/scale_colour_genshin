@@ -105,11 +105,12 @@ class App {
         $resource = $_GET["resource"];
         $messages = (new Table("messages"))->where(["mentions" => $resource])->order_by("message_time", true)->select();
 
-        for($id =0 ; $i < count($messages); $i++) {
+        for($i =0 ; $i < count($messages); $i++) {
             $messages[$i]["message"] = base64_decode($messages[$i]["message"]); 
             $messages[$i]["avatar"] = pakchoi::getAvatarUrl($messages[$i]["send_from"]);
         }
-
+        echo var_dump($messages);
+        die;
         controller::success($messages);
     }
 
