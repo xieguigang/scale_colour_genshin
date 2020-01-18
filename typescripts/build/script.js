@@ -123,6 +123,7 @@ var pages;
             $ts("#do-upload").onclick = function () {
                 vm.doUpload();
             };
+            webapp.hookImagePreviews("#inputGroupFile02", "previews");
         };
         share_photo.prototype.doUpload = function () {
             var file = $input("#inputGroupFile02").files[0];
@@ -163,4 +164,37 @@ var webapp;
 })(webapp || (webapp = {}));
 $ts.mode = Modes.debug;
 $ts(webapp.start);
+var webapp;
+(function (webapp) {
+    function hookImagePreviews(inputId, previewImgId) {
+        var image = $image(previewImgId);
+        var file;
+        $input(inputId).onchange = function (evt) {
+            file = $input(inputId).files[0];
+            image.src = URL.createObjectURL(file);
+        };
+    }
+    webapp.hookImagePreviews = hookImagePreviews;
+})(webapp || (webapp = {}));
+var pages;
+(function (pages) {
+    var edit_profile = /** @class */ (function (_super) {
+        __extends(edit_profile, _super);
+        function edit_profile() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(edit_profile.prototype, "appName", {
+            get: function () {
+                return "edit/profile";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        edit_profile.prototype.init = function () {
+            webapp.hookImagePreviews("#inputGroupFile02", "#avatar-preview");
+        };
+        return edit_profile;
+    }(Bootstrap));
+    pages.edit_profile = edit_profile;
+})(pages || (pages = {}));
 //# sourceMappingURL=script.js.map

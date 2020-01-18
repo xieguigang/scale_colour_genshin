@@ -29,3 +29,12 @@ declare namespace pages {
 declare namespace webapp {
     function start(): void;
 }
+declare namespace webapp {
+    function hookImagePreviews(inputId: string, previewImgId: string): void;
+}
+declare namespace pages {
+    class edit_profile extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+    }
+}

@@ -12,6 +12,8 @@ namespace pages {
             $ts("#do-upload").onclick = function () {
                 vm.doUpload();
             }
+
+            webapp.hookImagePreviews("#inputGroupFile02", "previews");
         }
 
         private doUpload() {
