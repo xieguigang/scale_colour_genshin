@@ -53,14 +53,15 @@ class App {
         $resource = $_GET["resource"];
         $type = strtolower(WebRequest::get("type", ""));
         $path = pakchoi::getUploadDir() . "/images/$resource";
-        
+        $resource = pakchoi::getUploadResource($resource);
+
         if (!file_exists($path)) {
             dotnet::PageNotFound($_GET["resource"]);
         }
 
         if ($type == "") {
             # get raw
-            Utils::PushDownload($path, -1, "image/jpeg");
+            Utils::PushDownload($path, -1, "image/jpeg", $resource["filename"]);
         } else {
             if ($type == "thumbnail") {
                 # width = 180px for thumbnail
@@ -73,7 +74,7 @@ class App {
             } else {
                 controller::error("Invalid config: '$type'!");
             }
-
+        
             $ext = self::getImageRawFileType($resource);
 
             if(!Utils::ImageThumbs($path, $tmpfname, $width, $ext)){
@@ -83,15 +84,8 @@ class App {
             }
         }
 	}
-    
-    private static function getImageRawFileType($resource) {
-        $tokens = explode("/", $resource);
-        $user_id = $tokens[0];
-        $resource = "{$tokens[1]}/{$tokens[2]}";
-        $file = (new Table("resources"))->where([
-            "uploader" => $user_id, 
-            "resource" => $resource
-        ])->find();
+
+    private static function getImageRawFileType($file) {
         $rawfilename = $file["filename"];
         $ext = explode(".", $rawfilename);
         $ext = $ext[count($ext) -1];

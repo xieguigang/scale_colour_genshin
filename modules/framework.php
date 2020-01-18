@@ -9,6 +9,18 @@ class pakchoi {
         return WWWROOT . "/upload";
     }
 
+    public static function getUploadResource($resource) {
+        $tokens = explode("/", $resource);
+        $user_id = $tokens[0];
+        $resource = "{$tokens[1]}/{$tokens[2]}";
+        $file = (new Table("resources"))->where([
+            "uploader" => $user_id, 
+            "resource" => $resource
+        ])->find();
+
+        return $file;
+    }
+
     public static function getActivityTags() {
         return [
             "访问", // 0
@@ -24,6 +36,13 @@ class pakchoi {
             "user" => $_SESSION["id"],
             "resource" => $resId
         ]);
+
+        # update activity count
+        (new Table("users"))->where(["id" => $_SESSION["id"]])->save(["activities" => "~activities + 1"]);
+
+        if ($type == 1) {
+            (new Table("users"))->where(["id" => $_SESSION["id"]])->save(["photos" => "~photos + 1"]);
+        }        
     }
 
     public static function login_userId() {
