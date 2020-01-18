@@ -5,6 +5,8 @@ include __DIR__ . "/../modules/bootstrap.php";
 class App {
     
     /**
+     * 用户在客户端拉起登录会话
+     * 
      * @access *
      * @require people=i32
      * @method POST
@@ -28,6 +30,9 @@ class App {
     }
 
     /**
+     * 检查登录是否成功
+     * 
+     * @uses api
      * @access *
     */
     public function login_check() {
@@ -39,6 +44,8 @@ class App {
     }
 
     /**
+     * 通过访问电子邮件中的这个链接确认登录
+     * 
      * @access *
      * @require token=string|session=string
      * @uses view
@@ -97,6 +104,8 @@ class App {
     }
 
     /**
+     * 上传相片
+     * 
      * @uses api
      * @method POST
     */
