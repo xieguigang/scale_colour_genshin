@@ -86,6 +86,17 @@ class App {
         ]);
     }
 
+    /**
+     * 吐槽与聊天
+     * 
+     * @uses view
+    */
+    public function chat() {
+        View::Display([
+            "comment.active" => "active"
+        ]);
+    }
+
 	/**
      * 相册
      * 
