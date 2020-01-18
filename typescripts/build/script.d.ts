@@ -20,6 +20,14 @@ declare namespace pages {
     }
 }
 declare namespace pages {
+    class chat extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+        private sendComment;
+        private fetchMessage;
+    }
+}
+declare namespace pages {
     class share_photo extends Bootstrap {
         readonly appName: string;
         protected init(): void;
@@ -32,7 +40,6 @@ declare namespace pages {
         private resourceId;
         protected init(): void;
         private sendComment;
-        private loadComments;
     }
 }
 declare namespace pages {
@@ -56,4 +63,5 @@ declare namespace webapp.models {
         message: string;
         avatar: string;
     }
+    function fetchComments(): void;
 }

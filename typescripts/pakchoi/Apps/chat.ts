@@ -1,12 +1,9 @@
 namespace pages {
 
-    export class view_photo extends Bootstrap {
-
+    export class chat extends Bootstrap {
         get appName(): string {
-            return "view/photo";
+            return "chat";
         }
-
-        private resourceId: string = <any>$ts("@data:resource");
 
         protected init(): void {
             let vm = this;
@@ -15,14 +12,13 @@ namespace pages {
                 vm.sendComment();
             }
 
-            // load comments belongs to this resource file
-            webapp.models.fetchComments();
+            this.fetchMessage();
         }
 
         private sendComment() {
             let text: string = $ts.value("#comment");
             let data = {
-                resource: this.resourceId,
+                resource: -1,
                 comment: text
             };
 
@@ -35,6 +31,10 @@ namespace pages {
                     $ts.value("#comment", "");
                 }
             });
+        }
+
+        private fetchMessage() {
+
         }
     }
 }

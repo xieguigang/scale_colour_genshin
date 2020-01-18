@@ -106,6 +106,48 @@ var pages;
 })(pages || (pages = {}));
 var pages;
 (function (pages) {
+    var chat = /** @class */ (function (_super) {
+        __extends(chat, _super);
+        function chat() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(chat.prototype, "appName", {
+            get: function () {
+                return "chat";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        chat.prototype.init = function () {
+            var vm = this;
+            $ts("#send").onclick = function () {
+                vm.sendComment();
+            };
+            this.fetchMessage();
+        };
+        chat.prototype.sendComment = function () {
+            var text = $ts.value("#comment");
+            var data = {
+                resource: -1,
+                comment: text
+            };
+            if (Strings.Empty(text)) {
+                return webapp.displayMsg("评论不可以为空！");
+            }
+            $ts.post("@api:comment", data, function (result) {
+                if (result.code == 0) {
+                    $ts.value("#comment", "");
+                }
+            });
+        };
+        chat.prototype.fetchMessage = function () {
+        };
+        return chat;
+    }(Bootstrap));
+    pages.chat = chat;
+})(pages || (pages = {}));
+var pages;
+(function (pages) {
     var share_photo = /** @class */ (function (_super) {
         __extends(share_photo, _super);
         function share_photo() {
@@ -168,7 +210,7 @@ var pages;
                 vm.sendComment();
             };
             // load comments belongs to this resource file
-            this.loadComments();
+            webapp.models.fetchComments();
         };
         view_photo.prototype.sendComment = function () {
             var text = $ts.value("#comment");
@@ -182,25 +224,6 @@ var pages;
             $ts.post("@api:comment", data, function (result) {
                 if (result.code == 0) {
                     $ts.value("#comment", "");
-                }
-            });
-        };
-        view_photo.prototype.loadComments = function () {
-            $ts.get("@api:load?resource=" + this.resourceId, function (result) {
-                if (result.code == 0) {
-                    var list = $ts("#comment-list");
-                    for (var _i = 0, _a = result.info; _i < _a.length; _i++) {
-                        var msg = _a[_i];
-                        var row = $ts("<div>", { class: "col-md-4" });
-                        row.append($ts("<img>", {
-                            src: msg.avatar,
-                            class: "img-fluid rounded-circle shadow-lg",
-                            style: "width: 24px;"
-                        })).append($ts("<span>", {
-                            style: "font-size:0.9em;"
-                        }).display(msg.message));
-                        list.append($ts("<div>", { class: "row" }).display(row));
-                    }
                 }
             });
         };
@@ -261,6 +284,7 @@ var pages;
 /// <reference path="Apps/index.ts" />
 /// <reference path="Apps/login.ts" />
 /// <reference path="Apps/home.ts" />
+/// <reference path="Apps/chat.ts" />
 /// <reference path="Apps/share_photo.ts" />
 /// <reference path="Apps/view_photo.ts" />
 /// <reference path="Apps/edit_profile.ts" />
@@ -273,6 +297,7 @@ var webapp;
         Router.AddAppHandler(new pages.view_photo());
         Router.AddAppHandler(new pages.edit_profile());
         Router.AddAppHandler(new pages.home());
+        Router.AddAppHandler(new pages.chat());
         Router.RunApp();
     }
     webapp.start = start;
@@ -293,5 +318,31 @@ var webapp;
     function displayMsg(msg) {
     }
     webapp.displayMsg = displayMsg;
+})(webapp || (webapp = {}));
+var webapp;
+(function (webapp) {
+    var models;
+    (function (models) {
+        function fetchComments() {
+            $ts.get("@api:load?resource=" + this.resourceId, function (result) {
+                if (result.code == 0) {
+                    var list = $ts("#comment-list");
+                    for (var _i = 0, _a = result.info; _i < _a.length; _i++) {
+                        var msg = _a[_i];
+                        var row = $ts("<div>", { class: "col-md-4" });
+                        row.append($ts("<img>", {
+                            src: msg.avatar,
+                            class: "img-fluid rounded-circle shadow-lg",
+                            style: "width: 24px;"
+                        })).append($ts("<span>", {
+                            style: "font-size:0.9em;"
+                        }).display(msg.message));
+                        list.append($ts("<div>", { class: "row" }).display(row));
+                    }
+                }
+            });
+        }
+        models.fetchComments = fetchComments;
+    })(models = webapp.models || (webapp.models = {}));
 })(webapp || (webapp = {}));
 //# sourceMappingURL=script.js.map
