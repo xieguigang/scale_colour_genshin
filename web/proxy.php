@@ -61,20 +61,26 @@ class App {
         if ($type == "") {
             # get raw
             Utils::PushDownload($path, -1, "image/jpeg");
-        } else if ($type == "thumbnail") {
-            # width = 120px for thumbnail
-            $tmpfname = tempnam("/tmp", "thumbnail");
-            Utils::ImageThumbs($path, $tmpfname, 120, self::getImageRawFileType($resource));
-            Utils::PushDownload($tmpfname, -1, "image/jpeg");
-
-        } else if ($type == "preview") {
-            # width = 600px for preview
-            $tmpfname = tempnam("/tmp", "previews");
-            Utils::ImageThumbs($path, $tmpfname, 600, self::getImageRawFileType($resource));
-            Utils::PushDownload($tmpfname, -1, "image/jpeg");
-
         } else {
-            controller::error("Invalid config!");
+            if ($type == "thumbnail") {
+                # width = 120px for thumbnail
+                $tmpfname = tempnam("/tmp", "thumbnail");
+                $width = 120;               
+            } else if ($type == "preview") {
+                # width = 600px for preview
+                $tmpfname = tempnam("/tmp", "previews");
+                $width = 600;
+            } else {
+                controller::error("Invalid config: '$type'!");
+            }
+
+            $ext = self::getImageRawFileType($resource);
+
+            if(!Utils::ImageThumbs($path, $tmpfname, $width, $ext)){
+                controller::error("gd library is not installed!");
+            } else {
+                Utils::PushDownload($tmpfname, -1, "image/jpeg");
+            }
         }
 	}
     
