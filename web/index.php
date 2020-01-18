@@ -29,16 +29,10 @@ class App {
     public function login() {
         if (pakchoi::login_userId() <= 0) {
 			# get user list
-			$peoples = (new Table("users"))->all();
-			$default = "/assets/images/default.png";
+			$peoples = (new Table("users"))->all();			
 			
 			for($i = 0; $i < count($peoples); $i++) {
-				if (empty($peoples[$i]["avatar"])) {
-					# use default
-					$peoples[$i]["avatar"] = $default;
-				} else {
-					$peoples[$i]["avatar"] = "/files/image/" . $peoples[$i]["avatar"];					
-				}
+				$peoples[$i]["avatar"] = pakchoi::getAvatarUrl($peoples[$i]);
 			}
 			
             # 未登录状态
@@ -170,7 +164,8 @@ class App {
             "whats.up" => $user["whats_up"],
             "n.posts" => $user["posts"],
             "n.photo" => $user["photos"],
-            "n.activity" => $user["activities"]
+            "n.activity" => $user["activities"],
+            "avatar" => pakchoi::getAvatarUrl($user)
         ]);
     }
 

@@ -5,6 +5,21 @@ imports("php.export");
 
 class pakchoi {
 
+    public static function getAvatarUrl($id) {
+        if (is_array($id)) {
+            $peoples = $id;
+        } else {
+            $peoples = (new Table("users"))->where(["id" => $id])->find();
+        }
+
+        if (empty($peoples["avatar"])) {
+            # use default
+            return "/assets/images/default.png";
+        } else {
+            return "/images/avatar/" . $peoples["avatar"];					
+        }
+    }
+
     public static function getUploadDir() {
         return WWWROOT . "/upload";
     }
