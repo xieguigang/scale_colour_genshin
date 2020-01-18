@@ -174,6 +174,15 @@ class App {
         ]);
     }
 
+    /**
+     * 编辑我的信息
+     * 
+     * @uses view
+    */
+    public function edit_profile() {
+        View::Display(["profile.active" => "active"]);
+    }
+
 	/**
      * 后台更新
      * 
