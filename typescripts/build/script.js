@@ -120,10 +120,12 @@ var pages;
         });
         chat.prototype.init = function () {
             var vm = this;
+            setInterval(function () {
+                vm.fetchMessage();
+            }, 1000);
             $ts("#send").onclick = function () {
                 vm.sendComment();
             };
-            this.fetchMessage();
         };
         chat.prototype.sendComment = function () {
             var text = $ts.value("#comment");
@@ -323,26 +325,30 @@ var webapp;
 (function (webapp) {
     var models;
     (function (models) {
-        function fetchComments(resourceId) {
-            $ts.get("@api:load?resource=" + resourceId, function (result) {
+        function fetchComments(resourceId, lastId) {
+            if (lastId === void 0) { lastId = ""; }
+            var api = "@api:load?resource=" + resourceId + "&lastid=" + lastId;
+            $ts.get(api, function (result) {
                 if (result.code == 0) {
-                    var list = $ts("#comment-list");
-                    for (var _i = 0, _a = result.info; _i < _a.length; _i++) {
-                        var msg = _a[_i];
-                        var row = $ts("<div>", { class: "col-md-4" });
-                        row.append($ts("<img>", {
-                            src: msg.avatar,
-                            class: "img-fluid rounded-circle shadow-lg",
-                            style: "width: 24px;"
-                        })).append($ts("<span>", {
-                            style: "font-size:0.9em;"
-                        }).display(msg.message));
-                        list.append($ts("<div>", { class: "row" }).display(row));
-                    }
+                    appendComments($ts("#comment-list"), result.info);
                 }
             });
         }
         models.fetchComments = fetchComments;
+        function appendComments(list, messages) {
+            for (var _i = 0, messages_1 = messages; _i < messages_1.length; _i++) {
+                var msg = messages_1[_i];
+                var row = $ts("<div>", { class: "col-md-4" });
+                row.append($ts("<img>", {
+                    src: msg.avatar,
+                    class: "img-fluid rounded-circle shadow-lg",
+                    style: "width: 24px;"
+                })).append($ts("<span>", {
+                    style: "font-size:0.9em;"
+                }).display(msg.message));
+                list.append($ts("<div>", { class: "row" }).display(row));
+            }
+        }
     })(models = webapp.models || (webapp.models = {}));
 })(webapp || (webapp = {}));
 //# sourceMappingURL=script.js.map

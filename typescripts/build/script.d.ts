@@ -24,6 +24,7 @@ declare namespace pages {
         readonly appName: string;
         protected init(): void;
         private sendComment;
+        private lastId;
         private fetchMessage;
     }
 }
@@ -63,5 +64,5 @@ declare namespace webapp.models {
         message: string;
         avatar: string;
     }
-    function fetchComments(resourceId: string): void;
+    function fetchComments(resourceId: string, lastId?: string): void;
 }
