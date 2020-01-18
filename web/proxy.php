@@ -41,16 +41,63 @@ class App {
     }
     
     /**
+     * Get upload image
+     * 
+     * thumbnail = 120
+     * preview = 600
+     * 
      * @require resource=string
     */
 	public function image() {
         # pakchoi::getUploadDir() . "/images/$id/" . $latest[$i]["resource"];	
         $resource = $_GET["resource"];
+        $type = strtolower(WebRequest::get("type", ""));
         $path = pakchoi::getUploadDir() . "/images/$resource";
         
-        Utils::PushDownload($path, -1, "image/jpeg");
+        if (!file_exists($path)) {
+            dotnet::PageNotFound($_GET["resource"]);
+        }
+
+        if ($type == "") {
+            # get raw
+            Utils::PushDownload($path, -1, "image/jpeg");
+        } else if ($type == "thumbnail") {
+            # width = 120px for thumbnail
+            $tmpfname = tempnam("/tmp", "thumbnail");
+            Utils::ImageThumbs($path, $tmpfname, 120, self::getImageRawFileType($resource));
+            Utils::PushDownload($tmpfname, -1, "image/jpeg");
+
+        } else if ($type == "preview") {
+            # width = 600px for preview
+            $tmpfname = tempnam("/tmp", "previews");
+            Utils::ImageThumbs($path, $tmpfname, 600, self::getImageRawFileType($resource));
+            Utils::PushDownload($tmpfname, -1, "image/jpeg");
+
+        } else {
+            controller::error("Invalid config!");
+        }
 	}
-	
+    
+    private static function getImageRawFileType($resource) {
+        $tokens = explode("/", $resource);
+        $user_id = $tokens[0];
+        $resource = "{$tokens[1]}/{$tokens[2]}";
+        $file = (new Table("resources"))->where([
+            "uploader" => $user_id, 
+            "resource" => $resource
+        ])->find();
+        $rawfilename = $file["filename"];
+        $ext = explode(".", $rawfilename);
+        $ext = $ext[count($ext) -1];
+
+        if (strlen($ext) > 4) {
+            # This image file have no extension name
+            return "jpg";
+        } else {
+            return strtolower($ext);
+        }
+    }
+
     /**
      * 
     */
