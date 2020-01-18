@@ -107,14 +107,19 @@ class App {
         $resource = $_POST["resource"];
         $comment = $_POST["comment"];
         $userId = $_SESSION["id"];
-        $newId = (new Table("messages"))->add([
+        $messages = new Table("messages");
+        $newId = $messages->add([
             "send_from" => $userId,
             "message_time" => Utils::Now(),
-            "message" => $comment,
+            "message" => base64_encode($comment),
             "mentions" => $resource
         ]);
 
-        controller::success($newId);
+        if ($newId == false) {
+            controller::error($messages->getLastMySql());
+        } else {
+            controller::success($newId);
+        }
     }
 
     /**

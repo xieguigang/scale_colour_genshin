@@ -180,6 +180,9 @@ var pages;
                 return webapp.displayMsg("评论不可以为空！");
             }
             $ts.post("@api:comment", data, function (result) {
+                if (result.code == 0) {
+                    $ts.value("#comment", "");
+                }
             });
         };
         view_photo.prototype.loadComments = function () {

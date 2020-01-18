@@ -31,7 +31,9 @@ namespace pages {
             }
 
             $ts.post("@api:comment", data, function (result) {
-
+                if (result.code == 0) {
+                    $ts.value("#comment", "");
+                }
             });
         }
 
