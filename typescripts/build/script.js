@@ -210,7 +210,7 @@ var pages;
                 vm.sendComment();
             };
             // load comments belongs to this resource file
-            webapp.models.fetchComments();
+            webapp.models.fetchComments(this.resourceId);
         };
         view_photo.prototype.sendComment = function () {
             var text = $ts.value("#comment");
@@ -323,8 +323,8 @@ var webapp;
 (function (webapp) {
     var models;
     (function (models) {
-        function fetchComments() {
-            $ts.get("@api:load?resource=" + this.resourceId, function (result) {
+        function fetchComments(resourceId) {
+            $ts.get("@api:load?resource=" + resourceId, function (result) {
                 if (result.code == 0) {
                     var list = $ts("#comment-list");
                     for (var _i = 0, _a = result.info; _i < _a.length; _i++) {

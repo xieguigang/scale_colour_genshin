@@ -7,8 +7,8 @@ namespace webapp.models {
         avatar: string;
     }
 
-    export function fetchComments() {
-        $ts.get(`@api:load?resource=${this.resourceId}`, function (result: IMsg<webapp.models.message[]>) {
+    export function fetchComments(resourceId: string) {
+        $ts.get(`@api:load?resource=${resourceId}`, function (result: IMsg<webapp.models.message[]>) {
             if (result.code == 0) {
                 let list = $ts("#comment-list");
 

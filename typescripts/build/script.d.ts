@@ -63,5 +63,5 @@ declare namespace webapp.models {
         message: string;
         avatar: string;
     }
-    function fetchComments(): void;
+    function fetchComments(resourceId: string): void;
 }
