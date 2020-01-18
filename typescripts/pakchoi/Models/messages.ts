@@ -5,14 +5,22 @@ namespace webapp.models {
         message_time: string;
         message: string;
         avatar: string;
+        id: string;
     }
 
-    export function fetchComments(resourceId: string, lastId: string = "") {
+    export function fetchComments(resourceId: string, lastId: string = "", getLastMsgId: Delegate.Sub = null) {
         let api: string = `@api:load?resource=${resourceId}&lastid=${lastId}`;
 
         $ts.get(api, function (result: IMsg<webapp.models.message[]>) {
             if (result.code == 0) {
-                appendComments($ts("#comment-list"), <webapp.models.message[]>result.info);
+                let msgs = <webapp.models.message[]>result.info;
+                let container = $ts("#comment-list");
+
+                appendComments(container, msgs);
+
+                if (!isNullOrUndefined(getLastMsgId)) {
+                    getLastMsgId(msgs[msgs.length - 1].id);
+                }
             }
         });
     }

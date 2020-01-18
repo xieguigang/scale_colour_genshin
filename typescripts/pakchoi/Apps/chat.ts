@@ -39,7 +39,7 @@ namespace pages {
         private lastId: string;
 
         private fetchMessage() {
-
+            webapp.models.fetchComments("-1", this.lastId);
         }
     }
 }

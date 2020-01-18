@@ -143,6 +143,7 @@ var pages;
             });
         };
         chat.prototype.fetchMessage = function () {
+            webapp.models.fetchComments("-1", this.lastId);
         };
         return chat;
     }(Bootstrap));
@@ -325,12 +326,18 @@ var webapp;
 (function (webapp) {
     var models;
     (function (models) {
-        function fetchComments(resourceId, lastId) {
+        function fetchComments(resourceId, lastId, getLastMsgId) {
             if (lastId === void 0) { lastId = ""; }
+            if (getLastMsgId === void 0) { getLastMsgId = null; }
             var api = "@api:load?resource=" + resourceId + "&lastid=" + lastId;
             $ts.get(api, function (result) {
                 if (result.code == 0) {
-                    appendComments($ts("#comment-list"), result.info);
+                    var msgs = result.info;
+                    var container = $ts("#comment-list");
+                    appendComments(container, msgs);
+                    if (!isNullOrUndefined(getLastMsgId)) {
+                        getLastMsgId(msgs[msgs.length - 1].id);
+                    }
                 }
             });
         }

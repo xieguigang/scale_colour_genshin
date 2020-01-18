@@ -63,6 +63,7 @@ declare namespace webapp.models {
         message_time: string;
         message: string;
         avatar: string;
+        id: string;
     }
-    function fetchComments(resourceId: string, lastId?: string): void;
+    function fetchComments(resourceId: string, lastId?: string, getLastMsgId?: Delegate.Sub): void;
 }
