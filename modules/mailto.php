@@ -1,6 +1,12 @@
 <?php
 
-# include_once __DIR__ . "/PHPMailer/PHPMailerAutoload.php";
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+include_once __DIR__ . "/PHPMailer/src/Exception.php";
+include_once __DIR__ . "/PHPMailer/src/PHPMailer.php";
+include_once __DIR__ . "/PHPMailer/src/POP3.php";
+include_once __DIR__ . "/PHPMailer/src/SMTP.php";
 
 class EMail {
 		
@@ -17,8 +23,8 @@ class EMail {
 	 * @return string|boolean 如果发送成功，则只会返回一个逻辑值``true``，反之失败会返回错误信息 
     */
     public static function sendMail($to, $name, $title, $content, $link, $attachmentLink = NULL) {
-        $mail = new \PHPMailer(); 
-		$config = Registry::Read("mailer");
+        $mail = new PHPMailer(); 
+		$config = DotNetRegistry::Read("mailer");
 		
         $mail->isSMTP();              // 使用SMTP服务
         $mail->CharSet = "UTF-8";     // 编码格式为utf8，不设置编码的话，中文会出现乱码       
@@ -59,7 +65,7 @@ class EMail {
 		
         $mail->Subject = $title;   // 邮件标题        
         $mail->MsgHTML($content);  // 识别html代码
-       
+
         if ($mail->send()) {
             return true;
         } else {
@@ -71,7 +77,12 @@ class EMail {
 		$time = date('Y-m-d H:i:s');
 		$html = file_get_contents(__DIR__ . "/views/etc/mail.html");
 		
-		list($linkTitle, $linkURL) = Utils::Tuple($link);
+		if (is_string($link)) {
+			$linkTitle = "";
+			$linkURL = $link;
+		} else {
+			list($linkTitle, $linkURL) = Utils::Tuple($link);
+		}
 
 		if (!$name) {
 			$name = explode("@", $email)[0];			

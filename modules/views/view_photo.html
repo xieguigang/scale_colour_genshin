@@ -2,9 +2,11 @@
 <html>
 
 <head>
-    <meta name="app" content="login" />
-    <meta name="api:login" content="/api/login.vbs" />
-    <meta name="api:check" content="/api/login_check.vbs" />
+    <meta name="app" content="view/photo" />
+    <meta name="data:resource" content="{$resource_id}">
+
+    <meta name="api:comment" content="/api/comment.vbs" />
+    <meta name="api:load" content="/api/get_comment.vbs" />
 
     ${includes/head.html}
 </head>
@@ -41,66 +43,49 @@
 
 
     <div class="blog-posts bg-light">
-        <div class="text-center">
-            <h2>登录</h2>
-            <p class="lead">看看对方有什么动静</p>
-        </div>
+        <!--
+		<div class="text-center">
+			<h2>动态</h2>
+			<p class="lead">看看对方有什么动静</p>
+		</div>-->
         <div class="container">
+
             <div class="row">
                 <div class="col-md-4">
                     <div class="component">
                         <div class="card mb-4">
                             <div class="card-header">
-                                <img class="card-img" src="/assets/images/splash.jpg">
+                                <img class="card-img" src='{$resource}'>
                             </div>
                             <div class="card-body">
-                                <span class="badge badge-success mb-2">登录</span>
-                                <h4 class="card-title">点击下面的E-mail进行登录</h4>
-                                <p class="card-text">
-                                    <ul>
-                                        <foreach @peoples>
-                                            <a class="people-link" href="javascript:void(0);" target="__blank"
-                                                people='@peoples["id"]'>
-                                                <img src='@peoples["avatar"]' class="img-fluid rounded-circle shadow-lg"
-                                                    style="width: 64px;" />
-                                            </a>
-                                        </foreach>
-                                    </ul>
-                                </p>
+                                <h4 class="card-title">{$nickname}于{$create_time}分享相片</h4>
+                                <p class="card-text">{$description}</p>
+                            </div>
+                            <div class='card-footer'>
+                                <a href="{$raw}" class="btn btn-primary">下载原图</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- button that opens the modal -->
-    <button type="button" class="btn btn-info" id="open-msg" style="display: none;" data-toggle="modal"
-        data-target="#loginModal">        
-    </button>
+            <div id="comment-list">
 
-    <!-- the modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">等待登录确认</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    请点击电子邮箱中的登录链接确认登录
+            </div>
 
-                    <img src="/assets/images/loader.gif" />
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            <hr />
+
+            <div class="row">
+                <div class="col-md-4">
+
+                    <textarea id="comment" class="form-control" rows="3" style="min-width: 95%"></textarea>
+                    <button id="send" type="button" class="btn btn-primary">添加评论</button>
+
                 </div>
             </div>
+
         </div>
+    </div>
     </div>
 
     ${includes/footer.html}

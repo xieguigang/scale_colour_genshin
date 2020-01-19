@@ -13,19 +13,21 @@ return [
 
     // 框架配置参数
 	"ERR_HANDLER_DISABLE" => "FALSE",
-	"RFC7231"       => __DIR__ . "/views/http_errors/",
+    "RFC7231"       => __DIR__ . "/views/http_errors/",
+    "show.stacktrace" => false,
 	"CACHE" => false,
     "APP_NAME" => "pakchoi",
     "APP_TITLE" => "pakchoi",
     "APP_VERSION" => "0.0.0.1-alpha",
 	"MVC_VIEW_ROOT" => [		
 		"index" => AppViews
-    ]
+    ],
 	
 	"login.tokens" => ["demo1","demo2","demo3","demo4","demo5"],
-	
+    "baidumap.key" => "xxxxx",
+    
 	// config for email sender
-	"mailer" = [
+	"mailer" => [
 		"server" => "email.com",
 		"user"  => "username",
 		"password" => "*******",

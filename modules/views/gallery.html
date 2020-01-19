@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="app" content="gallery" />
+
+    ${includes/head.html}
+</head>
+
+<body class="index landing profile">
+
+    <div class="bubbles d-none d-md-block">
+        <!-- 				bubbles -->
+        <div class="bubble bubble-1 rotate-bubble bg-warning"></div>
+        <div class="bubble bubble-2 bubble-bottom-right bg-danger rotate-bubble"></div>
+        <div class="bubble bubble-3 bubble-top-right bg-warning rotate-bubble"></div>
+        <div class="bubble bubble-4 bubble-top-left bg-info rotate-bubble"></div>
+        <div class="bubble bubble-5 bg-info rotate-bubble"></div>
+        <div class="bubble bubble-6 bubble-bottom-right bg-danger rotate-bubble"></div>
+        <div class="bubble bubble-7 bubble-top-right bg-success rotate-bubble"></div>
+        <div class="bubble bubble-8 bubble-top-left bg-success rotate-bubble"></div>
+        <div class="bubble bubble-9 bg-warning rotate-bubble"></div>
+        <div class="bubble bubble-10 bg-danger rotate-bubble"></div>
+        <div class="bubble bubble-11 bubble-bottom-right bg-info rotate-bubble"></div>
+        <div class="bubble bubble-12 bubble-top-right bg-success rotate-bubble"></div>
+        <div class="bubble bubble-13 bubble-top-left bg-success rotate-bubble"></div>
+        <!--         circles -->
+        <div class="circle circle-1 bg-light rotate-circle"></div>
+        <div class="circle circle-2 bg-success rotate-circle"></div>
+        <div class="circle circle-3 bg-danger rotate-circle"></div>
+        <div class="circle circle-4 bg-info rotate-circle"></div>
+        <div class="circle circle-5 bg-success rotate-circle"></div>
+        <div class="circle circle-6 bg-info rotate-circle"></div>
+        <div class="circle circle-7 bg-warning rotate-circle"></div>
+        <div class="circle circle-8 bg-white rotate-circle"></div>
+        <div class="circle circle-9 bg-warning rotate-circle"></div>
+        <div class="circle circle-10 bg-danger rotate-circle"></div>
+    </div>
+
+
+    <div class="blog-posts bg-light">
+        <div class="text-center">
+            <h2>相册</h2>
+            <p class="lead">看看对方有什么动静</p>
+        </div>
+        <div class="container">
+
+            <div class="row">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        分享
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/share_photo" id="upload-photo">相片</a>
+                        <!--
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-tabs tab-content">
+                <div class="tab-pane fade show active" id="photos">
+
+                    <foreach @photos>
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <div class="square" style="background-image:url('@photos[" url"]?type=preview');"></div>
+                            </div>
+                        </div>
+                    </foreach>
+
+                </div>
+            </div>
+
+
+            <div>
+                <ul class="pagination pagination-lg">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#a"><i class="fas fa-long-arrow-alt-left"></i></a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link" href="#a">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#a">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#a">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#a"><i class="fas fa-long-arrow-alt-right"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    ${includes/footer.html}
+</body>
+
+</html>
