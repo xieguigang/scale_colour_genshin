@@ -247,3 +247,7 @@ pip-log.txt
 /modules/config.ini.php
 web/phpinfo.php
 /template/lazy-kit-master
+/typescripts/build/pakchoi.js.map
+/typescripts/build/pakchoi.js
+/typescripts/build/linq.js.map
+/typescripts/build/linq.js
