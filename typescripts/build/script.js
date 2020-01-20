@@ -336,14 +336,26 @@ var webapp;
     var models;
     (function (models) {
         function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            if ($ts.location.url.protocol.toLowerCase() == "http") {
+                // 非https链接会被浏览器拒绝调用API
+                // 则这个时候在服务器端使用ip定位
+                ipLocation();
             }
             else {
-                alert("浏览器不支持地理定位。");
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition, showError);
+                }
+                else {
+                    alert("浏览器不支持地理定位。");
+                }
             }
         }
         models.getLocation = getLocation;
+        function ipLocation() {
+            $ts.post("@api:addGeoLoc", { fallback: true }, function (result) {
+                console.log(result);
+            });
+        }
         function showPosition(position) {
             var lat = position.coords.latitude; //纬度 
             var lag = position.coords.longitude; //经度 

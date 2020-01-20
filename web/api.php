@@ -98,17 +98,24 @@ class App {
     }
 
     /**
+     * 分享当前的位置
+     * 
      * @uses api
      * @method POST
-     * @require  latitude=string|longitude=string
     */
     public function share_geoLocation() {
-        $latitude = $_POST["latitude"];
-        $longitude = $_POST["longitude"];
-        $content = [
-            "latitude" => $latitude,
-            "longitude" => $longitude 
-        ];
+        if ($_POST["fallback"] == true) {
+            $content = (new baiduMap())->GetUserGeoLocation(true);
+            $content["fallback"] = true;
+        } else {
+            $latitude = $_POST["latitude"];
+            $longitude = $_POST["longitude"];
+            $content = [
+                "latitude" => $latitude,
+                "longitude" => $longitude,
+                "fallback" => false
+            ];
+        }
 
         $result = pakchoi::addActivity(2, json_encode($content), null);
 

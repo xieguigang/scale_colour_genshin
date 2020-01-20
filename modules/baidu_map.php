@@ -17,14 +17,18 @@ class baiduMap {
         return Utils::UserIPAddress();
     }
 
-    public function GetUserGeoLocation() {
+    public function GetUserGeoLocation($raw = false) {
         $ip       = $this->GetUserIP();
         $argv     = [
             "ip" => $ip, 
             "ak" => $this->key
         ]; 
         $url      = baiduMap::api . "?" . http_build_query($argv);
-        $response = json_decode(CURLExtensions::GET($url));
+        $response = json_decode(CURLExtensions::GET($url), $raw);
+
+        if ($raw) {
+            return $response;
+        }
 
         if (property_exists($response, "content")) {
             $location = $response->content->address;

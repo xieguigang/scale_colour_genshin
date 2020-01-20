@@ -1,11 +1,23 @@
 namespace webapp.models {
 
     export function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        if ($ts.location.url.protocol.toLowerCase() == "http") {
+            // 非https链接会被浏览器拒绝调用API
+            // 则这个时候在服务器端使用ip定位
+            ipLocation();
         } else {
-            alert("浏览器不支持地理定位。");
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("浏览器不支持地理定位。");
+            }
         }
+    }
+
+    function ipLocation() {
+        $ts.post("@api:addGeoLoc", { fallback: true }, function (result) {
+            console.log(result);
+        });
     }
 
     function showPosition(position: Position) {
