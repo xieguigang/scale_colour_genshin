@@ -21,7 +21,11 @@ namespace webapp {
 
         Notification.requestPermission()
             .then(function (permission) {
-
+                if (permission == "granted") {
+                    webapp.modules.startNotification();
+                } else {
+                    displayMsg("消息权限被拒绝");
+                }
             });
 
         Router.RunApp();
