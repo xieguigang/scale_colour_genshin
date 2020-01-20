@@ -21,7 +21,11 @@ namespace pages {
                                 webapp.displayMsg("消息权限被拒绝");
                             }
                         });
+                } else {
+
                 }
+
+                console.log(Notification.permission);
             }
 
             $("#open-msg").click();

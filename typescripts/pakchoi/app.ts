@@ -21,6 +21,8 @@ namespace webapp {
 
         if (Notification.permission == "granted") {
             webapp.modules.startNotification();
+        } else {
+            console.log(Notification.permission);
         }
 
         Router.RunApp();
