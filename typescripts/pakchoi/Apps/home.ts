@@ -18,7 +18,7 @@ namespace pages {
                             if (permission == "granted") {
                                 webapp.modules.startNotification();
                             } else {
-                                webapp.displayMsg("???????");
+                                webapp.displayMsg("消息权限被拒绝");
                             }
                         });
                 }
