@@ -9,7 +9,7 @@ RewriteRule ^([a-z_0-9]+)$ /index.php?app=$1
 
 RewriteRule ^view/([a-z_]+)/(\d+)$ /index.php?app=view_$1&id=$2
 
-RewriteRule ^api/([a-z_]+).vbs$ /api.php?app=$1
+RewriteRule ^api/([a-z\_]+).vbs$ /api.php?app=$1
 RewriteRule ^api/login_confirm$ /api.php?app=login_confirm
 
 RewriteRule ^api/upload/(.+)$ /api.php?app=upload_$1
