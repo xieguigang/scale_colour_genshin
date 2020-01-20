@@ -6,7 +6,7 @@
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "outDir": "../dist",
-    "outFile": "../build/script.js",
+    "outFile": "../build/pakchoi.js",
     "declaration": true
   },
   "exclude": [
