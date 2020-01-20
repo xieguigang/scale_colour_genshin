@@ -16,7 +16,7 @@ namespace pages {
             }
 
             // load comments belongs to this resource file
-            webapp.models.fetchComments(this.resourceId);
+            webapp.modules.fetchComments(this.resourceId);
         }
 
         private sendComment() {

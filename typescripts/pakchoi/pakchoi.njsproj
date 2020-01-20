@@ -57,6 +57,9 @@
     <TypeScriptCompile Include="Apps\chat.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Apps\view_location.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Apps\view_photo.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

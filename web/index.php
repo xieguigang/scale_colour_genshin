@@ -77,7 +77,11 @@ class App {
                 $url = "/images/$id/" . $res["resource"] . "?type=thumbnail";
                 $latest10[$i]["resource"] = $url;
                 $latest10[$i]["link"] = "/view/photo/" . $res["id"];
-            }            
+            } else if ($type == 2) {
+                # 查看分享的位置
+                $latest10[$i]["resource"] = "/assets/images/map.jpg";
+                $latest10[$i]["link"] = "/view/location/" . $res["id"];
+            }           
         }
 
         View::Display([
@@ -195,6 +199,19 @@ class App {
             "whatsup" => $me["whats_up"],
             "email" => $me["email"],
             "nickname" => $me["nickname"]
+        ]);
+    }
+
+    /**
+     * 查看分享的位置
+     * 
+     * @uses view
+     * @require id=i32
+    */
+    public function view_location() {
+        View::Display([
+            "home.active" => "active",
+            "id" => $_GET["id"]
         ]);
     }
 

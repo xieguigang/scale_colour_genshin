@@ -47,6 +47,13 @@ declare namespace pages {
     }
 }
 declare namespace pages {
+    class view_location extends Bootstrap {
+        readonly appName: string;
+        private activityId;
+        protected init(): void;
+    }
+}
+declare namespace pages {
     class edit_profile extends Bootstrap {
         readonly appName: string;
         protected init(): void;
