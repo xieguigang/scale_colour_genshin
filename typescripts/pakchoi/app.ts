@@ -19,6 +19,10 @@ namespace webapp {
         Router.AddAppHandler(new pages.home());
         Router.AddAppHandler(new pages.chat());
 
+        if (Notification.permission == "granted") {
+            webapp.modules.startNotification();
+        }
+
         Router.RunApp();
     }
 }
