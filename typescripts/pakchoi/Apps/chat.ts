@@ -17,7 +17,7 @@ namespace pages {
                 vm.sendComment();
             }
             $ts("#share_geo").onclick = function () {
-                webapp.models.getLocation();
+                webapp.modules.getLocation();
             }
         }
 
@@ -47,7 +47,7 @@ namespace pages {
         private fetchMessage() {
             let vm = this;
 
-            webapp.models.fetchComments("-1", this.lastId, function (id) {
+            webapp.modules.fetchComments("-1", this.lastId, function (id) {
                 vm.lastId = id;
             });
         }

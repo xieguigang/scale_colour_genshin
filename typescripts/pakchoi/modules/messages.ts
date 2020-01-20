@@ -11,9 +11,9 @@ namespace webapp.modules {
     export function fetchComments(resourceId: string, lastId: string = "", getLastMsgId: Delegate.Sub = null) {
         let api: string = `@api:load?resource=${resourceId}&lastid=${lastId}`;
 
-        $ts.get(api, function (result: IMsg<webapp.models.message[]>) {
+        $ts.get(api, function (result: IMsg<webapp.modules.message[]>) {
             if (result.code == 0) {
-                let msgs = <webapp.models.message[]>result.info;
+                let msgs = <webapp.modules.message[]>result.info;
                 let container = $ts("#comment-list");
 
                 appendComments(container, msgs);

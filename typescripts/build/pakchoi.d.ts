@@ -60,10 +60,10 @@ declare namespace webapp {
     function hookImagePreviews(inputId: string, previewImgId: string): void;
     function displayMsg(msg: string): void;
 }
-declare namespace webapp.models {
+declare namespace webapp.modules {
     function getLocation(): void;
 }
-declare namespace webapp.models {
+declare namespace webapp.modules {
     interface message {
         send_from: string;
         message_time: string;
@@ -72,4 +72,6 @@ declare namespace webapp.models {
         id: string;
     }
     function fetchComments(resourceId: string, lastId?: string, getLastMsgId?: Delegate.Sub): void;
+}
+declare namespace webapp.modules {
 }
