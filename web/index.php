@@ -80,7 +80,7 @@ class App {
             } else if ($type == 2) {
                 # 查看分享的位置
                 $latest10[$i]["resource"] = "/assets/images/map.jpg";
-                $latest10[$i]["link"] = "/view/location/" . $res["id"];
+                $latest10[$i]["link"] = "/view/location/" . $latest10[$i]["id"];
             }           
         }
 

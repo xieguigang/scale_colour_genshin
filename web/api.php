@@ -128,6 +128,17 @@ class App {
 
     /**
      * @uses api
+     * @require id=i32
+    */
+    public function getLocation() {
+        $id = $_GET["id"];
+        $location = (new Table("activity"))->where(["id" => $id])->find();
+
+        controller::success($location);
+    }
+
+    /**
+     * @uses api
      * @require resource=i32
     */
     public function get_comment() {
