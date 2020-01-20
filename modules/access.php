@@ -18,6 +18,10 @@ class accessController extends controller {
         ]);
     }
 
+    protected function recordNotFoundActivity() {
+        self::recordEvent(404);
+    }
+
     private function log_pageView($access) {
         $type = $this->getUsage();
 
