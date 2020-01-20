@@ -58,13 +58,18 @@ class pakchoi {
 
     public static function addActivity($type, $content, $resId) {
         $activity = new Table("activity");
-        $result = $activity->add([
+        $data = [
             "type" => $type,
-            "content" => $content,
+            "content" => $activity->EscapeString($content),
             "create_time" => Utils::Now(),
-            "user" => $_SESSION["id"],
-            "resource" => $resId
-        ]);
+            "user" => $_SESSION["id"]            
+        ];
+
+        if (!empty($resId)) {
+            $data["resource"] = $resId;
+        }
+
+        $result = $activity->add($data);
 
         if ($result != false) {
             # update activity count
