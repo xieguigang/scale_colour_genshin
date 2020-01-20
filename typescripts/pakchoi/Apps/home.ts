@@ -11,6 +11,20 @@ namespace pages {
             $ts("#share_geo").onclick = function () {
                 webapp.modules.getLocation();
             }
+            $ts("#granted").onclick = function () {
+                if (Notification.permission != "granted") {
+                    Notification.requestPermission()
+                        .then(function (permission) {
+                            if (permission == "granted") {
+                                webapp.modules.startNotification();
+                            } else {
+                                webapp.displayMsg("???????");
+                            }
+                        });
+                }
+            }
+
+            $("#open-msg").click();
         }
 
 

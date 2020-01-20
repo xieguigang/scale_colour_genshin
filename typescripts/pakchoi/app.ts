@@ -19,15 +19,6 @@ namespace webapp {
         Router.AddAppHandler(new pages.home());
         Router.AddAppHandler(new pages.chat());
 
-        Notification.requestPermission()
-            .then(function (permission) {
-                if (permission == "granted") {
-                    webapp.modules.startNotification();
-                } else {
-                    displayMsg("消息权限被拒绝");
-                }
-            });
-
         Router.RunApp();
     }
 }
