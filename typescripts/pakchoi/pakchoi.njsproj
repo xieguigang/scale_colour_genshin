@@ -36,7 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Apps\" />
-    <Folder Include="Models\" />
+    <Folder Include="modules\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Apps\index.ts">
@@ -63,10 +63,13 @@
     <TypeScriptCompile Include="helpers.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Models\messages.ts">
+    <TypeScriptCompile Include="modules\messages.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Models\geoLocation.ts">
+    <TypeScriptCompile Include="modules\geoLocation.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="modules\webNotification.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>

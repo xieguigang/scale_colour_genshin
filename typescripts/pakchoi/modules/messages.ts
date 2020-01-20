@@ -1,4 +1,4 @@
-namespace webapp.models {
+namespace webapp.modules {
 
     export interface message {
         send_from: string;

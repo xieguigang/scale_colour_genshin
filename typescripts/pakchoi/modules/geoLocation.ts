@@ -1,4 +1,4 @@
-namespace webapp.models {
+namespace webapp.modules {
 
     export function getLocation() {
         if ($ts.location.url.protocol.toLowerCase() == "http") {
