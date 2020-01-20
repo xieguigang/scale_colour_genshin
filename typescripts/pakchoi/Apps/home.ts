@@ -26,6 +26,7 @@ namespace pages {
                 }
 
                 console.log(Notification.permission);
+                webapp.modules.startNotification();
             }
 
             $("#open-msg").click();
