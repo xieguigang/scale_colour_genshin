@@ -74,4 +74,5 @@ declare namespace webapp.modules {
     function fetchComments(resourceId: string, lastId?: string, getLastMsgId?: Delegate.Sub): void;
 }
 declare namespace webapp.modules {
+    function startNotification(): void;
 }
