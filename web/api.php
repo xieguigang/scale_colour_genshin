@@ -130,11 +130,14 @@ class App {
      * @uses api
      * @require id=i32
     */
-    public function getLocation() {
+    public function getLocation() {       
         $id = $_GET["id"];
         $location = (new Table("activity"))->where(["id" => $id])->find();
+        $content = json_decode($location["content"], true);
+        $content["create_time"] = $location["create_time"];
+        $content["user"] = $location["user"];
 
-        controller::success($location);
+        controller::success($content);
     }
 
     /**

@@ -9,7 +9,7 @@ namespace pages {
         private activityId: string = <any>$ts("@data:activityId");
 
         protected init(): void {
-            $ts.get(`@api:getLocation&id=${this.activityId}`, function (result) {
+            $ts.get(`@api:getLocation?id=${this.activityId}`, function (result) {
                 console.log(result);
             });
         }
