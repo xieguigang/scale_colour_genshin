@@ -68,6 +68,14 @@ declare namespace webapp {
     function hookImagePreviews(inputId: string, previewImgId: string): void;
     function displayMsg(msg: string): void;
 }
+declare namespace pages {
+    class profile extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+        private renderLoginList;
+        private renderVisitList;
+    }
+}
 declare namespace webapp.modules {
     function getLocation(): void;
     interface ILocation {
