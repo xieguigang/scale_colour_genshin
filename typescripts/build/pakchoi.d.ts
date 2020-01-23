@@ -51,6 +51,7 @@ declare namespace pages {
         readonly appName: string;
         private activityId;
         protected init(): void;
+        private renderBaidDuMapLocation;
     }
 }
 declare namespace pages {
@@ -69,6 +70,27 @@ declare namespace webapp {
 }
 declare namespace webapp.modules {
     function getLocation(): void;
+    interface ILocation {
+        fallback: boolean;
+    }
+    interface baiduMapLocation extends ILocation {
+        address: string;
+        content: {
+            address: string;
+            point: {
+                x: number;
+                y: number;
+            };
+            address_detail: {
+                province: string;
+                city: string;
+                district: string;
+                street: string;
+                street_number: string;
+                city_code: string;
+            };
+        };
+    }
 }
 declare namespace webapp.modules {
     interface message {

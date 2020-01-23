@@ -215,9 +215,20 @@ class App {
      * @require id=i32
     */
     public function view_location() {
+        $id = $_GET["id"];
+        $location = (new Table("activity"))
+            ->where(["id" => $id])
+            ->find();
+        $usr = (new Table("users"))
+            ->where(["id" => $location["user"]])
+            ->find();
+
         View::Display([
             "home.active" => "active",
-            "id" => $_GET["id"]
+            "id" => $id,
+            "nickname" => $usr["nickname"],
+            "create_time" => $location["create_time"],
+            "description" => ""
         ]);
     }
 

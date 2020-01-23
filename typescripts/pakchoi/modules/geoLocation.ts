@@ -46,4 +46,23 @@ namespace webapp.modules {
         }
     }
 
+    export interface ILocation {
+        fallback: boolean;
+    }
+
+    export interface baiduMapLocation extends ILocation {
+        address: string;        
+        content: {
+            address: string;
+            point: { x: number, y: number },
+            address_detail: {
+                province: string
+                city: string
+                district: string
+                street: string
+                street_number: string
+                city_code: string
+            }
+        }
+    }
 }
