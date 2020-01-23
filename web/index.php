@@ -232,6 +232,17 @@ class App {
         ]);
     }
 
+    /**
+     * 查看地理位置
+     * 
+     * @uses view
+     * @require x=double|y=double
+    */
+    public function baiduMap() {
+        $_GET["key"] = DotNetRegistry::Read("baidumap.webkey");
+        View::Display($_GET);
+    }
+
 	/**
      * 后台更新
      * 

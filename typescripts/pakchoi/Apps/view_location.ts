@@ -26,7 +26,9 @@ namespace pages {
             let address: string = `${location.address}: [${location.content.point.x}, ${location.content.point.y}]`; 
 
             console.log(location);
+
             $ts("#info").clear().display(address);
+            $link("#viewMap").href = `/baiduMap?x=${location.content.point.x}&y=${location.content.point.y}`;
         }
 
     }

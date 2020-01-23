@@ -25,6 +25,7 @@ return [
 	
 	"login.tokens" => ["demo1","demo2","demo3","demo4","demo5"],
     "baidumap.key" => "xxxxx",
+    "baidumap.webkey" => "xxxxxxx",
     
 	// config for email sender
 	"mailer" => [
