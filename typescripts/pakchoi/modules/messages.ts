@@ -6,6 +6,10 @@ namespace webapp.modules {
         message: string;
         avatar: string;
         id: string;
+        target?: {
+            title: string;
+            href: string;
+        }
     }
 
     export function fetchComments(resourceId: string, getLastMsgId: Delegate.Sub = null) {
@@ -42,7 +46,14 @@ namespace webapp.modules {
                 style: "font-size:0.9em;"
             }).display(msg.message);
 
-            row.append(timeSpan).append(msgSpan)
+            if (isNullOrUndefined(msg.target)) {
+                row.append(timeSpan).append(msgSpan);
+            } else {
+                let visitResource = $ts("<span>").display(msg.target.title);
+                let link = $ts("<a>", { href: msg.target.href }).display("[??]<br />");
+                row.append(timeSpan).append(visitResource).append(link).append(msgSpan);
+            }
+
             list.append($ts("<div>", { class: "row" }).display(row));
         }
     }

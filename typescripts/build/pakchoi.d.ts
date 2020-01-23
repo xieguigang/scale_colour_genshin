@@ -107,6 +107,10 @@ declare namespace webapp.modules {
         message: string;
         avatar: string;
         id: string;
+        target?: {
+            title: string;
+            href: string;
+        };
     }
     function fetchComments(resourceId: string, getLastMsgId?: Delegate.Sub): void;
     function appendComments(list: IHTMLElement, messages: message[]): void;

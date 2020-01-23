@@ -37,6 +37,7 @@ class pakchoi {
                                 "title" => "评论相片 '{$res["filename"]}'",
                                 "href" => "/view/photo/$res_id"
                             ];
+                            break;
                         default:
                             $resources[$res_key] = [
                                 "title" => "无效的资源目标",
