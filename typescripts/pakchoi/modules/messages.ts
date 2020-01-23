@@ -36,8 +36,8 @@ namespace webapp.modules {
             }));
 
             let timeSpan = $ts("<span>", {
-                style: "font-size:0.85em; color: lightgray"
-            }).display(msg.message_time + "&nbsp;");
+                style: "font-size:0.7em; color: lightgray"
+            }).display(msg.message_time + "<br />");
             let msgSpan = $ts("<span>", {
                 style: "font-size:0.9em;"
             }).display(msg.message);
