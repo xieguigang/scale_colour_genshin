@@ -93,6 +93,28 @@ class App {
     }
 
     /**
+     * 目标与进展
+     * 
+     * @uses view
+    */
+    public function goals() {
+        View::Display([
+            "home.active" => "active"          
+        ]);
+    }
+
+    /**
+     * 纪念日
+     * 
+     * @uses view
+    */
+    public function memorials() {
+        View::Display([
+            "home.active" => "active"          
+        ]);
+    }
+
+    /**
      * 吐槽与聊天
      * 
      * @uses view
