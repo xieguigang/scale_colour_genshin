@@ -20,6 +20,24 @@ class pakchoi {
         }
     }
 
+    public static function fillMsgSenderAvatarUrl($messages) {
+        $avatars = [];
+
+        for($i =0 ; $i < count($messages); $i++) {
+            $usrId = $messages[$i]["send_from"];
+            $usrKey = "T$usrId";
+            $messages[$i]["message"] = base64_decode($messages[$i]["message"]); 
+
+            if (!array_key_exists($usrKey, $avatars)) {
+                $avatars[$usrKey] = pakchoi::getAvatarUrl($usrId);
+            }
+
+            $messages[$i]["avatar"] = $avatars[$usrKey];      
+        }
+
+        return $messages;
+    }
+
     public static function getUploadDir() {
         return WWWROOT . "/upload";
     }
@@ -73,10 +91,18 @@ class pakchoi {
 
         if ($result != false) {
             # update activity count
-            (new Table("users"))->where(["id" => $_SESSION["id"]])->save(["activities" => "~activities + 1"]);
+            (new Table("users"))
+            ->where(["id" => $_SESSION["id"]])
+            ->save([
+                "activities" => "~activities + 1"
+            ]);
 
             if ($type == 1) {
-                (new Table("users"))->where(["id" => $_SESSION["id"]])->save(["photos" => "~photos + 1"]);
+                (new Table("users"))
+                ->where(["id" => $_SESSION["id"]])
+                ->save([
+                    "photos" => "~photos + 1"
+                ]);
             }  
 
             return $result;
@@ -93,7 +119,9 @@ class pakchoi {
      * Get data of current login user
     */
     public static function loginUser() {
-        return (new Table("users"))->where(["id" => self::login_userId()])->find();
+        return (new Table("users"))
+            ->where(["id" => self::login_userId()])
+            ->find();
     }
 
     public static function sendLoginEmail($user) {
@@ -103,7 +131,9 @@ class pakchoi {
         $key = $key[random_int(0, count($key)-1)];
         $token = md5($key . $user["id"]);
         $ssid = urlencode(session_id());
-        $url = "http://47.94.16.9:83/api/login_confirm?token=$token&session=$ssid";
+        $time = urlencode(Utils::Now());
+        $host = "http://47.94.16.9";
+        $url = "$host/api/login_confirm?time=$time&token=$token&session=$ssid";
 
         $_SESSION["key"] = $key;
         $_SESSION["check"] = $user;

@@ -11,16 +11,28 @@ class App {
      * @require last_id=i32
     */
     public function updates() {
+        $last_id = $_GET["last_id"];
+        $messages = (new Table("messages"))->where([
+            "id" => gt($last_id)
+        ])->order_by("message_time", true)
+          ->select();       
 
+        controller::success(pakchoi::fillMsgSenderAvatarUrl($messages));
     }
 
     /**
      * Get history message
      * 
      * @uses api
-     * @require history_id=i32
     */
     public function history() {
+        $history_id = WebRequest::getInteger("history_id", 0);
+
+        if ($history_id == 0) {
+            # get latest 10;
+        } else {
+
+        }
 
     }
 }

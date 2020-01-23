@@ -141,6 +141,8 @@ class App {
     }
 
     /**
+     * Get comments data for a given resource object
+     * 
      * @uses api
      * @require resource=i32
     */
@@ -149,14 +151,9 @@ class App {
         $messages = (new Table("messages"))->where([
             "mentions" => $resource
         ])->order_by("message_time", true)
-            ->select();            
+          ->select();       
         
-        for($i =0 ; $i < count($messages); $i++) {
-            $messages[$i]["message"] = base64_decode($messages[$i]["message"]); 
-            $messages[$i]["avatar"] = pakchoi::getAvatarUrl($messages[$i]["send_from"]);
-        }
-
-        controller::success($messages);
+        controller::success(pakchoi::fillMsgSenderAvatarUrl($messages));
     }
 
     /**
