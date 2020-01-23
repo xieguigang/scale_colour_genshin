@@ -17,7 +17,10 @@ class App {
         ])->order_by("message_time", false)
           ->select();       
 
-        controller::success(pakchoi::fillMsgSenderAvatarUrl($messages));
+        controller::success(
+            pakchoi::fillMsgSenderMentionUrl(
+            pakchoi::fillMsgSenderAvatarUrl($messages))
+        );
     }
 
     /**
@@ -42,6 +45,9 @@ class App {
               ->select();
         }
 
-        controller::success(pakchoi::fillMsgSenderAvatarUrl($messages));
+        controller::success(
+            pakchoi::fillMsgSenderMentionUrl(
+            pakchoi::fillMsgSenderAvatarUrl($messages))
+        );
     }
 }

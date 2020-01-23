@@ -20,6 +20,38 @@ class pakchoi {
         }
     }
 
+    public static function fillMsgSenderMentionUrl($messages) {
+        $resources = [];
+
+        for($i = 0; $i < count($messages); $i++) {
+            if ($messages[$i]["mentions"] > 0) {
+                $res_id = $messages[$i]["mentions"];
+                $res_key = "T$res_id";
+
+                if(!array_key_exists($res_key, $resources)) {
+                    $res = (new Table("resources"))->where(["id" => $res_id])->find();
+
+                    switch($res["type"]) {
+                        case 0:
+                            $resources[$res_key] = [
+                                "title" => "评论相片 '{$res["filename"]}'",
+                                "href" => "/view/photo/$res_id"
+                            ];
+                        default:
+                            $resources[$res_key] = [
+                                "title" => "无效的资源目标",
+                                "href" => "#"
+                            ];
+                    }
+                }
+
+                $messages[$i]["target"] = $resources[$res_key];
+            }
+        }
+        
+        return $messages;
+    }
+
     public static function fillMsgSenderAvatarUrl($messages) {
         $avatars = [];
 
