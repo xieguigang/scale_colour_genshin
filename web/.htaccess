@@ -18,3 +18,5 @@ RewriteRule ^api/upload/(.+)$ /api.php?app=upload_$1
 RewriteRule ^api/addnote$ /api.php?app=resource_note
 
 RewriteRule ^message/(.+).vbs$ /message.php?app=$1
+
+ErrorDocument 404 /404.php?app=index
