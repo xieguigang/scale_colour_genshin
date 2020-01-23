@@ -146,33 +146,11 @@ class App {
     */
     public function get_comment() {
         $resource = $_GET["resource"];
-        $lastId = $_GET["lastid"];
-
-        if (Strings::Empty($lastId, true)) {
-            if ($resource == -1) {
-                $messages = (new Table("messages"))
-                    ->order_by("message_time", false)
-                    ->limit(10)
-                    ->select();
-            } else {
-                $messages = (new Table("messages"))->where([
-                    "mentions" => $resource
-                ])->order_by("message_time", true)
-                  ->select();
-            }
-        } else {
-            $filter = ["id" => gt($lastId)];
-            
-            if ($resource !== -1) {
-                $filter["mentions"] = $resource;
-            }
-            
-            $messages = (new Table("messages"))
-                ->where($filter)
-                ->order_by("message_time", false)
-                ->select();
-        }
-
+        $messages = (new Table("messages"))->where([
+            "mentions" => $resource
+        ])->order_by("message_time", true)
+            ->select();            
+        
         for($i =0 ; $i < count($messages); $i++) {
             $messages[$i]["message"] = base64_decode($messages[$i]["message"]); 
             $messages[$i]["avatar"] = pakchoi::getAvatarUrl($messages[$i]["send_from"]);
