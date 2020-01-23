@@ -32,6 +32,14 @@ declare namespace pages {
     }
 }
 declare namespace pages {
+    class profile extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+        private renderLoginList;
+        private renderVisitList;
+    }
+}
+declare namespace pages {
     class share_photo extends Bootstrap {
         readonly appName: string;
         protected init(): void;
@@ -67,14 +75,6 @@ declare namespace webapp {
 declare namespace webapp {
     function hookImagePreviews(inputId: string, previewImgId: string): void;
     function displayMsg(msg: string): void;
-}
-declare namespace pages {
-    class profile extends Bootstrap {
-        readonly appName: string;
-        protected init(): void;
-        private renderLoginList;
-        private renderVisitList;
-    }
 }
 declare namespace webapp.modules {
     function getLocation(): void;
