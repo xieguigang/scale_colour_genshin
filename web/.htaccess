@@ -17,4 +17,4 @@ RewriteRule ^api/login_confirm$ /api.php?app=login_confirm
 RewriteRule ^api/upload/(.+)$ /api.php?app=upload_$1
 RewriteRule ^api/addnote$ /api.php?app=resource_note
 
-RewriteRule ?message/(.+).vbs$ /message/$1
+RewriteRule ^message/(.+).vbs$ /message.php?app=$1
