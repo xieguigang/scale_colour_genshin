@@ -31,13 +31,13 @@ class App {
         if ($history_id == 0) {
             # get latest 10;
             $messages = (new Table("messages"))
-              ->order_by("message_time", true)
+              ->order_by("message_time", false)
               ->limit(10)
               ->select();      
         } else {
             $messages = (new Table("messages"))
               ->where(["id", lt($history_id)])
-              ->order_by("message_time", true)
+              ->order_by("message_time", false)
               ->limit(5)
               ->select();
         }

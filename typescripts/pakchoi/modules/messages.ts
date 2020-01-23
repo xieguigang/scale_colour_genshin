@@ -19,7 +19,7 @@ namespace webapp.modules {
                 appendComments(container, msgs);
 
                 if (!isNullOrUndefined(getLastMsgId) && msgs.length > 0) {
-                    getLastMsgId(msgs[0].id);
+                    getLastMsgId(msgs[msgs.length - 1].id);
                 }
             }
         });
@@ -33,10 +33,16 @@ namespace webapp.modules {
                 src: msg.avatar,
                 class: "img-fluid rounded-circle shadow-lg",
                 style: "width: 24px;"
-            })).append($ts("<span>", {
-                style: "font-size:0.9em;"
-            }).display(msg.message));
+            }));
 
+            let timeSpan = $ts("<span>", {
+                style: "font-size:0.85em; color: lightgray"
+            }).display(msg.message_time + "&nbsp;");
+            let msgSpan = $ts("<span>", {
+                style: "font-size:0.9em;"
+            }).display(msg.message);
+
+            row.append(timeSpan).append(msgSpan)
             list.append($ts("<div>", { class: "row" }).display(row));
         }
     }
