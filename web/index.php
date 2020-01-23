@@ -11,9 +11,11 @@ class App {
      * @access *
     */
     public function index() {
+        $welcome = pakchoi::login_userId() >= 0 ? "Hi, " . $_SESSION["nickname"] : "欢迎使用pakchoi";
+
         View::Display([
             "hide" => "display: none;",
-            "who" => pakchoi::login_userId() >= 0 ? "Hi, " . $_SESSION["nickname"] : "欢迎使用pakchoi" 
+            "who" => $welcome
         ]);
     }
     
@@ -143,7 +145,11 @@ class App {
      * @require id=i32
     */
     public function view_photo() {       
-        $res = (new Table("resources"))->where(["id" => $_GET["id"], "type" => 0])->find();
+        $res = (new Table("resources"))
+              ->where([
+                "id" => $_GET["id"], 
+                "type" => 0
+            ])->find();
 
         if ($res == false) {
             dotnet::PageNotFound("Target resource not found!");
