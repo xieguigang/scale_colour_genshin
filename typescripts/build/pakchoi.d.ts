@@ -78,7 +78,8 @@ declare namespace webapp.modules {
         avatar: string;
         id: string;
     }
-    function fetchComments(resourceId: string, lastId?: string, getLastMsgId?: Delegate.Sub): void;
+    function fetchComments(resourceId: string, getLastMsgId?: Delegate.Sub): void;
+    function appendComments(list: IHTMLElement, messages: message[]): void;
 }
 declare namespace webapp.modules {
     function startNotification(): void;

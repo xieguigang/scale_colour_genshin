@@ -8,8 +8,8 @@ namespace webapp.modules {
         id: string;
     }
 
-    export function fetchComments(resourceId: string, lastId: string = "", getLastMsgId: Delegate.Sub = null) {
-        let api: string = `@api:load?resource=${resourceId}&lastid=${lastId}`;
+    export function fetchComments(resourceId: string, getLastMsgId: Delegate.Sub = null) {
+        let api: string = `@api:load?resource=${resourceId}`;
 
         $ts.get(api, function (result: IMsg<webapp.modules.message[]>) {
             if (result.code == 0) {
@@ -25,7 +25,7 @@ namespace webapp.modules {
         });
     }
 
-    function appendComments(list: IHTMLElement, messages: message[]) {
+    export function appendComments(list: IHTMLElement, messages: message[]) {
         for (let msg of messages) {
             let row = $ts("<div>", { class: "col-md-4" });
 

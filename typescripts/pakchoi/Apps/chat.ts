@@ -19,6 +19,10 @@ namespace pages {
             $ts("#share_geo").onclick = function () {
                 webapp.modules.getLocation();
             }
+
+            webapp.modules.fetchComments("-1", function (id) {
+                vm.lastId = id;
+            });
         }
 
         private sendComment() {
@@ -46,9 +50,20 @@ namespace pages {
 
         private fetchMessage() {
             let vm = this;
+            let url: string = `@api:update?last_id=${vm.lastId}`;
 
-            webapp.modules.fetchComments("-1", this.lastId, function (id) {
-                vm.lastId = id;
+            $ts.get(url, function (result: IMsg<webapp.modules.message[]>) {
+                if (result.code == 0) {
+                    let msgs = <webapp.modules.message[]>result.info;
+                    let container = $ts("#comment-list");
+
+                    if (msgs.length > 0) {
+                        vm.lastId = msgs[msgs.length - 1].id;
+                    }
+
+                    // update ui
+                    webapp.modules.appendComments(container, msgs);
+                }
             });
         }
     }
