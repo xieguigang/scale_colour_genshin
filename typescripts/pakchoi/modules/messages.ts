@@ -49,9 +49,8 @@ namespace webapp.modules {
             if (isNullOrUndefined(msg.target)) {
                 row.append(timeSpan).append(msgSpan);
             } else {
-                let visitResource = $ts("<span>").display(msg.target.title);
-                let link = $ts("<a>", { href: msg.target.href }).display("[??]<br />");
-                row.append(timeSpan).append(visitResource).append(link).append(msgSpan);
+                let visitResource = $ts("<span>").display(msg.target.title + "<br />");
+                row.append(timeSpan).append(visitResource).append(msgSpan);
             }
 
             list.append($ts("<div>", { class: "row" }).display(row));

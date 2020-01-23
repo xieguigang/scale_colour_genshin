@@ -34,7 +34,7 @@ class pakchoi {
                     switch($res["type"]) {
                         case 0:
                             $resources[$res_key] = [
-                                "title" => "评论相片 '{$res["filename"]}'",
+                                "title" => "评论相片 <strong>'<a href='/view/photo/$res_id'>{$res["filename"]}</a>'</strong>",
                                 "href" => "/view/photo/$res_id"
                             ];
                             break;
