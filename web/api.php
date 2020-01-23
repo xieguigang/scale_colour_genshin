@@ -115,7 +115,7 @@ class App {
     */
     public function latest_logins() {
         $logins = (new Table("activity"))
-        ->where(["user" => $_SESSION, "type" => 0])
+        ->where(["user" => $_SESSION["id"], "type" => 0])
         ->limit(10)
         ->order_by("create_time", true)
         ->select();
