@@ -1,4 +1,4 @@
-#!/bin/bashß
+#!/bin/bash
 
 jscompress=`printf "java -jar ./gcc/closure-compiler-v20181125.jar"`
 built=`printf "./build"`
