@@ -40,6 +40,18 @@ declare namespace pages {
     }
 }
 declare namespace pages {
+    class memorials extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+        private show_memorials;
+    }
+    interface memorial {
+        date: string;
+        description: string;
+        add_user: string;
+    }
+}
+declare namespace pages {
     class share_photo extends Bootstrap {
         readonly appName: string;
         protected init(): void;
