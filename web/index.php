@@ -115,6 +115,17 @@ class App {
     }
 
     /**
+     * 添加纪念日
+     * 
+     * @uses view
+    */
+    public function share_memorial() {
+        View::Display([
+            "home.active" => "active"          
+        ]);
+    }
+
+    /**
      * 吐槽与聊天
      * 
      * @uses view

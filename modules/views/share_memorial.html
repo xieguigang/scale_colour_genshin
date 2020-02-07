@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="app" content="share_memorial" />
+    <meta name="api:add" content="/api/add_memorial" />
+
+    ${includes/head.html}
+
+
+    <link href="https://cdn.bootcss.com/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+
+</head>
+
+<body class="index landing profile">
+
+    <div class="bubbles d-none d-md-block">
+        <!-- 				bubbles -->
+        <div class="bubble bubble-1 rotate-bubble bg-warning"></div>
+        <div class="bubble bubble-2 bubble-bottom-right bg-danger rotate-bubble"></div>
+        <div class="bubble bubble-3 bubble-top-right bg-warning rotate-bubble"></div>
+        <div class="bubble bubble-4 bubble-top-left bg-info rotate-bubble"></div>
+        <div class="bubble bubble-5 bg-info rotate-bubble"></div>
+        <div class="bubble bubble-6 bubble-bottom-right bg-danger rotate-bubble"></div>
+        <div class="bubble bubble-7 bubble-top-right bg-success rotate-bubble"></div>
+        <div class="bubble bubble-8 bubble-top-left bg-success rotate-bubble"></div>
+        <div class="bubble bubble-9 bg-warning rotate-bubble"></div>
+        <div class="bubble bubble-10 bg-danger rotate-bubble"></div>
+        <div class="bubble bubble-11 bubble-bottom-right bg-info rotate-bubble"></div>
+        <div class="bubble bubble-12 bubble-top-right bg-success rotate-bubble"></div>
+        <div class="bubble bubble-13 bubble-top-left bg-success rotate-bubble"></div>
+        <!--         circles -->
+        <div class="circle circle-1 bg-light rotate-circle"></div>
+        <div class="circle circle-2 bg-success rotate-circle"></div>
+        <div class="circle circle-3 bg-danger rotate-circle"></div>
+        <div class="circle circle-4 bg-info rotate-circle"></div>
+        <div class="circle circle-5 bg-success rotate-circle"></div>
+        <div class="circle circle-6 bg-info rotate-circle"></div>
+        <div class="circle circle-7 bg-warning rotate-circle"></div>
+        <div class="circle circle-8 bg-white rotate-circle"></div>
+        <div class="circle circle-9 bg-warning rotate-circle"></div>
+        <div class="circle circle-10 bg-danger rotate-circle"></div>
+    </div>
+
+
+    <div class="blog-posts bg-light">
+        <div class="text-center">
+            <h2>添加新的纪念日</h2>
+            <p class="lead">留下新的回忆</p>
+        </div>
+        <div class="container">
+
+            <div class="profile-tabs tab-content">
+                <div class="tab-pane fade show active" id="photos">
+                    <!--
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <img id="previews" src="/assets/images/splash.jpg" style="width: 100%;" />
+                        </div>
+                    </div>
+                -->
+                    <div class="d-flex justify-content-center my-5">
+                        <div class="input-group">
+
+                            <div class="row">
+                                <div class='col-12 col-md-4'>
+                                    <div class="form-group">
+                                        <label>选择日期：</label>
+                                        <!--指定 date标记-->
+                                        <div class="input-group date" data-provide="datepicker">
+                                            <input id="date" type="text" class="form-control">
+                                            <div class="input-group-addon">
+                                                <span class="glyphicon glyphicon-th"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class='col-12 col-md-4'>
+                                    <div class="form-group">
+                                        <label>发生了什么：</label>
+                                        <input id="event" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button id="do-upload" type="button" class="btn btn-secondary">添加</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    ${includes/footer.html}
+    <script src="https://cdn.bootcss.com/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script>
+        $('.datepicker').datepicker();
+    </script>
+</body>
+
+</html>
