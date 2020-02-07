@@ -20,6 +20,16 @@ class pakchoi {
         }
     }
 
+    public static function getNickName($id) {
+        if (is_array($id)) {
+            $peoples = $id;
+        } else {
+            $peoples = (new Table("users"))->where(["id" => $id])->find();
+        }
+
+        return $peoples["nickname"];
+    }
+
     public static function fillMsgSenderMentionUrl($messages) {
         $resources = [];
 

@@ -332,6 +332,7 @@ class App {
         $events = (new Table("anniversary"))->all();
 
         for($i = 0; $i < count($events); $i++) {
+            $events[$i]["name"] = pakchoi::getNickName($events[$i]["add_user"]);
             $events[$i]["add_user"] = pakchoi::getAvatarUrl($events[$i]["add_user"]);
         }
 

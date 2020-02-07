@@ -19,10 +19,27 @@ namespace pages {
         }
 
         private show_memorials(data: memorial[]) {
-
+            let list = $ts("#timeline");
 
             for (let evt of data) {
+                let time = $ts("<li>").display(`<div class="timeline-time">
+                                <span class="date">${evt.date}</span>                               
+                            </div>
+                    
+                            <div class="timeline-body">
+                                <div class="timeline-header">
+                                    <span class="userimage"><img
+                                            src="${evt.add_user}" alt=""></span>
+                                    <span class="username"><a href="javascript:;">${evt.name}</a> <small></small></span>                                  
+                                </div>
+                                <div class="timeline-content">
+                                    <p>
+                                        ${evt.description}
+                                    </p>
+                                </div>                       
+                            </div>`);
 
+                list.append(time);
             }
         }
     }
@@ -31,5 +48,6 @@ namespace pages {
         date: string;
         description: string;
         add_user: string;
+        name: string;
     }
 }

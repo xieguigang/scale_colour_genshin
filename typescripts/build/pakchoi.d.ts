@@ -49,6 +49,7 @@ declare namespace pages {
         date: string;
         description: string;
         add_user: string;
+        name: string;
     }
 }
 declare namespace pages {
