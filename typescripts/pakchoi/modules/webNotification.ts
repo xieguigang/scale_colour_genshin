@@ -1,7 +1,7 @@
 namespace webapp.modules {
 
     export function startNotification() {
-        setInterval(fetchNewMessage, 1000);
+        setInterval(fetchNewMessage, 5000);
     }
 
     function fetchNewMessage() {
