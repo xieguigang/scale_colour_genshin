@@ -298,4 +298,29 @@ class App {
 
         controller::success(1);
     }
+
+    /**
+     * @uses api
+     * @method POST
+    */
+    public function add_memorial() {
+        $event = $_POST["event"];
+        $date = $_POST["date"];
+
+        imports("System.DateTime");
+
+        $date = System\DateTime::FromTimeStamp($date)->ToString();
+        $anniversary = new Table("anniversary");
+        $id = $anniversary->add([
+            "date" => $date,
+            "description" => $event,
+            "add_user" => pakchoi::login_userId()
+        ]);
+
+        if (false == $id) {
+            controller::error($anniversary->getLastMySql());
+        } else {
+            controller::success(1);
+        }
+    }
 }
