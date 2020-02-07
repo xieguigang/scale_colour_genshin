@@ -5,6 +5,7 @@
 /// <reference path="Apps/home.ts" />
 /// <reference path="Apps/chat.ts" />
 /// <reference path="Apps/profile.ts" />
+/// <reference path="Apps/memorials.ts" />
 /// <reference path="Apps/share_photo.ts" />
 /// <reference path="Apps/share_memorial.ts" />
 /// <reference path="Apps/view_photo.ts" />
@@ -23,6 +24,7 @@ namespace webapp {
         Router.AddAppHandler(new pages.edit_profile());
         Router.AddAppHandler(new pages.home());
         Router.AddAppHandler(new pages.chat());
+        Router.AddAppHandler(new pages.memorials());
         Router.AddAppHandler(new pages.profile());
 
         if (Notification.permission == "granted") {
