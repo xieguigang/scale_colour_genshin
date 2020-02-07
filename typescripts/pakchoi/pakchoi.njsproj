@@ -60,6 +60,9 @@
     <TypeScriptCompile Include="Apps\profile.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Apps\share_memorial.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Apps\view_location.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
