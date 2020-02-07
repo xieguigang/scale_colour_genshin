@@ -6,6 +6,7 @@
 /// <reference path="Apps/chat.ts" />
 /// <reference path="Apps/profile.ts" />
 /// <reference path="Apps/share_photo.ts" />
+/// <reference path="Apps/share_memorial.ts" />
 /// <reference path="Apps/view_photo.ts" />
 /// <reference path="Apps/view_location.ts" />
 /// <reference path="Apps/edit_profile.ts" />
@@ -16,6 +17,7 @@ namespace webapp {
         Router.AddAppHandler(new pages.index());
         Router.AddAppHandler(new pages.login());
         Router.AddAppHandler(new pages.share_photo());
+        Router.AddAppHandler(new pages.share_memorial());
         Router.AddAppHandler(new pages.view_photo());
         Router.AddAppHandler(new pages.view_location());
         Router.AddAppHandler(new pages.edit_profile());

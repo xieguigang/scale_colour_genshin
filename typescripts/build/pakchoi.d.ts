@@ -47,6 +47,12 @@ declare namespace pages {
     }
 }
 declare namespace pages {
+    class share_memorial extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+    }
+}
+declare namespace pages {
     class view_photo extends Bootstrap {
         readonly appName: string;
         private resourceId;
