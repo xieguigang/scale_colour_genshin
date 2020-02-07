@@ -22,7 +22,7 @@ namespace pages {
                 if (result.code == 0) {
                     setInterval(function () {
                         vm.doCheckLogin();
-                    }, 1000);
+                    }, 3000);
                 } else {
                     console.error(<string>result.info);
                 }
