@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="app" content="goals" />
+
+	${includes/head.html}
+</head>
+
+<body class="index landing">
+
+	<div class="bubbles d-none d-md-block">
+		<!-- bubbles -->
+		<div class="bubble bubble-1 rotate-bubble bg-warning"></div>
+		<div class="bubble bubble-2 bubble-bottom-right bg-danger rotate-bubble"></div>
+		<div class="bubble bubble-3 bubble-top-right bg-warning rotate-bubble"></div>
+		<div class="bubble bubble-4 bubble-top-left bg-info rotate-bubble"></div>
+		<div class="bubble bubble-5 bg-info rotate-bubble"></div>
+		<div class="bubble bubble-6 bubble-bottom-right bg-danger rotate-bubble"></div>
+		<div class="bubble bubble-7 bubble-top-right bg-success rotate-bubble"></div>
+		<div class="bubble bubble-8 bubble-top-left bg-success rotate-bubble"></div>
+		<div class="bubble bubble-9 bg-warning rotate-bubble"></div>
+		<div class="bubble bubble-10 bg-danger rotate-bubble"></div>
+		<div class="bubble bubble-11 bubble-bottom-right bg-info rotate-bubble"></div>
+		<div class="bubble bubble-12 bubble-top-right bg-success rotate-bubble"></div>
+		<div class="bubble bubble-13 bubble-top-left bg-success rotate-bubble"></div>
+		<!-- circles -->
+		<div class="circle circle-1 bg-light rotate-circle"></div>
+		<div class="circle circle-2 bg-success rotate-circle"></div>
+		<div class="circle circle-3 bg-danger rotate-circle"></div>
+		<div class="circle circle-4 bg-info rotate-circle"></div>
+		<div class="circle circle-5 bg-success rotate-circle"></div>
+		<div class="circle circle-6 bg-info rotate-circle"></div>
+		<div class="circle circle-7 bg-warning rotate-circle"></div>
+		<div class="circle circle-8 bg-white rotate-circle"></div>
+		<div class="circle circle-9 bg-warning rotate-circle"></div>
+		<div class="circle circle-10 bg-danger rotate-circle"></div>
+	</div>
+
+
+	<div class="blog-posts bg-light">
+		<div class="text-center">
+			<h2>目标列表</h2>
+            <p class="lead">看看对方近期的人生目标进展</p>
+            
+			${includes/share.html}
+		</div>
+		<div class="container">
+
+			<foreach @latest>
+
+				<div class="row">
+					<div class="col-md-4">
+						<div class="component">
+							<div class="card mb-4">
+								<div class="card-header">
+									<img class="card-img" src='@latest["resource"]'>
+								</div>
+								<div class="card-body">
+									<span class="badge badge-success mb-2">@latest["tag"]</span>
+									<h4 class="card-title">@latest["create_time"]</h4>
+									<p class="card-text">@latest["content"]</p>
+								</div>
+								<div class='card-footer type@latest["type"]'>
+									<a href='@latest["link"]' class="btn btn-primary">查看</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</foreach>
+
+		</div>
+
+		<div class="d-flex justify-content-center my-5">
+			<a href="#a" class="btn btn-outline-primary btn-pill">加载更多</a>
+		</div>
+	</div>
+
+	${includes/footer.html}
+
+
+	<!-- button that opens the modal -->
+	<button type="button" id="open-msg" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"
+		style="display: none;">
+		Click for More
+	</button>
+
+	<!-- the modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">权限请求</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					是否允许后台消息通知？
+				</div>
+				<div class="modal-footer">
+					<button id="cancel_msg" type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+					<button id="granted" type="button" class="btn btn-success">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
