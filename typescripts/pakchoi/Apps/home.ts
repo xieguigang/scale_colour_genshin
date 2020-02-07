@@ -29,9 +29,9 @@ namespace pages {
                 webapp.modules.startNotification();
             }
 
-            $("#open-msg").click();
+            if (($ts.location.url.protocol == "https") && (Notification.permission != "granted")) {
+                $("#open-msg").click();
+            }
         }
-
-
     }
 }

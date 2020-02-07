@@ -54,6 +54,7 @@ class App {
         $token = $_GET["token"];
         $session = urldecode($_GET["session"]);
 
+        session_abort();
         session_id($session);
         session_start();
 
