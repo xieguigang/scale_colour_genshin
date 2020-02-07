@@ -323,4 +323,18 @@ class App {
             controller::success(1);
         }
     }
+
+    /**
+     * @uses api
+     * @method GET
+    */
+    public function get_memorials() {
+        $events = (new Table("anniversary"))->all();
+
+        for($i = 0; $i < count($events); $i++) {
+            $events[$i]["add_user"] = pakchoi::getAvatarUrl($events[$i]["add_user"]);
+        }
+
+        controller::success($events);
+    }
 }
