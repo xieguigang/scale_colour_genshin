@@ -1,7 +1,13 @@
 namespace webapp.modules {
 
     export function startNotification() {
-        setInterval(fetchNewMessage, 5000);
+        let location = Strings.Trim($ts.location.path, "/");
+
+        if (location == "" || location == "login") {
+            // disabled
+        } else {
+            setInterval(fetchNewMessage, 5000);
+        }
     }
 
     function fetchNewMessage() {
