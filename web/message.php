@@ -5,6 +5,16 @@ include __DIR__ . "/../modules/bootstrap.php";
 class App {
 
     /**
+     * Get new message
+     * 
+     * @uses api
+     * 
+    */
+    public function get_newMsg() {
+
+    }
+
+    /**
      * Get latest message
      * 
      * @uses api

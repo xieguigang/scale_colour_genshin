@@ -11,7 +11,7 @@ RewriteRule ^view/([a-z_]+)/(\d+)$ /index.php?app=view_$1&id=$2
 
 RewriteRule ^api/share_geoLocation.vbs$ /api.php?app=share_geoLocation
 RewriteRule ^api/getLocation.vbs$ /api.php?app=getLocation
-RewriteRule ^api/([a-z\_]+).vbs /api.php?app=$1
+RewriteRule ^api/([a-z\_]+).vbs$ /api.php?app=$1
 RewriteRule ^api/login_confirm$ /api.php?app=login_confirm
 RewriteRule ^api/add_memorial$ /api.php?app=add_memorial
 
@@ -20,6 +20,7 @@ RewriteRule ^api/addnote$ /api.php?app=resource_note
 
 RewriteRule ^api/get/(.+)$ /api.php?app=get_$1
 
+RewriteRule ^message/get/(.+).vbs$ /message.php?app=get_$1
 RewriteRule ^message/(.+).vbs$ /message.php?app=$1
 
 ErrorDocument 404 /404.php?app=index
