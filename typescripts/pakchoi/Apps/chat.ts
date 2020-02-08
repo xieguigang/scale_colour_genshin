@@ -16,9 +16,6 @@ namespace pages {
             $ts("#send").onclick = function () {
                 vm.sendComment();
             }
-            $ts("#share_geo").onclick = function () {
-                webapp.modules.getLocation();
-            }
 
             webapp.modules.fetchComments("-1", function (id) {
                 vm.lastId = id;

@@ -3,7 +3,10 @@ namespace webapp.modules {
     export function startNotification() {
         let location = Strings.Trim($ts.location.path, "/");
 
-        if (location == "" || location == "login") {
+        if (location == "" ||
+            location == "login" ||
+            location == "chat") {
+
             // disabled
         } else {
             setInterval(fetchNewMessage, 5000);
