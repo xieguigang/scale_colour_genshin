@@ -103,7 +103,9 @@ declare namespace pages {
 declare namespace pages {
     class view_memorial extends Bootstrap {
         readonly appName: string;
+        private evtId;
         protected init(): void;
+        private sendComment;
         private showDetails;
     }
 }
@@ -157,7 +159,7 @@ declare namespace webapp.modules {
             href: string;
         };
     }
-    function fetchComments(resourceId: string, getLastMsgId?: Delegate.Sub): void;
+    function fetchComments(resourceId: string, type: number, getLastMsgId?: Delegate.Sub): void;
     function appendComments(list: IHTMLElement, messages: message[]): void;
 }
 declare namespace webapp.modules {

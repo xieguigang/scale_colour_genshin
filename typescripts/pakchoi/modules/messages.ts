@@ -12,8 +12,8 @@ namespace webapp.modules {
         }
     }
 
-    export function fetchComments(resourceId: string, getLastMsgId: Delegate.Sub = null) {
-        let api: string = `@api:load?resource=${resourceId}`;
+    export function fetchComments(resourceId: string, type: number, getLastMsgId: Delegate.Sub = null) {
+        let api: string = `@api:load?resource=${resourceId}&type=${type}`;
 
         $ts.get(api, function (result: IMsg<webapp.modules.message[]>) {
             if (result.code == 0) {

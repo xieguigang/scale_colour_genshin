@@ -89,12 +89,14 @@ class App {
      * Get comments data for a given resource object
      * 
      * @uses api
-     * @require resource=i32
+     * @require resource=i32|type=i32
     */
     public function get_comment() {
         $resource = $_GET["resource"];
+        $type = $_GET["type"];
         $messages = (new Table("messages"))->where([
-            "mentions" => $resource
+            "mentions" => $resource,
+            "mention_type" => $type
         ])->order_by("message_time", true)
           ->select();       
         
@@ -105,18 +107,20 @@ class App {
      * @uses api
      * @method POST
      * 
-     * @require resource=i32|comment=string
+     * @require resource=i32|comment=string|type=i32
     */
     public function comment() {
         $resource = $_POST["resource"];
         $comment = $_POST["comment"];
+        $type = $_POST["type"];
         $userId = $_SESSION["id"];
         $messages = new Table("messages");
         $newId = $messages->add([
             "send_from" => $userId,
             "message_time" => Utils::Now(),
             "message" => base64_encode($comment),
-            "mentions" => $resource
+            "mentions" => $resource,
+            "mention_type" => $type
         ]);
 
         if ($newId == false) {
