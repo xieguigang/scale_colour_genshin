@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="app" content="view/memorial" />
+    <meta name="data:id" content="{$id}">
+
+    <meta name="api:comment" content="/api/comment.vbs" />
+    <meta name="api:load" content="/api/get_comment.vbs" />
+
+    ${includes/head.html}
+</head>
+
+<body class="index landing">
+
+    <div class="bubbles d-none d-md-block">
+        <!-- 				bubbles -->
+        <div class="bubble bubble-1 rotate-bubble bg-warning"></div>
+        <div class="bubble bubble-2 bubble-bottom-right bg-danger rotate-bubble"></div>
+        <div class="bubble bubble-3 bubble-top-right bg-warning rotate-bubble"></div>
+        <div class="bubble bubble-4 bubble-top-left bg-info rotate-bubble"></div>
+        <div class="bubble bubble-5 bg-info rotate-bubble"></div>
+        <div class="bubble bubble-6 bubble-bottom-right bg-danger rotate-bubble"></div>
+        <div class="bubble bubble-7 bubble-top-right bg-success rotate-bubble"></div>
+        <div class="bubble bubble-8 bubble-top-left bg-success rotate-bubble"></div>
+        <div class="bubble bubble-9 bg-warning rotate-bubble"></div>
+        <div class="bubble bubble-10 bg-danger rotate-bubble"></div>
+        <div class="bubble bubble-11 bubble-bottom-right bg-info rotate-bubble"></div>
+        <div class="bubble bubble-12 bubble-top-right bg-success rotate-bubble"></div>
+        <div class="bubble bubble-13 bubble-top-left bg-success rotate-bubble"></div>
+        <!--         circles -->
+        <div class="circle circle-1 bg-light rotate-circle"></div>
+        <div class="circle circle-2 bg-success rotate-circle"></div>
+        <div class="circle circle-3 bg-danger rotate-circle"></div>
+        <div class="circle circle-4 bg-info rotate-circle"></div>
+        <div class="circle circle-5 bg-success rotate-circle"></div>
+        <div class="circle circle-6 bg-info rotate-circle"></div>
+        <div class="circle circle-7 bg-warning rotate-circle"></div>
+        <div class="circle circle-8 bg-white rotate-circle"></div>
+        <div class="circle circle-9 bg-warning rotate-circle"></div>
+        <div class="circle circle-10 bg-danger rotate-circle"></div>
+    </div>
+
+
+    <div class="blog-posts bg-light">
+        <!--
+		<div class="text-center">
+			<h2>动态</h2>
+			<p class="lead">看看对方有什么动静</p>
+		</div>-->
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="component">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <img class="card-img" src='{$resource}'>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">{$nickname}于{$create_time}分享相片</h4>
+                                <p class="card-text">{$description}</p>
+                            </div>
+                            <div class='card-footer'>
+                                <a href="{$raw}" class="btn btn-primary">下载原图</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="comment-list">
+
+            </div>
+
+            <hr />
+
+            <div class="row">
+                <div class="col-md-4">
+
+                    <textarea id="comment" class="form-control" rows="3" style="min-width: 95%"></textarea>
+                    <button id="send" type="button" class="btn btn-primary">添加评论</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+    ${includes/footer.html}
+</body>
+
+</html>
