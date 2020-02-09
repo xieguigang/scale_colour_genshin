@@ -66,6 +66,9 @@
     <TypeScriptCompile Include="Apps\memorials.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Apps\gallery.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Apps\view_location.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

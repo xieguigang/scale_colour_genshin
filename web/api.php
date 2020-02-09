@@ -309,6 +309,25 @@ class App {
 
     /**
      * @uses api
+    */
+    public function load_gallery() {
+        # get latest 10 resource activity
+        $latest = (new Table("resources"))
+            ->order_by("upload_time", true)
+            // ->limit(10)
+            ->select();
+        $id = $_SESSION["id"];
+
+        for($i = 0; $i < count($latest); $i++) {
+            # $upload_path = pakchoi::getUploadDir() . "/images/$id/$year/";
+            $latest[$i]["url"] = "/images/$id/" . $latest[$i]["resource"];
+        }
+
+        controller::success($latest);
+    }
+
+    /**
+     * @uses api
      * @method POST
     */
     public function upload_avatar() {

@@ -112,21 +112,8 @@ class App {
      * 
     */
     public function gallery() {
-        # get latest 10 resource activity
-        $latest = (new Table("resources"))
-            ->order_by("upload_time", true)
-            ->limit(10)
-            ->select();
-        $id = $_SESSION["id"];
-
-        for($i = 0; $i < count($latest); $i++) {
-            # $upload_path = pakchoi::getUploadDir() . "/images/$id/$year/";
-            $latest[$i]["url"] = "/images/$id/" . $latest[$i]["resource"];
-        }
-
         View::Display([
-            "gallery.active" => "active",
-            "photos" => $latest
+            "gallery.active" => "active"            
         ]);
     }
     
