@@ -11,13 +11,13 @@ namespace pages {
 
             setInterval(function () {
                 vm.fetchMessage();
-            }, 1000);
+            }, 3000);
 
             $ts("#send").onclick = function () {
                 vm.sendComment();
             }
 
-            webapp.modules.fetchComments("-1", function (id) {
+            webapp.modules.fetchComments("-1", -1, function (id) {
                 vm.lastId = id;
             });
         }
