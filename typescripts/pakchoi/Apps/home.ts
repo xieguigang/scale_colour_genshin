@@ -81,6 +81,8 @@ namespace pages {
 						</div>
 					</div>`);
                 list.append(item);
+
+                this.latest_id = record.id;
             }
         }
     }
@@ -92,5 +94,6 @@ namespace pages {
         content: string;
         type: string;
         link: string;
+        id: string;
     }
 }
