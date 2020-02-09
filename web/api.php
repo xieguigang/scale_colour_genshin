@@ -331,6 +331,7 @@ class App {
         } else {
             $evt["name"] = pakchoi::getNickName($evt["add_user"]);
             $evt["add_user"] = pakchoi::getAvatarUrl($evt["add_user"]);
+            $evt["days"] = date_diff(date_create($evt["date"]), date_create(Utils::Now()));
 
             controller::success($evt);
         }

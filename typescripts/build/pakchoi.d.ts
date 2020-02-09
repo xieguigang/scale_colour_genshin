@@ -101,6 +101,13 @@ declare namespace pages {
     }
 }
 declare namespace pages {
+    class view_memorial extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+        private showDetails;
+    }
+}
+declare namespace pages {
     class edit_profile extends Bootstrap {
         readonly appName: string;
         protected init(): void;
