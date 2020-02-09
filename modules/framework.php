@@ -176,7 +176,7 @@ class pakchoi {
         $ssid = urlencode(session_id());
         $time = urlencode(Utils::Now());
         $host = "https://pakchoi.space";
-        $url = "$host/api/login_confirm?time=$time&token=$token&session=$ssid";
+        $url = "$host/user/login_confirm?time=$time&token=$token&session=$ssid";
 
         $_SESSION["key"] = $key;
         $_SESSION["check"] = $user;

@@ -61,28 +61,36 @@ class App {
         $check = md5($_SESSION["key"] . $_SESSION["check"]["id"]);
 
         if ($check == $token) {
-            # login success
-            # write session
-            foreach($_SESSION["check"] as $key => $value) {
-                $_SESSION[$key] = $value;
-            }
-
-            $_SESSION["check"] = null;
-
-            (new Table("activity"))->add([
-                "type" => 0,  # 0 -> user login
-                "content" => "在" . (new baiduMap())->GetUserGeoLocation() . "访问小站",
-                "create_time" => Utils::Now(),
-                "user" => pakchoi::login_userId()
-            ]);
-
-            (new Table("users"))->where([
-                "id" => $_SESSION["id"]
-            ])->save([
-                "activities" => "~activities + 1"
-            ]);
+            $this->doLogin();
         } else {
             dotnet::AccessDenied("Invalid user login token!");
         }
+    }
+
+    private function doLogin() {
+        # login success
+        # write session
+        foreach($_SESSION["check"] as $key => $value) {
+            $_SESSION[$key] = $value;
+        }
+
+        $_SESSION["check"] = null;
+
+        (new Table("activity"))->add([
+            "type" => 0,  # 0 -> user login
+            "content" => "在" . (new baiduMap())->GetUserGeoLocation() . "访问小站",
+            "create_time" => Utils::Now(),
+            "user" => pakchoi::login_userId()
+        ]);
+
+        (new Table("users"))->where([
+            "id" => $_SESSION["id"]
+        ])->save([
+            "activities" => "~activities + 1"
+        ]);
+
+        View::Show(dirname(__DIR__) . "/modules/views/etc/login_success.html",[
+            "title" => "登陆成功"
+        ]);
     }
 }

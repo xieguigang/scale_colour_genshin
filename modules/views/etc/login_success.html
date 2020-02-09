@@ -2,10 +2,6 @@
 <html>
 
 <head>
-    <meta name="app" content="login" />
-    <meta name="api:login" content="/user/login.vbs" />
-    <meta name="api:check" content="/user/login_check.vbs" />
-
     ${includes/head.html}
 </head>
 
@@ -39,12 +35,7 @@
         <div class="circle circle-10 bg-danger rotate-circle"></div>
     </div>
 
-
     <div class="blog-posts bg-light">
-        <div class="text-center">
-            <h2>登录</h2>
-            <p class="lead">看看对方有什么动静</p>
-        </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
@@ -54,50 +45,14 @@
                                 <img class="card-img" src="/assets/images/splash.jpg">
                             </div>
                             <div class="card-body">
-                                <span class="badge badge-success mb-2">登录</span>
-                                <h4 class="card-title">点击下面的E-mail进行登录</h4>
+                                <span class="badge badge-success mb-2">登录结果</span>
+                                <h4 class="card-title">登陆成功</h4>
                                 <p class="card-text">
-                                    <ul>
-                                        <foreach @peoples>
-                                            <a class="people-link" href="javascript:void(0);" target="__blank"
-                                                people='@peoples["id"]'>
-                                                <img src='@peoples["avatar"]' class="img-fluid rounded-circle shadow-lg"
-                                                    style="width: 64px;" />
-                                            </a>
-                                        </foreach>
-                                    </ul>
+                                    恭喜登陆成功，请返回pakchoi应用继续使用
                                 </p>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- button that opens the modal -->
-    <button type="button" class="btn btn-info" id="open-msg" style="display: none;" data-toggle="modal"
-        data-target="#loginModal">        
-    </button>
-
-    <!-- the modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">等待登录确认</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    请点击电子邮箱中的登录链接确认登录
-
-                    <img src="/assets/images/loader.gif" />
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                 </div>
             </div>
         </div>
