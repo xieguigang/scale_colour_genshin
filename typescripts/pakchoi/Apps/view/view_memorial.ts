@@ -25,6 +25,14 @@
 
             // load comments belongs to this resource file
             webapp.modules.fetchComments(this.evtId, 1);
+
+            $ts.get(`@api:gallery?memorial=${this.evtId}`, function (result) {
+                if (result.code == 0) {
+                    gallery.showGallery(<any>result.info);
+                } else {
+                    webapp.displayMsg(<string>result.info);
+                }
+            });
         }
 
         private sendComment() {

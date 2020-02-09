@@ -38,7 +38,11 @@ declare namespace pages {
     class gallery extends Bootstrap {
         readonly appName: string;
         protected init(): void;
-        private showGallery;
+        static showGallery(data: photo[]): void;
+    }
+    interface photo {
+        id: string;
+        url: string;
     }
 }
 declare namespace pages {

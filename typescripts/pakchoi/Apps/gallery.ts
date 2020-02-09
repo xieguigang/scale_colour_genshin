@@ -11,14 +11,14 @@ namespace pages {
 
             $ts.get("@api:gallery", function (result) {
                 if (result.code == 0) {
-                    vm.showGallery(<any>result.info);
+                    gallery.showGallery(<any>result.info);
                 } else {
                     webapp.displayMsg(<string>result.info);
                 }
             });
         }
 
-        private showGallery(data: photo[]) {
+        public static showGallery(data: photo[]) {
             let list = $ts("#photos");
             let img: HTMLElement;
 
