@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Apps\" />
+    <Folder Include="Apps\view\" />
     <Folder Include="modules\" />
   </ItemGroup>
   <ItemGroup>
@@ -69,10 +70,13 @@
     <TypeScriptCompile Include="Apps\gallery.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Apps\view_location.ts">
+    <TypeScriptCompile Include="Apps\goals.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Apps\view_photo.ts">
+    <TypeScriptCompile Include="Apps\view\view_location.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Apps\view\view_photo.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="helpers.ts">
