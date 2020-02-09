@@ -23,7 +23,7 @@ RewriteRule ^api/get/(.+)$ /api.php?app=get_$1
 RewriteRule ^message/get/(.+).vbs$ /message.php?app=get_$1
 RewriteRule ^message/(.+).vbs$ /message.php?app=$1
 
-RewriteRule ^user/(.+).vbs$ /message.php?app=$1
-RewriteRule ^user/(.+)$ /message.php?app=$1
+RewriteRule ^user/(.+).vbs$ /user.php?app=$1
+RewriteRule ^user/(.+)$ /user.php?app=$1
 
 ErrorDocument 404 /404.php?app=index
