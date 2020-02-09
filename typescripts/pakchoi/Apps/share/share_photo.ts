@@ -13,7 +13,7 @@ namespace pages {
                 vm.doUpload();
             }
 
-            webapp.hookImagePreviews("#inputGroupFile02", "previews");
+            webapp.hookImagePreviews("#inputGroupFile02", "#previews");
         }
 
         private doUpload() {
