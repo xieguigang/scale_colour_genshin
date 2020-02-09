@@ -42,6 +42,14 @@ declare namespace pages {
     }
 }
 declare namespace pages {
+    class goals extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+        private create_goal;
+        private show_goals;
+    }
+}
+declare namespace pages {
     class profile extends Bootstrap {
         readonly appName: string;
         protected init(): void;
