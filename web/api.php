@@ -209,6 +209,47 @@ class App {
     }
 
     /**
+     * @uses api
+    */
+    public function more() {
+        $latest_id = $_GET["latest_id"];
+        # 在最开始获取最近的10条
+        $latest10 = (new Table("activity"))
+            ->where(["type" => not_eq(0), "id" => lt_eq($latest_id)])
+            ->order_by("create_time", true)
+            ->limit(10)
+            ->select();
+        $tags = pakchoi::getActivityTags();   
+        $resource = new Table("resources");
+
+        for($i = 0; $i < count($latest10); $i++) {
+            $type = $latest10[$i]["type"];
+            $latest10[$i]["tag"] = $tags[$type];
+            $user = $latest10[$i]["user"];
+            $user = (new Table("users"))->where(["id" => $user])->find();
+
+            $latest10[$i]["content"] = $user["nickname"] . $latest10[$i]["content"];
+
+            if ($type == 0) {
+                # 登录动态是使用默认的地图图片的
+                $latest10[$i]["resource"] = "/assets/images/map.jpg";
+            } else if ($type == 1) {
+                $res = $resource->where(["id" => $latest10[$i]["resource"]])->find();
+                $id = $user["id"];
+                $url = "/images/$id/" . $res["resource"] . "?type=thumbnail";
+                $latest10[$i]["resource"] = $url;
+                $latest10[$i]["link"] = "/view/photo/" . $res["id"];
+            } else if ($type == 2) {
+                # 查看分享的位置
+                $latest10[$i]["resource"] = "/assets/images/map.jpg";
+                $latest10[$i]["link"] = "/view/location/" . $latest10[$i]["id"];
+            }           
+        }
+
+        controller::success($latest10);
+    }
+
+    /**
      * 添加对上传的资源的描述信息
      * 
      * @uses api
