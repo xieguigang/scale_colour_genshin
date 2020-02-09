@@ -35,6 +35,12 @@ declare namespace pages {
     }
 }
 declare namespace pages {
+    class gallery extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+    }
+}
+declare namespace pages {
     class profile extends Bootstrap {
         readonly appName: string;
         protected init(): void;
