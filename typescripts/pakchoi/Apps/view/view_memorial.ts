@@ -9,7 +9,7 @@
         protected init(): void {
             let vm = this;
 
-            $ts.get(`@api:load_event?id=${$ts("@id")}`, function (result) {
+            $ts.get(`@api:load_event?id=${$ts("@data:id")}`, function (result) {
                 if (result.code == 0) {
                     vm.showDetails(<any>result.info);
                 } else {
