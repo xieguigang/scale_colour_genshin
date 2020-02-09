@@ -7,6 +7,7 @@
 
     <meta name="api:comment" content="/api/comment.vbs" />
     <meta name="api:load" content="/api/get_comment.vbs" />
+    <meta name="api:load_event" content="/api/get/memorial" />
 
     ${includes/head.html}
 </head>
@@ -58,11 +59,11 @@
                                 <img class="card-img" src='{$resource}'>
                             </div>
                             <div class="card-body">
-                                <h4 class="card-title">{$nickname}于{$create_time}分享相片</h4>
-                                <p class="card-text">{$description}</p>
+                                <h4 id="title" class="card-title"></h4>
+                                <p id="content" class="card-text"></p>
                             </div>
                             <div class='card-footer'>
-                                <a href="{$raw}" class="btn btn-primary">下载原图</a>
+                                <span id="days"></span>
                             </div>
                         </div>
                     </div>

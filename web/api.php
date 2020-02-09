@@ -316,4 +316,23 @@ class App {
 
         controller::success($events);
     }
+
+    /**
+     * @uses api
+     * @method GET
+     * @require id=i32
+    */
+    public function get_memorial() {
+        $id = $_GET["id"];
+        $evt = (new Table("anniversary"))->where(["id" => $id])->find();
+
+        if ($evt == false) {
+            controller::error("not found");
+        } else {
+            $evt["name"] = pakchoi::getNickName($evt["add_user"]);
+            $evt["add_user"] = pakchoi::getAvatarUrl($evt["add_user"]);
+
+            controller::success($evt);
+        }
+    }
 }
