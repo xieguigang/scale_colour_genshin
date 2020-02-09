@@ -21,14 +21,14 @@
         private showDetails(info: memorial) {
             $ts("#title").display(`${info.name}在${info.date}添加了一个纪念日`);
             $ts("#content").display(info.description);
-            $ts("$days").display(`已经过去${info.days}天了`);
+            $ts("$days").display(`已经过去${info.days.days}天了`);
         }
     }
 
     interface memorial {
         id: string
         date: string
-        days: string
+        days: { days: string }
         description: string
         name: string
         /**
