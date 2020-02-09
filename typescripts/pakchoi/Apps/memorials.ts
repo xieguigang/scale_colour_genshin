@@ -30,11 +30,11 @@ namespace pages {
                                 <div class="timeline-header">
                                     <span class="userimage"><img
                                             src="${evt.add_user}" alt=""></span>
-                                    <span class="username"><a href="javascript:;">${evt.name}</a> <small></small></span>                                  
+                                    <span class="username"><a href="javascript:void(0);">${evt.name}</a> <small></small></span>                                  
                                 </div>
                                 <div class="timeline-content">
                                     <p>
-                                        ${evt.description}
+                                        <a href="/view/memorial/${evt.id}">${evt.description}</a>
                                     </p>
                                 </div>                       
                             </div>`);
@@ -49,5 +49,6 @@ namespace pages {
         description: string;
         add_user: string;
         name: string;
+        id: string;
     }
 }

@@ -68,6 +68,7 @@ declare namespace pages {
         description: string;
         add_user: string;
         name: string;
+        id: string;
     }
 }
 declare namespace pages {
