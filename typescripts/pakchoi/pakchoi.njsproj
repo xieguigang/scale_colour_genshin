@@ -36,6 +36,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Apps\" />
+    <Folder Include="Apps\edit\" />
+    <Folder Include="Apps\share\" />
     <Folder Include="Apps\view\" />
     <Folder Include="modules\" />
   </ItemGroup>
@@ -46,13 +48,13 @@
     <TypeScriptCompile Include="Apps\login.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Apps\share_photo.ts">
+    <TypeScriptCompile Include="Apps\share\share_photo.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Apps\home.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Apps\edit_profile.ts">
+    <TypeScriptCompile Include="Apps\edit\edit_profile.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Apps\chat.ts">
@@ -61,7 +63,7 @@
     <TypeScriptCompile Include="Apps\profile.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Apps\share_memorial.ts">
+    <TypeScriptCompile Include="Apps\share\share_memorial.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Apps\memorials.ts">

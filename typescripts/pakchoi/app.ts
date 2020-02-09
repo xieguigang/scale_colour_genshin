@@ -5,13 +5,14 @@
 /// <reference path="Apps/home.ts" />
 /// <reference path="Apps/chat.ts" />
 /// <reference path="Apps/gallery.ts" />
+/// <reference path="Apps/goals.ts" />
 /// <reference path="Apps/profile.ts" />
 /// <reference path="Apps/memorials.ts" />
-/// <reference path="Apps/share_photo.ts" />
-/// <reference path="Apps/share_memorial.ts" />
-/// <reference path="Apps/view_photo.ts" />
-/// <reference path="Apps/view_location.ts" />
-/// <reference path="Apps/edit_profile.ts" />
+/// <reference path="Apps/share/share_photo.ts" />
+/// <reference path="Apps/share/share_memorial.ts" />
+/// <reference path="Apps/view/view_photo.ts" />
+/// <reference path="Apps/view/view_location.ts" />
+/// <reference path="Apps/edit/edit_profile.ts" />
 
 namespace webapp {
 
@@ -28,6 +29,7 @@ namespace webapp {
         Router.AddAppHandler(new pages.gallery());
         Router.AddAppHandler(new pages.memorials());
         Router.AddAppHandler(new pages.profile());
+        Router.AddAppHandler(new pages.goals());
 
         if (Notification.permission == "granted") {
             webapp.modules.startNotification();
