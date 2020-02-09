@@ -243,11 +243,27 @@ class App {
      * @uses api
     */
     public function load_gallery() {
-        # get latest 10 resource activity
-        $latest = (new Table("resources"))
+        if (array_key_exists("memorial", $_GET)) {
+            $list = (new Table("anniversary_group"))->where(["anniversary" => $_GET["memorial"]])->select();
+            $idlist = [];
+
+            foreach ($list as $entry) {
+                array_push($idlist, $entry["resource"]);
+            }
+
+            # get latest 10 resource activity
+            $latest = (new Table("resources"))
+            ->where(["id" => in($idlist)])
             ->order_by("upload_time", true)
             // ->limit(10)
-            ->select();        
+            ->select();  
+        } else {
+            # get latest 10 resource activity
+            $latest = (new Table("resources"))
+                ->order_by("upload_time", true)
+                // ->limit(10)
+                ->select();  
+        }      
 
         for($i = 0; $i < count($latest); $i++) {
             # $upload_path = pakchoi::getUploadDir() . "/images/$id/$year/";
