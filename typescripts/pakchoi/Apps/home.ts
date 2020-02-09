@@ -42,6 +42,7 @@ namespace pages {
             }
 
             vm.latest_id = <any>$ts("@latest_id");
+            vm.loadMoreNews();
         }
 
         private loadMoreNews() {
