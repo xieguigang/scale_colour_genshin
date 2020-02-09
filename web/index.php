@@ -232,15 +232,18 @@ class App {
         View::Display($_GET);
     }
 
-	/**
-     * 后台更新
+    /**
+     * 查看详情
      * 
-	 * Update site source file from github repository
-	 *
-	 * @uses api
-	 * @access admin
-	*/
-    public function update() {
-		
+     * @uses view
+     * @require id=i32
+    */
+    public function view_memorial() {
+        $id = $_GET["id"];
+
+        View::Display([
+            "home.active" => "active",
+            "id" => $id
+        ]);
     }
 }
