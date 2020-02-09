@@ -183,8 +183,18 @@ class App {
         $id = $_POST["res"];
 
         (new Table("resources"))
-        ->where(["id" => $id])
-        ->save(["description" => $note]);
+            ->where(["id" => $id])
+            ->save(["description" => $note]);
+
+        if (array_key_exists("memorial", $_POST)) {
+            $memorial_id = $_POST["memorial"];
+
+            (new Table("anniversary_group"))->add([
+                "anniversary" => $memorial_id,
+                "resource" => $id,
+                "creator" => pakchoi::login_userId() 
+            ]);
+        }
 
         controller::success(1);
     }

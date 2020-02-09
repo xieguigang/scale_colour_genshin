@@ -18,14 +18,22 @@ namespace pages {
 
         private doUpload() {
             let file: File = $input("#inputGroupFile02").files[0];
+            let args = $from($ts.location.url.query)
+                .ToDictionary(a => a.name, a => a.value)
+                .Object;
 
             $ts.upload("@api:upload", file, function (result) {
                 if (result.code == 0) {
                     // then save description info
-                    $ts.post("@api:addnote", {
-                        note: $ts.value("#note"),
-                        res: result.info
-                    }, function (result) {
+                    // and other relation information
+                    if (isNullOrUndefined(args)) {
+                        args = {};
+                    }
+
+                    args["note"] = $ts.value("#note");
+                    args["res"] = result.info;
+
+                    $ts.post("@api:addnote", args, function (result) {
                         $goto("/gallery");
                     });
                 } else {
