@@ -4,6 +4,8 @@
 <head>
 	<meta name="app" content="home" />
 
+	<meta name="api:more" content="/api/more" />
+
 	${includes/head.html}
 </head>
 
@@ -44,7 +46,7 @@
 			<p class="lead">看看对方有什么动静</p>
 			${includes/share.html}
 		</div>
-		<div class="container">
+		<div id="activity-list" class="container">
 
 			<foreach @latest>
 
@@ -73,7 +75,7 @@
 		</div>
 
 		<div class="d-flex justify-content-center my-5">
-			<a href="#a" class="btn btn-outline-primary btn-pill">加载更多</a>
+			<a id="load-more" href="#" class="btn btn-outline-primary btn-pill">加载更多</a>
 		</div>
 	</div>
 

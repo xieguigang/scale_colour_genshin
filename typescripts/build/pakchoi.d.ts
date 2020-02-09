@@ -16,7 +16,10 @@ declare namespace pages {
 declare namespace pages {
     class home extends Bootstrap {
         readonly appName: string;
+        latest_id: string;
         protected init(): void;
+        private loadMoreNews;
+        private showActivities;
     }
 }
 declare namespace pages {
