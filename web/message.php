@@ -11,7 +11,7 @@ class App {
      * 
     */
     public function get_newMsg() {
-
+        controller::error(0);
     }
 
     /**

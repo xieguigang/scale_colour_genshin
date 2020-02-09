@@ -25,7 +25,10 @@ namespace pages {
             for (let photo of data) {
                 img = $ts("<div>", { class: "row" }).display(`
 <div class="col-12 col-md-4">
-                                <div class="square" style="background-image:url('${photo.url}?type=preview');"></div>
+<a href="/view/photo/${photo.id}">
+    <div class="square" style="background-image:url('${photo.url}?type=preview');">
+    </div>
+</a>
                             </div>`);
 
                 list.append(img);

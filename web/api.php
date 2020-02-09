@@ -315,11 +315,11 @@ class App {
         $latest = (new Table("resources"))
             ->order_by("upload_time", true)
             // ->limit(10)
-            ->select();
-        $id = $_SESSION["id"];
+            ->select();        
 
         for($i = 0; $i < count($latest); $i++) {
             # $upload_path = pakchoi::getUploadDir() . "/images/$id/$year/";
+            $id = $latest[$i]["uploader"];
             $latest[$i]["url"] = "/images/$id/" . $latest[$i]["resource"];
         }
 
