@@ -115,10 +115,13 @@ class App {
         require dirname(__DIR__) . "/modules/video_server/server.php";
 
         $resource = WebRequest::getPath("resource");
+        $direct = WebRequest::getBool("direct_stream");
         $path = pakchoi::getUploadDir() . "/video/$resource";
 
         if (!file_exists($path)) {
             dotnet::PageNotFound($_GET["resource"]);
+        } else if ($direct) {
+            Utils::PushDownload($path, -1, "video/mp4", "video.mp4", false, true);
         } else {
             $video = new SeekableVideo($path, 'video/mp4', 'video.mp4');
             $video->begin_stream();
