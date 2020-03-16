@@ -189,7 +189,7 @@ class App {
 
         $id = $res["uploader"];
         $raw = "/video/$id/" . $res["resource"];
-        $previews =  $raw . "?type=preview";
+        $previews =  $raw . "?type=preview&direct_stream=true";
         $upload_user = (new Table("users"))->where(["id" => $id])->find();
 
         View::Display([
