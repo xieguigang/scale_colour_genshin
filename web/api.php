@@ -105,7 +105,10 @@ class App {
     }
 
     /**
+     * 加载主页信息
+     * 
      * @uses api
+     * @require latest_id=i32
     */
     public function more() {
         $latest_id = $_GET["latest_id"];
@@ -132,9 +135,18 @@ class App {
             } else if ($type == 1) {
                 $res = $resource->where(["id" => $latest10[$i]["resource"]])->find();
                 $id = $user["id"];
-                $url = "/images/$id/" . $res["resource"] . "?type=thumbnail";
+
+                if ($res["type"] == 0) {
+                    $url = "/images/$id/" . $res["resource"] . "?type=thumbnail";
+                    $link = "/view/photo/" . $res["id"];
+                } else if ($res["type"] == 2) {
+                    # get video preview image
+                    $url = "/video/$id/thumbnail/" . $res["id"];
+                    $link = "/view/video/" . $res["id"];
+                }
+
                 $latest10[$i]["resource"] = $url;
-                $latest10[$i]["link"] = "/view/photo/" . $res["id"];
+                $latest10[$i]["link"] = $link;
             } else if ($type == 2) {
                 # 查看分享的位置
                 $latest10[$i]["resource"] = "/assets/images/map.jpg";
