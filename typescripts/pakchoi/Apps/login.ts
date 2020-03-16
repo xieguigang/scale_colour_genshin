@@ -33,7 +33,7 @@ namespace pages {
             $ts.get("@api:check", function (result: IMsg<string>) {
                 if (result.code == 0) {
                     if (result.info == "1") {
-                        successMsg("???????", function () {
+                        successMsg("登陆成功！", function () {
                             $goto("/home");
                         });
                     }

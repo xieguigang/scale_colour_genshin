@@ -21,7 +21,7 @@ namespace pages {
             $ts.get("@api:visits", function (result) {
                 if (result.code == 0) {
                     vm.renderVisitList(<any>result.info);
-                    vm.loadVisitsDone;
+                    vm.loadVisitsDone = true;
 
                     checkPageLoad();
                 } else {
@@ -32,7 +32,7 @@ namespace pages {
             $ts.get("@api:logins", function (result) {
                 if (result.code == 0) {
                     vm.renderLoginList(<any>result.info);
-                    vm.loadLoginsDone;
+                    vm.loadLoginsDone = true;
 
                     checkPageLoad();
                 } else {
@@ -41,7 +41,7 @@ namespace pages {
                 }
             });
         }
-               
+
         private renderLoginList(logins: loginActivity[]) {
             let list = $ts("#login-list");
             let rowView: any;
