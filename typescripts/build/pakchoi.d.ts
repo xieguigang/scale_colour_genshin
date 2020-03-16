@@ -1,4 +1,5 @@
 /// <reference path="linq.d.ts" />
+/// <reference path="../layer.d.ts" />
 declare namespace pages {
     class index extends Bootstrap {
         readonly appName: string;
@@ -56,6 +57,8 @@ declare namespace pages {
 declare namespace pages {
     class profile extends Bootstrap {
         readonly appName: string;
+        private loadVisitsDone;
+        private loadLoginsDone;
         protected init(): void;
         private renderLoginList;
         private renderVisitList;

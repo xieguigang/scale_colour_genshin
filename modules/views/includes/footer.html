@@ -86,4 +86,12 @@
 
         return false;
     }
+	
+	function loading(msg, icon = 16) {
+		return layer.msg(msg, {
+			icon: icon, 
+			shade: 0.01, 
+			time:false
+		});
+	}
 </script>

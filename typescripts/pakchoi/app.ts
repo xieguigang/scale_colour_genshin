@@ -1,4 +1,5 @@
 /// <reference path="../build/linq.d.ts" />
+/// <reference path="../layer.d.ts" />
 
 /// <reference path="Apps/index.ts" />
 /// <reference path="Apps/login.ts" />
