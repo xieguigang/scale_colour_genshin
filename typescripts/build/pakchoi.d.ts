@@ -88,21 +88,8 @@ declare namespace pages {
 declare namespace pages {
     class share_video extends Bootstrap {
         readonly appName: string;
-        private readonly upload_url;
         protected init(): void;
-        stop(e: any, data: any): void;
-        change(e: any, data: any): void;
-        getFilesFromResponse(e: {
-            result: IMsg<string>;
-            files: any[];
-        }): any[];
-        add(e: any, data: {
-            files: any[];
-            context: any;
-            process: any;
-            autoUpload: boolean;
-            submit: Delegate.Action;
-        }, fileUploader: any): void;
+        private doUpload;
     }
 }
 declare namespace pages {

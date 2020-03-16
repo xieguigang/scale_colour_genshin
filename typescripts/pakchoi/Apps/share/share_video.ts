@@ -6,104 +6,43 @@ namespace pages {
             return "share_video"
         };
 
-        private get upload_url(): string {
-            return <any>$ts("@api:upload");
-        }
-
         protected init(): void {
             let vm = this;
 
-            /* global $, window */
-            (<any>$('#fileupload')).fileupload({
-                stop: function (e, data) {
-                    vm.stop(e, data);
-                },
-                change: function (e, data) {
-                    vm.change(e, data);
-                },
-                add: function (e, data) {
-                    vm.add(e, data, $(this));
-                },
-                getFilesFromResponse: function (e) {
-                    vm.getFilesFromResponse(e);
-                }
-            });
-
-            $ts('#do-upload').onclick = function () {
-                $('#target').submit();
-            };
-        }
-
-        stop(e, data) {
-            TypeScript.logging.log("Stop!", TypeScript.ConsoleColors.Red);
-        }
-
-        change(e, data) {
-            TypeScript.logging.log("Changed!", TypeScript.ConsoleColors.Green);
-        }
-
-        getFilesFromResponse(e: { result: IMsg<string>, files: any[] }) {
-            let code = e.result.code;
-            let result = e.result.info;
-
-            if (code == 0) {
-                layer.msg(result, { icon: 1 }, function () {
-                    parent.location.reload();
-                });
-            } else {
-                layer.msg(result, { icon: 5 }, function () {
-
-                });
+            $ts("#do-upload").onclick = function () {
+                vm.doUpload();
             }
 
-            if (e.result && $.isArray(e.files)) {
-                return e.files;
-            }
+            // webapp.hookImagePreviews("#inputGroupFile02", "#previews");
         }
 
-        add(e, data: {
-            files: any[],
-            context: any,
-            process: any,
-            autoUpload: boolean,
-            submit: Delegate.Action
-        }, fileUploader) {
+        private doUpload() {
+            let file: File = $input("#inputGroupFile02").files[0];
+            let args = $from($ts.location.url.query)
+                .ToDictionary(a => a.name, a => a.value)
+                .Object;
+            let msgInfo = loading("正在上传视频，请不要刷新页面...");
 
-            TypeScript.logging.log(this.upload_url, TypeScript.ConsoleColors.Blue);
+            $ts.upload("@api:upload", file, function (result) {
+                if (result.code == 0) {
+                    // then save description info
+                    // and other relation information
+                    if (isNullOrUndefined(args)) {
+                        args = {};
+                    }
 
-            // 动态修改文件上传的url参数
-            fileUploader.fileupload('option', 'url', this.upload_url);
-            // 将文件添加到上传列表中显示
-            let $this = fileUploader,
-                that = $this.data('blueimp-fileupload') || $this.data('fileupload'),
-                options = that.options;
-            data.context = that._renderUpload(data.files)
-                .data('data', data)
-                .addClass('processing');
-            options.filesContainer[
-                options.prependFiles ? 'prepend' : 'append'
-            ](data.context);
-            that._forceReflow(data.context);
-            that._transition(data.context);
+                    args["note"] = $ts.value("#note");
+                    args["res"] = result.info;
 
-            data.process(function () {
-                return $this.fileupload('process', data);
-            }).always(function () {
-                data.context.each(function (index) {
-                    $(this).find('.size').text(
-                        that._formatFileSize(data.files[index].size)
-                    );
+                    $ts.post("@api:addnote", args, function (result) {
+                        layer.close(msgInfo);
 
-                }).removeClass('processing');
-
-                that._renderPreviews(data);
-            }).done(function () {
-                data.context.find('.start').prop('disabled', false);
-
-                if ((that._trigger('added', e, data) !== false) &&
-                    (options.autoUpload || data.autoUpload) &&
-                    data.autoUpload !== false) {
-                    data.submit();
+                        successMsg("上传成功！", function () {
+                            $goto("/gallery");
+                        });
+                    });
+                } else {
+                    errorMsg(<string>result.info);
                 }
             });
         }
