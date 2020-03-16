@@ -19,7 +19,7 @@ class App {
         $resource = WWWROOT . "/assets/$resource";
         
         if (!empty($resource) && file_exists($resource)) {
-            Utils::PushDownload($resource);
+            Utils::PushDownload($resource, -1, null, null, false, false);
         } else {
             dotnet::PageNotFound($_GET["resource"]);
         }
@@ -34,7 +34,7 @@ class App {
         $resource = WWWROOT . "/typescripts/build/$resource";
         
         if (!empty($resource) && file_exists($resource)) {
-            Utils::PushDownload($resource);
+            Utils::PushDownload($resource, -1, null, null, false, false);
         } else {
             dotnet::PageNotFound($_GET["resource"]);
         }
@@ -51,7 +51,7 @@ class App {
         if (!file_exists($path)) {
             dotnet::PageNotFound($_GET["resource"]);
         } else {
-            Utils::PushDownload($path, -1, "image/jpeg");
+            Utils::PushDownload($path, -1, "image/jpeg", null, false, false);
         }
     }
 
@@ -105,5 +105,9 @@ class App {
     */
     public function audio() {
 
+    }
+
+    public function video() {
+        require dirname(__DIR__) . "/modules/video_server/server.php";
     }
 }
