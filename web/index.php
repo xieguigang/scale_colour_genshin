@@ -171,6 +171,39 @@ class App {
     }
 
     /**
+     * 查看视频
+     * 
+     * @uses view
+     * @require id=i32
+    */
+    public function view_video() {       
+        $res = (new Table("resources"))
+              ->where([
+                "id" => $_GET["id"], 
+                "type" => 2
+            ])->find();
+
+        if ($res == false) {
+            dotnet::PageNotFound("Target resource not found!");
+        }
+
+        $id = $res["uploader"];
+        $raw = "/video/$id/" . $res["resource"];
+        $previews =  $raw . "?type=preview";
+        $upload_user = (new Table("users"))->where(["id" => $id])->find();
+
+        View::Display([
+            "gallery.active" => "active",
+            "resource" => $previews,
+            "nickname" => $upload_user["nickname"],
+            "create_time" => $res["upload_time"],
+            "description" => $res["description"],
+            "raw" => $raw,
+            "resource_id" => $res["id"]
+        ]);
+    }
+
+    /**
      * 我
      * 
      * @uses view
