@@ -128,6 +128,16 @@ class App {
     }
 
     /**
+     * 分享视频
+     * 
+     * @uses view
+     * 
+    */
+    public function share_video() {
+        View::Display(["gallery.active" => "active"]);
+    }
+
+    /**
      * 查看相片
      * 
      * @uses view
