@@ -49,11 +49,21 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-md-4">
-                    <button class="btn btn-danger btn-pill">
-                        <i class="fa fa-heart mr-1"></i>
-                        <a href="/share_photo">上传照片</a>
-                    </button>
+                <div class="col-12 col-md-4">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            分享至相册
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/share_photo" id="upload-photo">
+                                <i class="far fa-picture-o"></i>上传相片
+                            </a>
+                            <a id="upload_video" class="dropdown-item" href="/share_video">
+                                <i class="far fa-picture-o"></i>上传视频
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 

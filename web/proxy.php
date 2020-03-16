@@ -12,7 +12,7 @@ class App {
      * 
      * @access *
      * @require resource=string
-     * @cache max-age=360000000
+     * @cache max-age=3600000
     */
     public function assets() {
         $resource = WebRequest::getPath("resource");
