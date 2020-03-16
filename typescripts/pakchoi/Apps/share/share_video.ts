@@ -28,6 +28,10 @@ namespace pages {
                     vm.getFilesFromResponse(e);
                 }
             });
+
+            $ts('#do-upload').onclick = function () {
+                $('#target').submit();
+            };
         }
 
         stop(e, data) {
@@ -38,7 +42,7 @@ namespace pages {
             TypeScript.logging.log("Changed!", TypeScript.ConsoleColors.Green);
         }
 
-        getFilesFromResponse(e: { result: IMsg<string>, files: any[] }) {         
+        getFilesFromResponse(e: { result: IMsg<string>, files: any[] }) {
             let code = e.result.code;
             let result = e.result.info;
 
