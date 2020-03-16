@@ -174,46 +174,6 @@ class App {
     }
 
     /**
-     * 上传相片
-     * 
-     * @uses api
-     * @method POST
-    */
-    public function upload_image() {
-        imports("Microsoft.VisualBasic.FileIO.FileSystem");
-
-        $file = $_FILES["File"];
-        $tmp = $file["tmp_name"];
-        $id = $_SESSION["id"];
-        $year = year();
-        $upload_path = pakchoi::getUploadDir() . "/images/$id/$year/";
-
-        FileSystem::CreateDirectory($upload_path);
-
-        $name = md5(Utils::Now() . $tmp);
-        $upload_path = "$upload_path/$name";
-
-        move_uploaded_file($tmp, $upload_path);
-
-        $resId = (new Table("resources"))->add([
-            "type" => 0,
-            "filename" => $file["name"],
-            "upload_time" => Utils::Now(),
-            "size" => $file["size"],
-            "description" => "",
-            "uploader" => $id,
-            "resource" => "$year/$name"
-        ]);
-
-        if ($resId > 0) {
-            pakchoi::addActivity(1, "分享了相片 {$file["name"]}", $resId);
-            controller::success($resId);
-        } else {
-            controller::error("error!");
-        }
-    }
-
-    /**
      * @uses api
     */
     public function load_gallery() {

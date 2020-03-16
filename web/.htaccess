@@ -15,7 +15,7 @@ RewriteRule ^api/([a-z\_]+).vbs$ /api.php?app=$1
 RewriteRule ^api/add_memorial$ /api.php?app=add_memorial
 RewriteRule ^api/more$ /api.php?app=more
 
-RewriteRule ^api/upload/(.+)$ /api.php?app=upload_$1
+RewriteRule ^upload/(.+)$ /api/upload.php?app=$1
 RewriteRule ^api/addnote$ /api.php?app=resource_note
 
 RewriteRule ^api/get/(.+)$ /api.php?app=get_$1
