@@ -58,7 +58,7 @@
                     <div class="component">
                         <div class="card mb-4">
                             <div class="card-header">                                
-                                <video id="example_video_1" class="video-js vjs-default-skin vjs-fluid" controls preload="none" width="1920" height="1080" poster="/assets/images/splash.jpg" data-setup='{ "html5" : { "nativeTextTracks" : false } }'>
+                                <video id="video_1" class="video-js vjs-default-skin vjs-fluid" controls preload="none" width="1920" height="1080" poster="/assets/images/splash.jpg" data-setup='{ "html5" : { "nativeTextTracks" : false } }'>
                                     <source src="{$resource}" type="video/mp4">
                                 </video>
                             </div>
@@ -94,7 +94,8 @@
 
     ${includes/footer.html}
 
-<script>
+    <!--
+        <script>
     var player = videojs('video', { }, function () {
            console.log('Good to go!');
            //this.play(); // if you don't trust autoplay for some reason
@@ -115,6 +116,7 @@
         }
     });
 </script>
+-->
 
 </body>
 

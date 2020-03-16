@@ -107,7 +107,21 @@ class App {
 
     }
 
+    /**
+     *      
+     * @require resource=string
+    */
     public function video() {
         require dirname(__DIR__) . "/modules/video_server/server.php";
+
+        $resource = WebRequest::getPath("resource");
+        $path = pakchoi::getUploadDir() . "/video/$resource";
+
+        if (!file_exists($path)) {
+            dotnet::PageNotFound($_GET["resource"]);
+        } else {
+            $video = new SeekableVideo($path, 'video/mp4', 'video.mp4');
+            $video->begin_stream();
+        }
     }
 }
