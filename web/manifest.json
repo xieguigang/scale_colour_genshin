@@ -9,7 +9,6 @@
     }
   ],
   "start_url": "/",
-  "background_color": "#e01e5b",
   "display": "fullscreen",
   "scope": "/",
   "theme_color": "#e01e5b"
