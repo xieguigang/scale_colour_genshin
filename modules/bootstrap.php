@@ -1,9 +1,9 @@
 <?php
 
-session_start();
+ini_set('session.cookie_lifetime',"86400‬");
+ini_set('session.gc_maxlifetime', "86400‬"); 
 
-ini_set('session.cookie_lifetime',"3600");
-ini_set('session.gc_maxlifetime', "3600"); 
+session_start();
 
 include __DIR__ . "/php.NET/package.php";
 include __DIR__ . "/access.php";

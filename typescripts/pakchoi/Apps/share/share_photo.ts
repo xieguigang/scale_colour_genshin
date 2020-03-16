@@ -21,6 +21,7 @@ namespace pages {
             let args = $from($ts.location.url.query)
                 .ToDictionary(a => a.name, a => a.value)
                 .Object;
+            let msgInfo = loading("正在上传相片，请不要刷新页面...");
 
             $ts.upload("@api:upload", file, function (result) {
                 if (result.code == 0) {
@@ -34,10 +35,14 @@ namespace pages {
                     args["res"] = result.info;
 
                     $ts.post("@api:addnote", args, function (result) {
-                        $goto("/gallery");
+                        layer.close(msgInfo);
+
+                        successMsg("上传成功！", function () {
+                            $goto("/gallery");
+                        });
                     });
                 } else {
-                    console.error(<string>result.info);
+                    errorMsg(<string>result.info);
                 }
             });
         }
