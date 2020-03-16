@@ -80,7 +80,7 @@ namespace pages {
 							</div>
 						</div>
 					</div>`);
-                list.append(item);
+                list.appendElement(item);
 
                 this.latest_id = record.id;
             }

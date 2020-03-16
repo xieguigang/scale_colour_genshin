@@ -31,7 +31,7 @@ namespace pages {
 </a>
                             </div>`);
 
-                list.append(img);
+                list.appendElement(img);
             }
         }
     }

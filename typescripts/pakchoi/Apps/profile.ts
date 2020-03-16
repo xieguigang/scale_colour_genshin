@@ -49,10 +49,10 @@ namespace pages {
             for (let login of logins) {
                 rowView = $ts("<span>", {
                     style: "font-size:0.8em;color:lightgray"
-                }).display(login.create_time).append($ts("<span>", {
+                }).display(login.create_time).appendElement($ts("<span>", {
                 }).display(login.content));
 
-                list.append($ts("<li>").display(rowView));
+                list.appendElement($ts("<li>").display(rowView));
             }
         }
 
@@ -64,10 +64,10 @@ namespace pages {
                 rowView = $ts("<span>", {
                     style: "font-size:0.8em;color:lightgray"
                 }).display(visit.time)
-                    .append($ts("<span>", {
+                    .appendElement($ts("<span>", {
                     }).display($ts("<a>", { href: visit.page_url }).display(visit.page_url)));
 
-                list.append($ts("<li>").display(rowView));
+                list.appendElement($ts("<li>").display(rowView));
             }
         }
     }

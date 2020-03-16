@@ -39,7 +39,7 @@ namespace pages {
                                 </div>                       
                             </div>`);
 
-                list.append(time);
+                list.appendElement(time);
             }
         }
     }
