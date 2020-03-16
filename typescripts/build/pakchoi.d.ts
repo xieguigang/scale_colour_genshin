@@ -102,7 +102,7 @@ declare namespace pages {
             process: any;
             autoUpload: boolean;
             submit: Delegate.Action;
-        }, fileUploader: any): boolean;
+        }, fileUploader: any): void;
     }
 }
 declare namespace pages {

@@ -69,20 +69,6 @@ namespace pages {
             submit: Delegate.Action
         }, fileUploader) {
 
-            let acceptFileTypes = /^file\/(mp4)$/i;
-            let file_err = false;
-
-            // 文件类型判断
-            (data.files).map(function (index) {
-                if (index.type.length && !acceptFileTypes.test(index.type)) {
-                    file_err = true;
-                }
-            });
-            if (file_err) {
-                layer.msg('请上传MP4视频文件！', { icon: 0 });
-                return false;
-            }
-
             TypeScript.logging.log(this.upload_url, TypeScript.ConsoleColors.Blue);
 
             // 动态修改文件上传的url参数
