@@ -20,29 +20,46 @@ class pakchoi {
         }
     }
 
+    public static function getNickName($id) {
+        if (is_array($id)) {
+            $peoples = $id;
+        } else {
+            $peoples = (new Table("users"))->where(["id" => $id])->find();
+        }
+
+        return $peoples["nickname"];
+    }
+
     public static function fillMsgSenderMentionUrl($messages) {
         $resources = [];
 
         for($i = 0; $i < count($messages); $i++) {
             if ($messages[$i]["mentions"] > 0) {
                 $res_id = $messages[$i]["mentions"];
-                $res_key = "T$res_id";
+                $res_key = "T$res_id" . "+" . $messages[$i]["mention_type"];
 
                 if(!array_key_exists($res_key, $resources)) {
-                    $res = (new Table("resources"))->where(["id" => $res_id])->find();
+                    if ($messages[$i]["mention_type"] == 0) {
+                        $res = (new Table("resources"))->where(["id" => $res_id])->find();
 
-                    switch($res["type"]) {
-                        case 0:
-                            $resources[$res_key] = [
-                                "title" => "评论相片 <strong>'<a href='/view/photo/$res_id'>{$res["filename"]}</a>'</strong>",
-                                "href" => "/view/photo/$res_id"
-                            ];
-                            break;
-                        default:
-                            $resources[$res_key] = [
-                                "title" => "无效的资源目标",
-                                "href" => "#"
-                            ];
+                        switch($res["type"]) {
+                            case 0:
+                                $resources[$res_key] = [
+                                    "title" => "评论相片 <strong>'<a href='/view/photo/$res_id'>{$res["filename"]}</a>'</strong>",
+                                    "href" => "/view/photo/$res_id"
+                                ];
+                                break;
+                            default:
+                                $resources[$res_key] = [
+                                    "title" => "无效的资源目标",
+                                    "href" => "#"
+                                ];
+                        }
+                    } else if ($messages[$i]["mention_type"] == 1) {
+                        $resources[$res_key] = [
+                            "title" => "评论了 <strong>'<a href='/view/memorial/$res_id'>共同纪念日</a>'</strong>",
+                            "href" => "/view/memorial/$res_id"
+                        ];
                     }
                 }
 
@@ -165,8 +182,8 @@ class pakchoi {
         $token = md5($key . $user["id"]);
         $ssid = urlencode(session_id());
         $time = urlencode(Utils::Now());
-        $host = "http://47.94.16.9";
-        $url = "$host/api/login_confirm?time=$time&token=$token&session=$ssid";
+        $host = "https://pakchoi.space";
+        $url = "$host/user/login_confirm?time=$time&token=$token&session=$ssid";
 
         $_SESSION["key"] = $key;
         $_SESSION["check"] = $user;

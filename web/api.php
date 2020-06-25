@@ -2,88 +2,7 @@
 
 include __DIR__ . "/../modules/bootstrap.php";
 
-class App {
-    
-    /**
-     * 用户在客户端拉起登录会话
-     * 
-     * @access *
-     * @require people=i32
-     * @method POST
-    */
-    public function login() {
-        $id = $_POST["people"];
-        $user = (new Table("users"))->where(["id" => $id])->find();
-
-        if ($user == false) {
-            controller::error("Invalid user id!");
-        } else {
-            # send login email to target
-            $result = pakchoi::sendLoginEmail($user);
-
-            if ($result == true) {
-                controller::success("Please check your email for login");
-            } else {
-                controller::error($result);
-            }
-        }
-    }
-
-    /**
-     * 检查登录是否成功
-     * 
-     * @uses api
-     * @access *
-    */
-    public function login_check() {
-        if (pakchoi::login_userId() > 0) {
-            controller::success("1");
-        } else {
-            controller::success("no login");
-        }
-    }
-
-    /**
-     * 通过访问电子邮件中的这个链接确认登录
-     * 
-     * @access *
-     * @require token=string|session=string
-     * @uses view
-    */
-    public function login_confirm() {        
-        $token = $_GET["token"];
-        $session = urldecode($_GET["session"]);
-
-        session_id($session);
-        session_start();
-
-        $check = md5($_SESSION["key"] . $_SESSION["check"]["id"]);
-
-        if ($check == $token) {
-            # login success
-            # write session
-            foreach($_SESSION["check"] as $key => $value) {
-                $_SESSION[$key] = $value;
-            }
-
-            $_SESSION["check"] = null;
-
-            (new Table("activity"))->add([
-                "type" => 0,  # 0 -> user login
-                "content" => "在" . (new baiduMap())->GetUserGeoLocation() . "访问小站",
-                "create_time" => Utils::Now(),
-                "user" => pakchoi::login_userId()
-            ]);
-
-            (new Table("users"))->where([
-                "id" => $_SESSION["id"]
-            ])->save([
-                "activities" => "~activities + 1"
-            ]);
-        } else {
-            dotnet::AccessDenied("Invalid user login token!");
-        }
-    }
+class App {   
 
     /**
      * @uses api
@@ -95,32 +14,6 @@ class App {
         } else {
             controller::success("Invalid characters!");
         }
-    }
-
-    /**
-     * @uses api
-    */
-    public function latest_visits() {
-        $visits = (new Table("pageview"))
-        ->where(["user_id" => $_SESSION["id"], "code" => 200])
-        ->limit(10)
-        ->order_by("time", true)
-        ->select();
-
-        controller::success($visits);
-    }
-
-    /**
-     * @uses api
-    */
-    public function latest_logins() {
-        $logins = (new Table("activity"))
-        ->where(["user" => $_SESSION["id"], "type" => 0])
-        ->limit(10)
-        ->order_by("create_time", true)
-        ->select();
-
-        controller::success($logins);
     }
 
     /**
@@ -170,12 +63,14 @@ class App {
      * Get comments data for a given resource object
      * 
      * @uses api
-     * @require resource=i32
+     * @require resource=i32|type=i32
     */
     public function get_comment() {
         $resource = $_GET["resource"];
+        $type = $_GET["type"];
         $messages = (new Table("messages"))->where([
-            "mentions" => $resource
+            "mentions" => $resource,
+            "mention_type" => $type
         ])->order_by("message_time", true)
           ->select();       
         
@@ -186,18 +81,20 @@ class App {
      * @uses api
      * @method POST
      * 
-     * @require resource=i32|comment=string
+     * @require resource=i32|comment=string|type=i32
     */
     public function comment() {
         $resource = $_POST["resource"];
         $comment = $_POST["comment"];
+        $type = $_POST["type"];
         $userId = $_SESSION["id"];
         $messages = new Table("messages");
         $newId = $messages->add([
             "send_from" => $userId,
             "message_time" => Utils::Now(),
             "message" => base64_encode($comment),
-            "mentions" => $resource
+            "mentions" => $resource,
+            "mention_type" => $type
         ]);
 
         if ($newId == false) {
@@ -205,6 +102,59 @@ class App {
         } else {
             controller::success($newId);
         }
+    }
+
+    /**
+     * 加载主页信息
+     * 
+     * @uses api
+     * @require latest_id=i32
+    */
+    public function more() {
+        $latest_id = $_GET["latest_id"];
+        # 在最开始获取最近的10条
+        $latest10 = (new Table("activity"))
+            ->where(["type" => not_eq(0), "id" => lt_eq($latest_id)])
+            ->order_by("create_time", true)
+            ->limit(10)
+            ->select();
+        $tags = pakchoi::getActivityTags();   
+        $resource = new Table("resources");
+
+        for($i = 0; $i < count($latest10); $i++) {
+            $type = $latest10[$i]["type"];
+            $latest10[$i]["tag"] = $tags[$type];
+            $user = $latest10[$i]["user"];
+            $user = (new Table("users"))->where(["id" => $user])->find();
+
+            $latest10[$i]["content"] = $user["nickname"] . $latest10[$i]["content"];
+
+            if ($type == 0) {
+                # 登录动态是使用默认的地图图片的
+                $latest10[$i]["resource"] = "/assets/images/map.jpg";
+            } else if ($type == 1) {
+                $res = $resource->where(["id" => $latest10[$i]["resource"]])->find();
+                $id = $user["id"];
+
+                if ($res["type"] == 0) {
+                    $url = "/images/$id/" . $res["resource"] . "?type=thumbnail";
+                    $link = "/view/photo/" . $res["id"];
+                } else if ($res["type"] == 2) {
+                    # get video preview image
+                    $url = "/video/$id/thumbnail/" . $res["id"];
+                    $link = "/view/video/" . $res["id"];
+                }
+
+                $latest10[$i]["resource"] = $url;
+                $latest10[$i]["link"] = $link;
+            } else if ($type == 2) {
+                # 查看分享的位置
+                $latest10[$i]["resource"] = "/assets/images/map.jpg";
+                $latest10[$i]["link"] = "/view/location/" . $latest10[$i]["id"];
+            }           
+        }
+
+        controller::success($latest10);
     }
 
     /**
@@ -219,50 +169,55 @@ class App {
         $id = $_POST["res"];
 
         (new Table("resources"))
-        ->where(["id" => $id])
-        ->save(["description" => $note]);
+            ->where(["id" => $id])
+            ->save(["description" => $note]);
+
+        if (array_key_exists("memorial", $_POST)) {
+            $memorial_id = $_POST["memorial"];
+
+            (new Table("anniversary_group"))->add([
+                "anniversary" => $memorial_id,
+                "resource" => $id,
+                "creator" => pakchoi::login_userId() 
+            ]);
+        }
 
         controller::success(1);
     }
 
     /**
-     * 上传相片
-     * 
      * @uses api
-     * @method POST
     */
-    public function upload_image() {
-        imports("Microsoft.VisualBasic.FileIO.FileSystem");
+    public function load_gallery() {
+        if (array_key_exists("memorial", $_GET)) {
+            $list = (new Table("anniversary_group"))->where(["anniversary" => $_GET["memorial"]])->select();
+            $idlist = [];
 
-        $file = $_FILES["File"];
-        $tmp = $file["tmp_name"];
-        $id = $_SESSION["id"];
-        $year = year();
-        $upload_path = pakchoi::getUploadDir() . "/images/$id/$year/";
+            foreach ($list as $entry) {
+                array_push($idlist, $entry["resource"]);
+            }
 
-        FileSystem::CreateDirectory($upload_path);
-
-        $name = md5(Utils::Now() . $tmp);
-        $upload_path = "$upload_path/$name";
-
-        move_uploaded_file($tmp, $upload_path);
-
-        $resId = (new Table("resources"))->add([
-            "type" => 0,
-            "filename" => $file["name"],
-            "upload_time" => Utils::Now(),
-            "size" => $file["size"],
-            "description" => "",
-            "uploader" => $id,
-            "resource" => "$year/$name"
-        ]);
-
-        if ($resId > 0) {
-            pakchoi::addActivity(1, "分享了相片 {$file["name"]}", $resId);
-            controller::success($resId);
+            # get latest 10 resource activity
+            $latest = (new Table("resources"))
+            ->where(["id" => in($idlist)])
+            ->order_by("upload_time", true)
+            // ->limit(10)
+            ->select();  
         } else {
-            controller::error("error!");
+            # get latest 10 resource activity
+            $latest = (new Table("resources"))
+                ->order_by("upload_time", true)
+                // ->limit(10)
+                ->select();  
+        }      
+
+        for($i = 0; $i < count($latest); $i++) {
+            # $upload_path = pakchoi::getUploadDir() . "/images/$id/$year/";
+            $id = $latest[$i]["uploader"];
+            $latest[$i]["url"] = "/images/$id/" . $latest[$i]["resource"];
         }
+
+        controller::success($latest);
     }
 
     /**
@@ -296,5 +251,65 @@ class App {
         }        
 
         controller::success(1);
+    }
+
+    /**
+     * @uses api
+     * @method POST
+    */
+    public function add_memorial() {
+        $event = $_POST["event"];
+        $date = $_POST["date"];
+
+        imports("System.DateTime");
+
+        $date = System\DateTime::FromTimeStamp($date)->ToString();
+        $anniversary = new Table("anniversary");
+        $id = $anniversary->add([
+            "date" => $date,
+            "description" => $event,
+            "add_user" => pakchoi::login_userId()
+        ]);
+
+        if (false == $id) {
+            controller::error($anniversary->getLastMySql());
+        } else {
+            controller::success(1);
+        }
+    }
+
+    /**
+     * @uses api
+     * @method GET
+    */
+    public function get_memorials() {
+        $events = (new Table("anniversary"))->all();
+
+        for($i = 0; $i < count($events); $i++) {
+            $events[$i]["name"] = pakchoi::getNickName($events[$i]["add_user"]);
+            $events[$i]["add_user"] = pakchoi::getAvatarUrl($events[$i]["add_user"]);
+        }
+
+        controller::success($events);
+    }
+
+    /**
+     * @uses api
+     * @method GET
+     * @require id=i32
+    */
+    public function get_memorial() {
+        $id = $_GET["id"];
+        $evt = (new Table("anniversary"))->where(["id" => $id])->find();
+
+        if ($evt == false) {
+            controller::error("not found");
+        } else {
+            $evt["name"] = pakchoi::getNickName($evt["add_user"]);
+            $evt["add_user"] = pakchoi::getAvatarUrl($evt["add_user"]);
+            $evt["days"] = date_diff(date_create($evt["date"]), date_create(Utils::Now()));
+
+            controller::success($evt);
+        }
     }
 }

@@ -36,6 +36,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Apps\" />
+    <Folder Include="Apps\edit\" />
+    <Folder Include="Apps\share\" />
+    <Folder Include="Apps\view\" />
     <Folder Include="modules\" />
   </ItemGroup>
   <ItemGroup>
@@ -45,22 +48,43 @@
     <TypeScriptCompile Include="Apps\login.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Apps\share_photo.ts">
+    <TypeScriptCompile Include="Apps\share\share_photo.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Apps\home.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Apps\edit_profile.ts">
+    <TypeScriptCompile Include="Apps\edit\edit_profile.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Apps\chat.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Apps\view_location.ts">
+    <TypeScriptCompile Include="Apps\profile.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Apps\view_photo.ts">
+    <TypeScriptCompile Include="Apps\share\share_memorial.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Apps\memorials.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Apps\gallery.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Apps\goals.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Apps\share\share_video.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Apps\view\view_memorial.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Apps\view\view_location.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Apps\view\view_photo.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="helpers.ts">

@@ -16,14 +16,15 @@ namespace pages {
             }
 
             // load comments belongs to this resource file
-            webapp.modules.fetchComments(this.resourceId);
+            webapp.modules.fetchComments(this.resourceId, 0);
         }
 
         private sendComment() {
             let text: string = $ts.value("#comment");
             let data = {
                 resource: this.resourceId,
-                comment: text
+                comment: text,
+                type: 0
             };
 
             if (Strings.Empty(text)) {

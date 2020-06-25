@@ -3,14 +3,13 @@
   "name": "记录生活点点滴滴",
   "icons": [
     {
-      "src": "/favicon.ico",
-      "type": "image/x-icon",
+      "src": "/favicon.png",
+      "type": "image/png",
       "sizes": "192x192"
     }
   ],
   "start_url": "/",
-  "background_color": "#142b3e",
   "display": "fullscreen",
   "scope": "/",
-  "theme_color": "#142b3e"
+  "theme_color": "#e01e5b"
 }

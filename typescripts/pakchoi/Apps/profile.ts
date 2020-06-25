@@ -6,17 +6,38 @@ namespace pages {
             return "profile";
         }
 
+        private loadVisitsDone: boolean = false;
+        private loadLoginsDone: boolean = false;
+
         protected init(): void {
             let vm = this;
+            let msgInfo = loading("正在加载数据...");
+            let checkPageLoad = function () {
+                if (vm.loadVisitsDone && vm.loadLoginsDone) {
+                    layer.close(msgInfo);
+                }
+            }
 
             $ts.get("@api:visits", function (result) {
                 if (result.code == 0) {
                     vm.renderVisitList(<any>result.info);
+                    vm.loadVisitsDone = true;
+
+                    checkPageLoad();
+                } else {
+                    layer.closeAll();
+                    errorMsg(<string>result.info);
                 }
             });
             $ts.get("@api:logins", function (result) {
                 if (result.code == 0) {
                     vm.renderLoginList(<any>result.info);
+                    vm.loadLoginsDone = true;
+
+                    checkPageLoad();
+                } else {
+                    layer.closeAll();
+                    errorMsg(<string>result.info);
                 }
             });
         }
@@ -28,10 +49,10 @@ namespace pages {
             for (let login of logins) {
                 rowView = $ts("<span>", {
                     style: "font-size:0.8em;color:lightgray"
-                }).display(login.create_time).append($ts("<span>", {
+                }).display(login.create_time).appendElement($ts("<span>", {
                 }).display(login.content));
 
-                list.append($ts("<li>").display(rowView));
+                list.appendElement($ts("<li>").display(rowView));
             }
         }
 
@@ -43,10 +64,10 @@ namespace pages {
                 rowView = $ts("<span>", {
                     style: "font-size:0.8em;color:lightgray"
                 }).display(visit.time)
-                    .append($ts("<span>", {
+                    .appendElement($ts("<span>", {
                     }).display($ts("<a>", { href: visit.page_url }).display(visit.page_url)));
 
-                list.append($ts("<li>").display(rowView));
+                list.appendElement($ts("<li>").display(rowView));
             }
         }
     }

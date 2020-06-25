@@ -12,14 +12,14 @@ class App {
      * 
      * @access *
      * @require resource=string
-     * @cache max-age=360000000
+     * @cache max-age=3600000
     */
     public function assets() {
         $resource = WebRequest::getPath("resource");
         $resource = WWWROOT . "/assets/$resource";
         
         if (!empty($resource) && file_exists($resource)) {
-            Utils::PushDownload($resource);
+            Utils::PushDownload($resource, -1, null, null, false, false);
         } else {
             dotnet::PageNotFound($_GET["resource"]);
         }
@@ -34,7 +34,7 @@ class App {
         $resource = WWWROOT . "/typescripts/build/$resource";
         
         if (!empty($resource) && file_exists($resource)) {
-            Utils::PushDownload($resource);
+            Utils::PushDownload($resource, -1, null, null, false, false);
         } else {
             dotnet::PageNotFound($_GET["resource"]);
         }
@@ -51,7 +51,7 @@ class App {
         if (!file_exists($path)) {
             dotnet::PageNotFound($_GET["resource"]);
         } else {
-            Utils::PushDownload($path, -1, "image/jpeg");
+            Utils::PushDownload($path, -1, "image/jpeg", null, false, false);
         }
     }
 
@@ -105,5 +105,26 @@ class App {
     */
     public function audio() {
 
+    }
+
+    /**
+     *      
+     * @require resource=string
+    */
+    public function video() {
+        require dirname(__DIR__) . "/modules/video_server/server.php";
+
+        $resource = WebRequest::getPath("resource");
+        $direct = WebRequest::getBool("direct_stream");
+        $path = pakchoi::getUploadDir() . "/video/$resource";
+
+        if (!file_exists($path)) {
+            dotnet::PageNotFound($_GET["resource"]);
+        } else if ($direct) {
+            Utils::PushDownload($path, -1, "video/mp4", "video.mp4", false, true);
+        } else {
+            $video = new SeekableVideo($path, 'video/mp4', 'video.mp4');
+            $video->begin_stream();
+        }
     }
 }

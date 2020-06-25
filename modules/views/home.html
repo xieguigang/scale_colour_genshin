@@ -4,6 +4,9 @@
 <head>
 	<meta name="app" content="home" />
 
+	<meta name="latest_id" content="{$latest_id}" />
+	<meta name="api:more" content="/api/more" />
+
 	${includes/head.html}
 </head>
 
@@ -42,38 +45,14 @@
 		<div class="text-center">
 			<h2>动态</h2>
 			<p class="lead">看看对方有什么动静</p>
-			${includes/geo.html}
+			${includes/share.html}
 		</div>
-		<div class="container">
-
-			<foreach @latest>
-
-				<div class="row">
-					<div class="col-md-4">
-						<div class="component">
-							<div class="card mb-4">
-								<div class="card-header">
-									<img class="card-img" src='@latest["resource"]'>
-								</div>
-								<div class="card-body">
-									<span class="badge badge-success mb-2">@latest["tag"]</span>
-									<h4 class="card-title">@latest["create_time"]</h4>
-									<p class="card-text">@latest["content"]</p>
-								</div>
-								<div class='card-footer type@latest["type"]'>
-									<a href='@latest["link"]' class="btn btn-primary">查看</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</foreach>
+		<div id="activity-list" class="container">
 
 		</div>
 
 		<div class="d-flex justify-content-center my-5">
-			<a href="#a" class="btn btn-outline-primary btn-pill">加载更多</a>
+			<a id="load-more" href="javascript:void(0);" class="btn btn-outline-primary btn-pill">加载更多</a>
 		</div>
 	</div>
 

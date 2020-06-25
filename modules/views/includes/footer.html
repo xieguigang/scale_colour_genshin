@@ -32,7 +32,7 @@
     <div class="container">
         <div class="copyright text-center">
             <hr />
-            <p class="small">&copy; 2020, made with <span class="text-danger"><i class="fas fa-heart"></i></span> by
+            <p class="small">&copy; {#YEAR}, made with <span class="text-danger"><i class="fas fa-heart"></i></span> by
                 xieguigang</p>
         </div>
     </div>
@@ -45,9 +45,53 @@
 <script src="/assets/vendor/jquery/jquery.min.js"></script>
 <script src="/assets/vendor/popper/popper.min.js"></script>
 <script src="/assets/vendor/bootstrap/bootstrap.min.js"></script>
+<script src="/assets/vendor/layer-v2.1/layer/layer.js"></script>
 
 <!-- optional plugins -->
 <script src="/assets/vendor/nouislider/js/nouislider.min.js"></script>
 
 <!--   lazy javascript -->
 <script src="/assets/js/lazy.js"></script>
+
+<script type="text/javascript">
+    function successMsg(msg, after = null) {
+        layer.closeAll();
+        layer.msg(msg, { icon: 1, time: 2000 }, function () {
+            if (after) {
+                after();
+            }
+        });
+
+        return true;
+    }
+
+    function errorMsg(msg, after = null) {
+        layer.closeAll();
+        layer.msg(msg, { icon: 2, time: 2000 }, function () {
+            if (after) {
+                after();
+            }
+        });
+
+        return false;
+    }
+
+    function warningMsg(msg, after = null) {
+        layer.closeAll();
+        layer.msg(msg, { icon: 5, time: 2000 }, function () {
+            if (after) {
+                after();
+            }
+        });
+
+        return false;
+    }
+	
+	function loading(msg, icon = 16) {
+		return layer.msg(msg, {
+			icon: icon, 
+			shade: 0.01, 
+			time:false
+		});
+	}
+</script>

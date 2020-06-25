@@ -1,4 +1,5 @@
 /// <reference path="linq.d.ts" />
+/// <reference path="../layer.d.ts" />
 declare namespace pages {
     class index extends Bootstrap {
         readonly appName: string;
@@ -16,7 +17,10 @@ declare namespace pages {
 declare namespace pages {
     class home extends Bootstrap {
         readonly appName: string;
+        latest_id: string;
         protected init(): void;
+        private loadMoreNews;
+        private showActivities;
     }
 }
 declare namespace pages {
@@ -35,14 +39,46 @@ declare namespace pages {
     class memorials extends Bootstrap {
         readonly appName: string;
         protected init(): void;
+    class gallery extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+        static showGallery(data: photo[]): void;
+    }
+    interface photo {
+        id: string;
+        url: string;
+    }
+}
+declare namespace pages {
+    class goals extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+        private create_goal;
+        private show_goals;
     }
 }
 declare namespace pages {
     class profile extends Bootstrap {
         readonly appName: string;
+        private loadVisitsDone;
+        private loadLoginsDone;
         protected init(): void;
         private renderLoginList;
         private renderVisitList;
+    }
+}
+declare namespace pages {
+    class memorials extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+        private show_memorials;
+    }
+    interface memorial {
+        date: string;
+        description: string;
+        add_user: string;
+        name: string;
+        id: string;
     }
 }
 declare namespace pages {
@@ -50,6 +86,19 @@ declare namespace pages {
         readonly appName: string;
         protected init(): void;
         private doUpload;
+    }
+}
+declare namespace pages {
+    class share_video extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+        private doUpload;
+    }
+}
+declare namespace pages {
+    class share_memorial extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
     }
 }
 declare namespace pages {
@@ -66,6 +115,15 @@ declare namespace pages {
         private activityId;
         protected init(): void;
         private renderBaidDuMapLocation;
+    }
+}
+declare namespace pages {
+    class view_memorial extends Bootstrap {
+        readonly appName: string;
+        private evtId;
+        protected init(): void;
+        private sendComment;
+        private showDetails;
     }
 }
 declare namespace pages {
@@ -118,7 +176,7 @@ declare namespace webapp.modules {
             href: string;
         };
     }
-    function fetchComments(resourceId: string, getLastMsgId?: Delegate.Sub): void;
+    function fetchComments(resourceId: string, type: number, getLastMsgId?: Delegate.Sub): void;
     function appendComments(list: IHTMLElement, messages: message[]): void;
 }
 declare namespace webapp.modules {

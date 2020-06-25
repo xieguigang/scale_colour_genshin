@@ -1,8 +1,17 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name='renderer' content='webkit' />
 
-<meta name="api:getNewMsg" content="/api/getNewMsg.vbs" />
+<meta name='description' content='{$description}' />
+<meta name="author" content="xieguigang" />
+<meta name="copyright" content="http://xieguigang.me Copyright(c) {#YEAR}" />
+<meta name="keywords" content="blog" />
+<meta name="hostname" content="{#HOST_NAME}" />
+<meta name="user-login" content="{$user.name}" />
+<meta name="expected-hostname" content="{#HOST_NAME}" />
+
+<meta name="api:getNewMsg" content="/message/get/newMsg.vbs" />
 <meta name="api:addGeoLoc" content="/api/share_geoLocation.vbs" />
 
 <link rel="canonical" href="/">
@@ -13,6 +22,15 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="">
+
+<link rel="apple-touch-startup-image" href="/assets/images/splash.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="/assets/images/splash.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="/assets/images/splash.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="/assets/images/splash.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="/assets/images/splash.jpg" media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="/assets/images/splash.jpg" media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="/assets/images/splash.jpg" media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+
 <link rel="apple-touch-icon" href="/favicon.png">
 
 <!-- Add to home screen for IE on Windows -->
@@ -23,6 +41,8 @@
 
 <!-- bootstrap -->
 <link rel="stylesheet" href="/assets/vendor/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/vendor/layer-v2.1/layer/skin/layer.css" />
+
 <!-- font awesome icons -->
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
 <!-- lazy styling -->

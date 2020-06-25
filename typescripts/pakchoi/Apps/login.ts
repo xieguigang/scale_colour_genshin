@@ -18,11 +18,11 @@ namespace pages {
             clearInterval();
 
             $ts("#open-msg").click();
-            $ts.post("@api:login", { people: people }, function (result) {                
+            $ts.post("@api:login", { people: people }, function (result) {
                 if (result.code == 0) {
                     setInterval(function () {
                         vm.doCheckLogin();
-                    }, 1000);
+                    }, 3000);
                 } else {
                     console.error(<string>result.info);
                 }
@@ -33,10 +33,14 @@ namespace pages {
             $ts.get("@api:check", function (result: IMsg<string>) {
                 if (result.code == 0) {
                     if (result.info == "1") {
-                        $goto("/home");
+                        successMsg("登陆成功！", function () {
+                            $goto("/home");
+                        });
                     }
                 } else {
-                    console.error(result.info);
+                    errorMsg(result.info, function () {
+                        location.reload();
+                    });
                 }
             })
         }

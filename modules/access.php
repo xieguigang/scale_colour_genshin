@@ -7,12 +7,12 @@ class accessController extends controller {
 
     private static function recordEvent($code) {
         (new Table("pageview"))->add([
-            "time" => Utils::Now(),
-            "code" => $code,
-            "page_url" => Utils::URL(false),
-            "user_id" => pakchoi::login_userId(),
-            "ip" => Utils::UserIPAddress(),
-            "location" => (new baiduMap())->GetUserGeoLocation(),
+            "time"       => Utils::Now(),
+            "code"       => $code,
+            "page_url"   => Utils::URL(false),
+            "user_id"    => pakchoi::login_userId(),
+            "ip"         => Utils::UserIPAddress(),
+            "location"   => (new baiduMap())->GetUserGeoLocation(),
             "session_id" => session_id(),
             "user_agent" => $_SERVER['HTTP_USER_AGENT']
         ]);

@@ -12,8 +12,8 @@ namespace webapp.modules {
         }
     }
 
-    export function fetchComments(resourceId: string, getLastMsgId: Delegate.Sub = null) {
-        let api: string = `@api:load?resource=${resourceId}`;
+    export function fetchComments(resourceId: string, type: number, getLastMsgId: Delegate.Sub = null) {
+        let api: string = `@api:load?resource=${resourceId}&type=${type}`;
 
         $ts.get(api, function (result: IMsg<webapp.modules.message[]>) {
             if (result.code == 0) {
@@ -33,7 +33,7 @@ namespace webapp.modules {
         for (let msg of messages) {
             let row = $ts("<div>", { class: "col-md-4" });
 
-            row.append($ts("<img>", {
+            row.appendElement($ts("<img>", {
                 src: msg.avatar,
                 class: "img-fluid rounded-circle shadow-lg",
                 style: "width: 24px;"
@@ -47,13 +47,13 @@ namespace webapp.modules {
             }).display(msg.message);
 
             if (isNullOrUndefined(msg.target)) {
-                row.append(timeSpan).append(msgSpan);
+                row.appendElement(timeSpan).appendElement(msgSpan);
             } else {
                 let visitResource = $ts("<span>").display(msg.target.title + "<br />");
-                row.append(timeSpan).append(visitResource).append(msgSpan);
+                row.appendElement(timeSpan).appendElement(visitResource).appendElement(msgSpan);
             }
 
-            list.append($ts("<div>", { class: "row" }).display(row));
+            list.appendElement($ts("<div>", { class: "row" }).display(row));
         }
     }
 }

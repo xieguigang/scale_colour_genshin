@@ -4,19 +4,29 @@ RewriteRule ^assets/(.+)$ /proxy.php?app=assets&resource=$1
 RewriteRule ^scripts/(.+)$ /proxy.php?app=scripts&resource=$1
 RewriteRule ^images/avatar/(.+)$ /proxy.php?app=avatar&resource=$1
 RewriteRule ^images/(.+)$ /proxy.php?app=image&resource=$1
+RewriteRule ^video/(.+)$ /proxy.php?app=video&resource=$1
 
 RewriteRule ^([a-zA-Z\_0-9]+)$ /index.php?app=$1
 
 RewriteRule ^view/([a-z_]+)/(\d+)$ /index.php?app=view_$1&id=$2
 
 RewriteRule ^api/share_geoLocation.vbs$ /api.php?app=share_geoLocation
-RewriteRule ^api/getLocation.vbs /api.php?app=getLocation
+RewriteRule ^api/getLocation.vbs$ /api.php?app=getLocation
 RewriteRule ^api/([a-z\_]+).vbs$ /api.php?app=$1
-RewriteRule ^api/login_confirm$ /api.php?app=login_confirm
+RewriteRule ^api/add_memorial$ /api.php?app=add_memorial
+RewriteRule ^api/more$ /api.php?app=more
 
-RewriteRule ^api/upload/(.+)$ /api.php?app=upload_$1
+RewriteRule ^upload/(.+)$ /api/upload.php?app=$1
 RewriteRule ^api/addnote$ /api.php?app=resource_note
 
+RewriteRule ^api/get/(.+)$ /api.php?app=get_$1
+
+RewriteRule ^message/get/(.+).vbs$ /message.php?app=get_$1
 RewriteRule ^message/(.+).vbs$ /message.php?app=$1
+
+RewriteRule ^profile/api/(.+).vbs$ /api/profile.php?app=$1
+
+RewriteRule ^user/(.+).vbs$ /user.php?app=$1
+RewriteRule ^user/(.+)$ /user.php?app=$1
 
 ErrorDocument 404 /404.php?app=index

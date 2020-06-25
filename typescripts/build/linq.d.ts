@@ -1031,6 +1031,10 @@ declare namespace Internal {
         */
         parseURL(url: string): TypeScript.URL;
         /**
+         * Url solver of the meta reference value.
+        */
+        url(reference: string, currentFrame?: boolean): string;
+        /**
          * 从当前页面跳转到给定的链接页面
          *
          * @param url 链接，也支持meta查询表达式，如果是以``#``起始的文档节点id表达式，则会在文档内跳转到目标节点位置
@@ -1545,6 +1549,7 @@ declare namespace data {
 */
 declare namespace Internal {
     const StringEval: Handlers.stringEval;
+    function typeGenericElement<T extends HTMLElement>(query: string | HTMLElement, args?: Internal.TypeScriptArgument): T;
     /**
      * 对``$ts``对象的内部实现过程在这里
     */
@@ -1662,12 +1667,13 @@ declare const $ts: Internal.TypeScript;
 /**
  * 从文档之中查询或者创建一个新的图像标签元素
 */
-declare function $image(query: string, args?: Internal.TypeScriptArgument): IHTMLImageElement;
+declare const $image: (query: string | HTMLElement, args?: Internal.TypeScriptArgument) => IHTMLImageElement;
 /**
  * 从文档之中查询或者创建一个新的输入标签元素
 */
-declare function $input(query: string, args?: Internal.TypeScriptArgument): IHTMLInputElement;
-declare function $link(query: string, args?: Internal.TypeScriptArgument): IHTMLLinkElement;
+declare const $input: (query: string | HTMLElement, args?: Internal.TypeScriptArgument) => IHTMLInputElement;
+declare const $link: (query: string | HTMLElement, args?: Internal.TypeScriptArgument) => IHTMLLinkElement;
+declare const $iframe: (query: string | HTMLElement, args?: Internal.TypeScriptArgument) => HTMLIFrameElement;
 interface IProperty {
     get: () => any;
     set: (value: any) => void;
@@ -2033,9 +2039,16 @@ interface HTMLExtensions {
     any: any;
     /**
      * 将当前的html文档节点元素之中的显示内容替换为参数所给定的html内容
+     *
+     * @param html 可以为文档文本字符串内容，也可以是一个节点对象的实例，或者不需要参数的生成器函数
     */
     display(html: string | HTMLElement | HTMLTsElement | (() => HTMLElement)): IHTMLElement;
-    append(...html: (string | HTMLElement | HTMLTsElement | (() => HTMLElement))[]): IHTMLElement;
+    /**
+     * 将一个或者多个文档节点对象添加至当前的节点之中
+     *
+     * @returns 这个函数返回当前的文档节点对象实例
+    */
+    appendElement(...html: (string | HTMLElement | HTMLTsElement | (() => HTMLElement))[]): IHTMLElement;
     /**
      * @param reset If this parameter is true, then it means all of the style that this node have will be clear up.
     */
@@ -2861,6 +2874,8 @@ declare namespace Internal {
         text?: string;
         visible?: boolean;
         alt?: string;
+        checked?: boolean;
+        selected?: boolean;
         /**
          * 应用于``<a>``标签进行文件下载重命名文件所使用的
         */
