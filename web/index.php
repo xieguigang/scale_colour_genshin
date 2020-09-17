@@ -289,4 +289,13 @@ class App {
             "id" => $id
         ]);
     }
+
+    /**
+     * 显示服务器信息
+     * 
+     * 只能够在登陆的状态下进行显示
+    */
+    public function phpinfo() {
+        \phpinfo();
+    }
 }
