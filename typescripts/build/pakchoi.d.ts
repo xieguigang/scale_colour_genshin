@@ -36,6 +36,9 @@ declare namespace pages {
     }
 }
 declare namespace pages {
+    class memorials extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
     class gallery extends Bootstrap {
         readonly appName: string;
         protected init(): void;
