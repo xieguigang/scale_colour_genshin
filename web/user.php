@@ -50,9 +50,8 @@ class App {
      * @require token=string|session=string
      * @uses view
     */
-    public function login_confirm() {        
-        $token = $_GET["token"];
-        $session = urldecode($_GET["session"]);
+    public function login_confirm($token, $session) {
+        $session = urldecode($session);
 
         session_abort();
         session_id($session);
