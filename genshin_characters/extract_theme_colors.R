@@ -17,7 +17,7 @@ extract_colors = function(file) {
         </div>
     `;
     print(theme_colors);
-    writeLines(rect, con = `${basename(file)}.html`);
+    writeLines(rect, con = `${pwd}/${basename(file)}.html`);
 
     theme_colors;
 }
