@@ -7,9 +7,11 @@ require(JSON);
 extract_colors = function(file) {
     img = readImage(file);
     theme_colors = colors(img, n = 6, character = TRUE);
-    rect = `<div style="width: 50px; height: 50px; background-color: ${theme_colors}"></div>`;
+    rect = `<div style="width: 100px; height: 25px; background-color: ${theme_colors}">
+				<span style="color: white;">&nbsp;&nbsp;${theme_colors}</span>
+			</div>`;
     rect = `
-        <div style="width: 5%; min-width: 50px; float: left;">
+        <div style="width: 10%; min-width: 100px; float: left;">
             ${paste(rect, " ")}
         </div>
         <div style="width: 70%;">
