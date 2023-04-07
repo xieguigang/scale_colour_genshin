@@ -13,11 +13,11 @@ extract_colors = function(file) {
             ${paste(rect, " ")}
         </div>
         <div style="width: 70%;">
-            <img style="height: 600px;" src="${file}">
+            <img style="height: 600px;" src="./../character_posts/${basename(file, withExtensionName = TRUE)}">
         </div>
     `;
     print(theme_colors);
-    writeLines(rect, con = `${pwd}/${basename(file)}.html`);
+    writeLines(rect, con = `${pwd}/demo/${basename(file)}.html`);
 
     theme_colors;
 }
