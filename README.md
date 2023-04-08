@@ -2,6 +2,8 @@
 
 A ``R#`` package for use the color palette that extracted from the genshin characters.
 
+> https://stack.xieguigang.me/2023/genshin-impact-color-palettes/
+
 ## Extract theme colors
 
 The genshin color palette data is generated via extract the image theme colors based on the ``colors`` function from the ``grDevices`` namespace:
