@@ -1,8 +1,11 @@
 require(ggplot);
 
 pwd = @dir;
-img = readImage(`${pwd}/../genshin_characters/character_posts/fischl.jpg`);
-pixels = rasterPixels(img);
+pixels = [`${pwd}/../genshin_characters/character_posts/fischl.jpg`]
+|> readImage()
+|> resizeImage([256,256])
+|> rasterPixels()
+;
 
 print(pixels, max.print = 13);
 
@@ -12,11 +15,5 @@ bitmap(file = `${pwd}/raster.png`) {
     # use scatter points for visual our data
     + geom_point(shape = "triangle", size = 20)   
     + ggtitle("Raster Pixels")
-    # use the default white theme from ggplot
-    + theme_default()
-
-    # use a 3d camera to rotate the charting plot 
-    # and adjust view distance
-    + view_camera(angle = [31.5,65,125], fov = 100000)
     ;
 }
