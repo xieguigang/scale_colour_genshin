@@ -24,8 +24,6 @@ let ggplot2 = function(genshin_colors) {
 }
 
 for(let color_name in scale_colour_genshin::keys()) {
-   stop(color_name);
-
    png(filename = relative_work(`volcano_genshin_${color_name}.png`), 
       width = 600, 
       height = 400, 
